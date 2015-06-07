@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="24756080">
+    <data-source source="LOCAL" name="MySQL - AssetsManagement@localhost" uuid="0e97d29d-e255-4bac-82af-e33ec5ec3907">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/AssetsManagement</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfdadfcbdfd8dfc5dfc6dfcbdfc7dfcfdfcb</user-password>
+      <schema-pattern>assetsmanagement.*</schema-pattern>
+      <default-schemas>assetsmanagement.*</default-schemas>
+      <driver-properties>
+        <property name="zeroDateTimeBehavior" value="convertToNull" />
+        <property name="tinyInt1isBit" value="false" />
+      </driver-properties>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
