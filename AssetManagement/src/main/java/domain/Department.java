@@ -75,7 +75,7 @@ public class Department implements Serializable {
 		this.country = country;
 	}
 	
-	@OneToMany(mappedBy = "asset")
+	@OneToMany(mappedBy = "department")
 	public List<User> getUsers() {
 		return users;
 	}

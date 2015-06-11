@@ -51,7 +51,7 @@ public class Country implements Serializable {
 		this.countryCode = countryCode;
 	}
 
-	@OneToMany(mappedBy = "asset")
+	@OneToMany(mappedBy = "country")
 	public List<Department> getDepartments() {
 		return departments;
 	}

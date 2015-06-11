@@ -11,10 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="getUserByName", query="FROM User u WHERE u.name = :name")
+})
 @Table(name = "USERS")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;

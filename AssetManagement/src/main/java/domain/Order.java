@@ -54,7 +54,7 @@ public class Order implements Serializable {
 		this.supplierName = supplierName;
 	}
 
-	@Column(name = "ID_ORDER")
+	@Column(name = "PURCHASE_DATE")
 	public Date getPurchaseDate() {
 		return purchaseDate;
 	}
@@ -63,7 +63,7 @@ public class Order implements Serializable {
 		this.purchaseDate = purchaseDate;
 	}
 
-	@Column(name = "ID_ORDER")
+	@Column(name = "IS_RECEIVED")
 	public boolean isReceived() {
 		return isReceived;
 	}
