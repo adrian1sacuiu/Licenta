@@ -3,44 +3,44 @@ package domain;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Adrian on 02-Aug-14.
- */
 @Entity
-@Table(name = "Users")
+@Table(name = "USERS")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Long id;
-	@Size(min = 3, max = 50, message = "Your full name must be between 3 and 50 characters long.")
+
+	private Long idUser;
 	private String name;
-	@Size(min = 6, max = 20, message = "Your password must be between 6 and 20 characters long.")
-	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Password must be alphanumeric with no spaces.")
 	private String password;
-	@Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Invalid email address.")
 	private String email;
 	private String role;
+
+	private Department department;
+
 	private List<Asset> assets;
+	private List<Complaint> complaints;
+	private List<Request> requests;
 	private List<Transaction> transactions;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_user")
-	public Long getId() {
-		return id;
+	public Long getIdUser() {
+		return idUser;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
 	}
 
 	@Column(name = "name")
@@ -79,6 +79,16 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
+	@ManyToOne
+	@JoinColumn(name = "ID_DEPARTMENT")
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	
 	@OneToMany(mappedBy = "user")
 	public List<Asset> getAssets() {
 		return assets;
@@ -97,28 +107,76 @@ public class User implements Serializable {
 		this.transactions = transactions;
 	}
 
-	@Override
-	public String toString() {
-		return "User Id: " + id + "    Name: " + name + "    Password: " + password + "    Email: " + email + "    Role: " + role;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	public List<Complaint> getComplaints() {
+		return complaints;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+	public void setComplaints(List<Complaint> complaints) {
+		this.complaints = complaints;
+	}
 
-		User user = (User) o;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	public List<Request> getRequests() {
+		return requests;
+	}
 
-		if (id != null ? !id.equals(user.id) : user.id != null)
-			return false;
-
-		return true;
+	public void setRequests(List<Request> requests) {
+		this.requests = requests;
 	}
 
 	@Override
 	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (idUser == null) {
+			if (other.idUser != null)
+				return false;
+		} else if (!idUser.equals(other.idUser))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [idUser=" + idUser + ", name=" + name + ", password=" + password + ", email=" + email + ", role=" + role + "]";
+	}
+
 }

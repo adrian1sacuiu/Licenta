@@ -8,31 +8,49 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
+
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Adrian on 02-Aug-14.
- */
 @Entity
-@Table(name = "Transactions")
+@Table(name = "TRANSACTIONS")
 public class Transaction implements Serializable {
-	private static final long serialVersionUID = 3L;
-	private Long id;
-	private User user;
-	private Asset asset;
+	private static final long serialVersionUID = 1L;
+
+	private Long idTransaction;
 	private Date date;
 	private String status;
+
+	private User user;
+	private Asset asset;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_transaction")
-	public Long getId() {
-		return id;
+	public Long getIdTransaction() {
+		return idTransaction;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdTransaction(Long idTransaction) {
+		this.idTransaction = idTransaction;
+	}
+
+	@Column(name = "date")
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	@Column(name = "status")
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@ManyToOne
@@ -55,47 +73,46 @@ public class Transaction implements Serializable {
 		this.asset = asset;
 	}
 
-	@Column(name = "date")
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	@Column(name = "status")
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((idTransaction == null) ? 0 : idTransaction.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		return result;
 	}
 
 	@Override
-	public String toString() {
-		return "Transaction Id: " + id + "    Date: " + date + "     Status: " + status + "\n    User: " + user + "\n    Asset: " + "Asset Id: " + asset.getId() + "    Name: " + asset.getName()
-				+ "    Type: " + asset.getType() + "    available: " + asset.isAvailable() + "\n        User: " + asset.getUser();
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		if (o == null || getClass() != o.getClass())
+		if (obj == null)
 			return false;
-
-		Transaction that = (Transaction) o;
-
-		if (id != null ? !id.equals(that.id) : that.id != null)
+		if (getClass() != obj.getClass())
 			return false;
-
+		Transaction other = (Transaction) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (idTransaction == null) {
+			if (other.idTransaction != null)
+				return false;
+		} else if (!idTransaction.equals(other.idTransaction))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
 		return true;
 	}
 
 	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
+	public String toString() {
+		return "Transaction [idTransaction=" + idTransaction + ", date=" + date + ", status=" + status + "]";
 	}
+
 }
