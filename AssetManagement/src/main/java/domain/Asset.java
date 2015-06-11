@@ -2,10 +2,19 @@ package domain;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="getAssetsByName", query="FROM Asset a WHERE a.name = :name"),
+	@NamedQuery(name="getAssetsByType", query="FROM Asset a WHERE a.type = :type"),
+	@NamedQuery(name="getAssetsByIsAvailable", query="FROM Asset a WHERE a.isAvailable = :isAvailable"),
+	@NamedQuery(name="getAssetsByIsOnStock", query="FROM Asset a WHERE a.isOnStock = :isOnStock")
+})
 @Table(name = "ASSETS")
 public class Asset implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,8 +22,8 @@ public class Asset implements Serializable {
 	private Long idAsset;
 	private String name;
 	private String type;
-	private boolean available;
-	private boolean onStock;
+	private boolean isAvailable;
+	private boolean isOnStock;
 
 	private User user;
 	private Order order;
@@ -52,22 +61,22 @@ public class Asset implements Serializable {
 		this.type = type;
 	}
 
-	@Column(name = "AVAILABLE")
-	public boolean isAvailable() {
-		return available;
+	@Column(name = "IS_AVAILABLE")
+	public boolean getIsAvailable() {
+		return isAvailable;
 	}
 
-	public void setAvailable(boolean available) {
-		this.available = available;
+	public void setIsAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 
-	@Column(name = "ON_STOCK")
-	public boolean isOnStock() {
-		return onStock;
+	@Column(name = "IS_ON_STOCK")
+	public boolean getIsOnStock() {
+		return isOnStock;
 	}
 
-	public void setOnStock(boolean onStock) {
-		this.onStock = onStock;
+	public void setIsOnStock(boolean isOnStock) {
+		this.isOnStock = isOnStock;
 	}
 
 	@ManyToOne
@@ -121,10 +130,10 @@ public class Asset implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (available ? 1231 : 1237);
+		result = prime * result + (isAvailable ? 1231 : 1237);
 		result = prime * result + ((idAsset == null) ? 0 : idAsset.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + (onStock ? 1231 : 1237);
+		result = prime * result + (isOnStock ? 1231 : 1237);
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -138,7 +147,7 @@ public class Asset implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Asset other = (Asset) obj;
-		if (available != other.available)
+		if (isAvailable != other.isAvailable)
 			return false;
 		if (idAsset == null) {
 			if (other.idAsset != null)
@@ -150,7 +159,7 @@ public class Asset implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (onStock != other.onStock)
+		if (isOnStock != other.isOnStock)
 			return false;
 		if (type == null) {
 			if (other.type != null)
@@ -162,7 +171,7 @@ public class Asset implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Asset [idAsset=" + idAsset + ", name=" + name + ", type=" + type + ", available=" + available + ", onStock=" + onStock + "]";
+		return "Asset [idAsset=" + idAsset + ", name=" + name + ", type=" + type + ", isAvailable=" + isAvailable + ", isOnStock=" + isOnStock + "]";
 	}
 
 }

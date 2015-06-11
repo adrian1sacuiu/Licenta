@@ -13,7 +13,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
+@NamedQueries({
+	@NamedQuery(name="getDepartmentsByName", query="FROM Department d WHERE d.name = :name"),
+	@NamedQuery(name="getDepartmentsByLocation", query="FROM Department d WHERE d.location = :location"),
+	@NamedQuery(name="getDepartmentsByAddress", query="FROM Department d WHERE d.address = :address")
+})
 @Table(name = "DEPARTMENTS")
 public class Department implements Serializable {
 	private static final long serialVersionUID = 1L;

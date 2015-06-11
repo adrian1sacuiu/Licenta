@@ -11,7 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
+@NamedQueries({
+	@NamedQuery(name="getCountryByName", query="FROM Country c WHERE c.name = :name"),
+	@NamedQuery(name="getCountryByCountryCode", query="FROM Country c WHERE c.countryCode = :countryCode")
+})
 @Table(name = "COUNTRY")
 public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;

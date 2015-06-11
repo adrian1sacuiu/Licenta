@@ -9,10 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="getTransactionsByDate", query="FROM Transaction t WHERE t.date = :date"),
+	@NamedQuery(name="getTransactionsByStatus", query="FROM Transaction t WHERE t.status = :status")
+})
 @Table(name = "TRANSACTIONS")
 public class Transaction implements Serializable {
 	private static final long serialVersionUID = 1L;

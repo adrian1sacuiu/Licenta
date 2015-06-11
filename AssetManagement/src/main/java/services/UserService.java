@@ -33,8 +33,8 @@ public class UserService{
 	@Autowired
 	TransactionDao transactionDao;
 
-	public User createUser(User user) {
-		logger.info("in createUser method.");
+	public User addUser(User user) {
+		logger.info("in addUser method.");
 		
 		return userDao.addUser(user);
 	}
@@ -47,12 +47,26 @@ public class UserService{
 	}
 	
 	@Transactional(readOnly = true)
-	public List<User> getUserByName(String name) {
+	public List<User> getUsersByName(String name) {
 		logger.info("in getUserByName method.");
 		
-		return userDao.getUserByName(name);
+		return userDao.getUsersByName(name);
 	}
-
+	
+	@Transactional(readOnly = true)
+	public User getUserByEmail(String email) {
+		logger.info("in getUserByEmail method.");
+		
+		return userDao.getUserByEmail(email);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<User> getUsersByRole(String role) {
+		logger.info("in getUsersByRole method.");
+		
+		return userDao.getUsersByRole(role);
+	}
+	
 	public User deleteUser(Long id) {
 		logger.info("in deleteUser method.");
 		
@@ -61,7 +75,7 @@ public class UserService{
 		
 		if (!assets.isEmpty()) {
 			for (Asset asset : assets) {
-				asset.setAvailable(true);
+				asset.setIsAvailable(true);
 				asset.setUser(null);
 				assetDao.updateAsset(asset);
 			}

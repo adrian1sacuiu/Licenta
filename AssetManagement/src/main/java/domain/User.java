@@ -19,7 +19,10 @@ import java.util.List;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="getUserByName", query="FROM User u WHERE u.name = :name")
+	@NamedQuery(name="getUsersByName", query="FROM User u WHERE u.name = :name"),
+	@NamedQuery(name="getUsersByPassword", query="FROM User u WHERE u.password = :password"),
+	@NamedQuery(name="getUserByEmail", query="FROM User u WHERE u.email = :email"),
+	@NamedQuery(name="getUsersByRole", query="FROM User u WHERE u.role = :role")
 })
 @Table(name = "USERS")
 public class User implements Serializable {

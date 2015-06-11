@@ -11,7 +11,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
+@NamedQueries({
+	@NamedQuery(name="getComplaintsByTitle", query="FROM Complaint c WHERE c.title = :title"),
+	@NamedQuery(name="getComplaintsByDescription", query="FROM Complaint c WHERE c.description = :description"),
+	@NamedQuery(name="getComplaintsByPriority", query="FROM Complaint c WHERE c.priority = :priority"),
+	@NamedQuery(name="getComplaintsByStatus", query="FROM Complaint c WHERE c.status = :status")
+})
 @Table(name = "COMPLAINTS")
 public class Complaint implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -13,10 +13,11 @@ public class Test {
 
 		User user = new User();
 		user.setName("Adrian");
-		userService.createUser(user);
+		user.setEmail("sacuiu_adrian@yahoo.com");
+		userService.addUser(user);
 
 		user = null;
-		user = userService.getUserByName("Adrian").get(0);
+		user = userService.getUsersByName("Adrian").get(0);
 		System.out.println(user);
 	}
 }

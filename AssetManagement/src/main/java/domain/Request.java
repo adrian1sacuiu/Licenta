@@ -12,7 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
+@NamedQueries({
+	@NamedQuery(name="getRequestsByStartDate", query="FROM Request r WHERE r.startDate = :startDate"),
+	@NamedQuery(name="getRequestsByEndDate", query="FROM Request r WHERE r.endDate = :endDate"),
+	@NamedQuery(name="getRequestsByStatus", query="FROM Request r WHERE r.status = :status")
+})
 @Table(name = "REQUESTS")
 public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -12,16 +12,25 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
+@NamedQueries({
+	@NamedQuery(name="getOrdersByPrice", query="FROM Order o WHERE o.price = :price"),
+	@NamedQuery(name="getOrdersBySupplierName", query="FROM Order o WHERE o.supplierName = :supplierName"),
+	@NamedQuery(name="getOrdersByPurchaseDate", query="FROM Order o WHERE o.purchaseDate = :purchaseDate"),
+	@NamedQuery(name="getOrdersByIsReceived", query="FROM Order o WHERE o.isReceived = :isReceived")
+})
 @Table(name = "ORDERS")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private long idOrder;
 	private String price;
 	private String supplierName;
 	private Date purchaseDate;
 	private boolean isReceived;
-	private long idOrder;
 
 	private List<Asset> assets;
 
@@ -64,11 +73,11 @@ public class Order implements Serializable {
 	}
 
 	@Column(name = "IS_RECEIVED")
-	public boolean isReceived() {
+	public boolean getIsReceived() {
 		return isReceived;
 	}
 
-	public void setReceived(boolean isReceived) {
+	public void setIsReceived(boolean isReceived) {
 		this.isReceived = isReceived;
 	}
 
