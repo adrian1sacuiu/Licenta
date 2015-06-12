@@ -44,18 +44,20 @@ public class DepartmentDao extends SessionController {
 		return result;
 	}
 
-	public Department deleteDepartment(Department department) {
+	public boolean deleteDepartment(Department department) {
 		logger.info("Inside deleteDepartment method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().delete(department);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in deleteDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 
-		return department;
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

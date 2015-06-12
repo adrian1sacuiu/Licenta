@@ -45,18 +45,20 @@ public class RequestDao extends SessionController {
 		return result;
 	}
 
-	public Request deleteRequest(Request request) {
+	public boolean deleteRequest(Request request) {
 		logger.info("Inside deleteRequest method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().delete(request);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in deleteRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 
-		return request;
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

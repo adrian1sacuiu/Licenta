@@ -45,18 +45,20 @@ public class OrderDao extends SessionController {
 		return result;
 	}
 
-	public Order deleteOrder(Order order) {
+	public boolean deleteOrder(Order order) {
 		logger.info("Inside deleteOrder method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().delete(order);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in deleteOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 
-		return order;
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

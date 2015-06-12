@@ -41,18 +41,20 @@ public class ComplaintDao extends SessionController {
 		return result;
 	}
 
-	public Complaint deleteComplaint(Complaint complaint) {
+	public boolean deleteComplaint(Complaint complaint) {
 		logger.info("Inside deleteComplaint method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().delete(complaint);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in deleteComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 
-		return complaint;
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

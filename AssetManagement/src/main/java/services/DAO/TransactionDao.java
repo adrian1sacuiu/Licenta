@@ -45,17 +45,20 @@ public class TransactionDao extends SessionController {
 		return result;
 	}
 
-	public Transaction deleteTransaction(Transaction transaction) {
+	public boolean deleteTransaction(Transaction transaction) {
 		logger.info("Inside deleteTransaction method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().delete(transaction);
+			result = true;
+			
 		} catch (Exception e) {
 			logger.error("in deleteTransaction method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 
-		return transaction;
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

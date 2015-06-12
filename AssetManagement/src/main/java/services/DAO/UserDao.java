@@ -44,18 +44,20 @@ public class UserDao extends SessionController {
 		return result;
 	}
 
-	public User deleteUser(User user) {
+	public boolean deleteUser(User user) {
 		logger.info("Inside deleteUser method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().delete(user);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in deleteUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 
-		return user;
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

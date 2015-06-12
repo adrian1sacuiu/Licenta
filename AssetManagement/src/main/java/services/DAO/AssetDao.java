@@ -44,18 +44,20 @@ public class AssetDao extends SessionController {
 		return result;
 	}
 
-	public Asset deleteAsset(Asset asset) {
+	public boolean deleteAsset(Asset asset) {
 		logger.info("Inside deleteAsset method.");
-
+		boolean result = false;
+		
 		try {
 			getCurrentSession().delete(asset);
-
+			result = true;
+			
 		} catch (Exception e) {
 			logger.error("in deleteAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 
-		return asset;
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

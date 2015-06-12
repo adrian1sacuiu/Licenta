@@ -108,7 +108,7 @@ public class Asset implements Serializable {
 		this.transactions = transactions;
 	}
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "asset")
+	@OneToMany(mappedBy = "asset")
 	public List<Complaint> getComplaints() {
 		return complaints;
 	}

@@ -44,18 +44,21 @@ public class CountryDao extends SessionController {
 		return result;
 	}
 
-	public Country deleteCountry(Country country) {
+	public boolean deleteCountry(Country country) {
 		logger.info("Inside deleteCountry method.");
+		boolean result = false;
+
 
 		try {
 			getCurrentSession().delete(country);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in deleteCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 
-		return country;
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -11,9 +11,6 @@ import services.DAO.AssetDao;
 
 import java.util.List;
 
-/**
- * Created by Adrian on 06-Aug-14.
- */
 @Transactional
 @Service
 public class AssetService{
@@ -28,26 +25,53 @@ public class AssetService{
 		return assetDao.addAsset(asset);
 	}
 
+	public boolean updateAsset(Asset asset){
+		logger.info("in updateAsset method.");
+		
+		return assetDao.updateAsset(asset);
+	}
+	
+	public boolean deleteAsset(Asset asset) {
+		logger.info("in deleteAsset method.");
+		
+		return assetDao.deleteAsset(asset);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Asset> getAllAssets() {
+		logger.info("in getAllAssets method.");
+
+		return assetDao.getAllAssets();
+	}
+	
 	@Transactional(readOnly = true)
 	public Asset getAssetById(Long id) {
 		logger.info("in getAssetById method.");
 
 		return assetDao.getAssetById(id);
 	}
+	
+	public List<Asset> getAssetsByName(String name) {
+		logger.info("Inside getAssetsByName method.");
 
-	public Asset deleteAsset(Long id) {
-		logger.info("in deleteAsset method.");
-
-		Asset asset = assetDao.getAssetById(id);
-		assetDao.deleteAsset(asset);
-		
-		return asset;
+		return assetDao.getAssetsByName(name);
 	}
+	
+	public List<Asset> getAssetsByType(String type) {
+		logger.info("Inside getAssetsByType method.");
 
-	public List<Asset> getAllAssets() {
-		logger.info("in getAllAssets method.");
-
-		return assetDao.getAllAssets();
+		return assetDao.getAssetsByType(type);
 	}
+	
+	public List<Asset> getAssetsByIsAvailable(boolean isAvailable) {
+		logger.info("Inside getAssetsByIsAvailable method.");
 
+		return assetDao.getAssetsByIsAvailable(isAvailable);
+	}
+	
+	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) {
+		logger.info("Inside getAssetsByIsOnStock method.");
+
+		return assetDao.getAssetsByIsOnStock(isOnStock);
+	}
 }
