@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id="info">
-		<form class="form-horizontal" role="form" action="/login"
+		<form class="form-horizontal" role="form" action="login"
 			method="post">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">Username</label>

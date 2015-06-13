@@ -15,21 +15,24 @@ import java.util.List;
 public class RequestDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(RequestDao.class);
 
-	public Request addRequest(Request request) {
+	public boolean addRequest(Request request) throws Exception {
 		logger.info("Inside addRequest method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().save(request);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in addRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
-		return request;
+		return result;
 	}
 
-	public boolean updateRequest(Request request) {
+	public boolean updateRequest(Request request) throws Exception {
 		logger.info("Inside updateRequest method.");
 		boolean result = false;
 
@@ -40,12 +43,13 @@ public class RequestDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in updateRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
 	}
 
-	public boolean deleteRequest(Request request) {
+	public boolean deleteRequest(Request request) throws Exception {
 		logger.info("Inside deleteRequest method.");
 		boolean result = false;
 
@@ -56,6 +60,7 @@ public class RequestDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in deleteRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
@@ -109,7 +114,7 @@ public class RequestDao extends SessionController {
 
 		return requests;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Request> getRequestsByEndDate(Date endDate) {
 		logger.info("Inside getRequestByEndDate method.");
@@ -128,7 +133,7 @@ public class RequestDao extends SessionController {
 
 		return requests;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Request> getRequestsByStatus(String status) {
 		logger.info("Inside getRequestsByStatus method.");
@@ -147,5 +152,5 @@ public class RequestDao extends SessionController {
 
 		return requests;
 	}
-	
+
 }

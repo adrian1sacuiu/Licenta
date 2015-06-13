@@ -1,76 +1,62 @@
 package controllers;
 
 import domain.User;
-import misc.ImageUploadException;
-import org.apache.commons.io.FileUtils;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import services.UserService;
 
-import javax.validation.Valid;
-import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Created by internship on 8/7/2014.
- */
 @Controller
-@RequestMapping(value = "/register")
+@RequestMapping(value = "register")
 public class RegisterController {
-
-	private UserService userService;
+	private static final Logger logger = Logger.getLogger(RegisterController.class);
 
 	@Autowired
-	public RegisterController(UserService userService) {
-		this.userService = userService;
-	}
+	private UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView createUser() {
+		logger.info("Inside createUser method");
+		
 		ModelAndView mv = new ModelAndView("register");
 		mv.addObject("user", new User());
+		
 		return mv;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView registerUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @RequestParam(value = "image", required = false) MultipartFile image) {
-		ModelAndView mv = new ModelAndView("register");
-		if (bindingResult.hasErrors()) {
-			return mv;
-		}
-		userService.addUser(user);
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public Map<String, String> registerUser(@ModelAttribute("user") User user) {
+		logger.info("Inside registerUser method");
+		Map<String, String> resultMap = new HashMap<String, String>();
+		
 		try {
-			if (!image.isEmpty()) {
-				validateImage(image);
-				saveImage(user.getName() + ".jpg", image); //
-			}
-		} catch (ImageUploadException e) {
-			bindingResult.reject(e.getMessage());
-			return mv;
-		}
-		mv = new ModelAndView("myProfile");
-		return mv;
-	}
-
-	private void validateImage(MultipartFile image) {
-		if (!image.getContentType().equals("image/jpeg")) {
-			throw new ImageUploadException("Only JPG images accepted");
-		}
-	}
-
-	private void saveImage(String filename, MultipartFile image) throws ImageUploadException {
-		try {
-			File file = new File("src/main/webapp/resources/images/" + filename);
-			FileUtils.writeByteArrayToFile(file, image.getBytes());
-		} catch (IOException e) {
-			throw new ImageUploadException("Unable to save image", e);
-		}
+			String password = user.getPassword();
+			String hashedPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+			
+			user.setPassword(hashedPassword);
+			userService.addUser(user);
+			resultMap.put("status", "true");
+			resultMap.put("message", "User registered successfully!");
+			
+		} catch (Exception e) {
+			logger.error("in registerUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error creating user!");
+		}	
+			
+		
+		return resultMap;
 	}
 }

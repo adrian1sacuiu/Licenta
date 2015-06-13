@@ -15,21 +15,24 @@ import java.util.List;
 public class OrderDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(OrderDao.class);
 
-	public Order addOrder(Order order) {
+	public boolean addOrder(Order order) throws Exception {
 		logger.info("Inside addOrder method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().save(order);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in addOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
-		return order;
+		return result;
 	}
 
-	public boolean updateOrder(Order order) {
+	public boolean updateOrder(Order order) throws Exception {
 		logger.info("Inside updateOrder method.");
 		boolean result = false;
 
@@ -40,12 +43,13 @@ public class OrderDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in updateOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
 	}
 
-	public boolean deleteOrder(Order order) {
+	public boolean deleteOrder(Order order) throws Exception {
 		logger.info("Inside deleteOrder method.");
 		boolean result = false;
 
@@ -56,6 +60,7 @@ public class OrderDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in deleteOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
@@ -109,7 +114,7 @@ public class OrderDao extends SessionController {
 
 		return orders;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Order> getOrdersBySupplierName(String supplierName) {
 		logger.info("Inside getOrdersBySupplierName method.");
@@ -128,7 +133,7 @@ public class OrderDao extends SessionController {
 
 		return orders;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Order> getOrdersByPurchaseDate(Date purchaseDate) {
 		logger.info("Inside getOrdersByPurchaseDate method.");
@@ -147,7 +152,7 @@ public class OrderDao extends SessionController {
 
 		return orders;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Order> getOrdersByIsReceived(boolean isReceived) {
 		logger.info("Inside getOrdersByIsReceived method.");
@@ -166,6 +171,5 @@ public class OrderDao extends SessionController {
 
 		return orders;
 	}
-	
-	
+
 }

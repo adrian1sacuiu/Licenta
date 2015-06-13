@@ -14,21 +14,24 @@ import java.util.List;
 public class UserDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(UserDao.class);
 
-	public User addUser(User user) {
+	public boolean addUser(User user) throws Exception {
 		logger.info("Inside addUser method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().save(user);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in addUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
-		return user;
+		return result;
 	}
 
-	public boolean updateUser(User user) {
+	public boolean updateUser(User user) throws Exception {
 		logger.info("Inside updateUser method.");
 		boolean result = false;
 
@@ -39,12 +42,13 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in updateUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
 	}
 
-	public boolean deleteUser(User user) {
+	public boolean deleteUser(User user) throws Exception {
 		logger.info("Inside deleteUser method.");
 		boolean result = false;
 
@@ -55,6 +59,7 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in deleteUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;

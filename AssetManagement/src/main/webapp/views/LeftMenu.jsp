@@ -9,7 +9,7 @@
 <article class="col1">
 	<div class="feedzilla-news-widget feedzilla-8419175315648317"
 		style="width: 350px; padding: 0; text-align: center; font-size: 11px; border: 0;">
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
             new FEEDZILLA.Widget({
                 style: 'slide-left-to-right',
                 culture_code: 'en_all',
@@ -28,7 +28,7 @@
                 theme: 'start',
                 className: 'feedzilla-8419175315648317'
             });
-        </script>
+        </script> -->
 		<br /> <a
 			href="http://widgets.feedzilla.com/news/builder/index.html?utm_source=feedzilla&utm_medium=widget&utm_campaign=widget%2Blink"
 			target="_blank">Get Your News Widget</a>

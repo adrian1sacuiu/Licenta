@@ -14,7 +14,7 @@ import java.util.List;
 public class AssetDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(AssetDao.class);
 
-	public Asset addAsset(Asset asset) {
+	public Asset addAsset(Asset asset) throws Exception {
 		logger.info("Inside addAsset method.");
 
 		try {
@@ -23,12 +23,13 @@ public class AssetDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in addAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return asset;
 	}
 
-	public boolean updateAsset(Asset asset) {
+	public boolean updateAsset(Asset asset) throws Exception {
 		logger.info("Inside updateAsset method.");
 		boolean result = false;
 
@@ -39,22 +40,24 @@ public class AssetDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in updateAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
 	}
 
-	public boolean deleteAsset(Asset asset) {
+	public boolean deleteAsset(Asset asset) throws Exception {
 		logger.info("Inside deleteAsset method.");
 		boolean result = false;
-		
+
 		try {
 			getCurrentSession().delete(asset);
 			result = true;
-			
+
 		} catch (Exception e) {
 			logger.error("in deleteAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
@@ -108,7 +111,7 @@ public class AssetDao extends SessionController {
 
 		return assets;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Asset> getAssetsByType(String type) {
 		logger.info("Inside getAssetsByType method.");
@@ -127,7 +130,7 @@ public class AssetDao extends SessionController {
 
 		return assets;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Asset> getAssetsByIsAvailable(boolean isAvailable) {
 		logger.info("Inside getAssetsByIsAvailable method.");
@@ -146,7 +149,7 @@ public class AssetDao extends SessionController {
 
 		return assets;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) {
 		logger.info("Inside getAssetsByIsOnStock method.");
@@ -165,5 +168,5 @@ public class AssetDao extends SessionController {
 
 		return assets;
 	}
-	
+
 }

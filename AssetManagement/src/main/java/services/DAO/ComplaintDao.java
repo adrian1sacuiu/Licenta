@@ -4,28 +4,33 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
+import org.springframework.stereotype.Repository;
 
 import domain.Complaint;
 import services.DAO.controller.SessionController;
 
+@Repository
 public class ComplaintDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(ComplaintDao.class);
 
-	public Complaint addComplaint(Complaint complaint) {
+	public boolean addComplaint(Complaint complaint) throws Exception {
 		logger.info("Inside addComplaint method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().save(complaint);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in addComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
-		return complaint;
+		return result;
 	}
 
-	public boolean updateComplaint(Complaint complaint) {
+	public boolean updateComplaint(Complaint complaint) throws Exception {
 		logger.info("Inside updateComplaint method.");
 		boolean result = false;
 
@@ -36,12 +41,13 @@ public class ComplaintDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in updateComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
 	}
 
-	public boolean deleteComplaint(Complaint complaint) {
+	public boolean deleteComplaint(Complaint complaint) throws Exception {
 		logger.info("Inside deleteComplaint method.");
 		boolean result = false;
 
@@ -52,6 +58,7 @@ public class ComplaintDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in deleteComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;

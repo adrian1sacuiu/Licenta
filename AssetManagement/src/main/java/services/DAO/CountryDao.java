@@ -14,21 +14,24 @@ import java.util.List;
 public class CountryDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(CountryDao.class);
 
-	public Country addCountry(Country country) {
+	public boolean addCountry(Country country) throws Exception {
 		logger.info("Inside addCountry method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().save(country);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in addCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
-		return country;
+		return result;
 	}
 
-	public boolean updateCountry(Country country) {
+	public boolean updateCountry(Country country) throws Exception {
 		logger.info("Inside updateCountry method.");
 		boolean result = false;
 
@@ -39,15 +42,15 @@ public class CountryDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in updateCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
 	}
 
-	public boolean deleteCountry(Country country) {
+	public boolean deleteCountry(Country country) throws Exception {
 		logger.info("Inside deleteCountry method.");
 		boolean result = false;
-
 
 		try {
 			getCurrentSession().delete(country);
@@ -56,6 +59,7 @@ public class CountryDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in deleteCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;

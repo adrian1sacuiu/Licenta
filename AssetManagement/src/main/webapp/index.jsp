@@ -26,9 +26,9 @@
 					<p class="color1">Don't have an account? You can register here.</p>
 				</div>
 				<div class="wrapper pad_bot2">
-					<form action="register" method="get">
+					<!-- <form action="register" method="get"> -->
 						<button type="submit" id="button2" class="btn btn-info btn-lg">Register</button>
-					</form>
+					<!-- </form> -->
 				</div>
 			</div>
 		</article>

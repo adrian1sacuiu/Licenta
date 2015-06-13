@@ -14,21 +14,24 @@ import java.util.List;
 public class DepartmentDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(DepartmentDao.class);
 
-	public Department addDepartment(Department department) {
+	public boolean addDepartment(Department department) throws Exception {
 		logger.info("Inside addDepartment method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().save(department);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in addDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
-		return department;
+		return result;
 	}
 
-	public boolean updateDepartment(Department department) {
+	public boolean updateDepartment(Department department) throws Exception {
 		logger.info("Inside updateDepartment method.");
 		boolean result = false;
 
@@ -39,12 +42,13 @@ public class DepartmentDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in updateDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
 	}
 
-	public boolean deleteDepartment(Department department) {
+	public boolean deleteDepartment(Department department) throws Exception {
 		logger.info("Inside deleteDepartment method.");
 		boolean result = false;
 
@@ -55,6 +59,7 @@ public class DepartmentDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in deleteDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
@@ -108,7 +113,7 @@ public class DepartmentDao extends SessionController {
 
 		return departments;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Department> getDepartmentsByLocation(String location) {
 		logger.info("Inside getDepartmentsByLocation method.");
@@ -127,7 +132,7 @@ public class DepartmentDao extends SessionController {
 
 		return departments;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Department> getDepartmentsByAddress(String address) {
 		logger.info("Inside getDepartmentsByAddress method.");
@@ -146,5 +151,5 @@ public class DepartmentDao extends SessionController {
 
 		return departments;
 	}
-	
+
 }

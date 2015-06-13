@@ -15,30 +15,30 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserService{
+public class UserService {
 	private static final Logger logger = Logger.getLogger(UserService.class);
-	
+
 	@Autowired
 	UserDao userDao;
-	
+
 	@Autowired
 	AssetDao assetDao;
-	
-	public User addUser(User user) {
+
+	public boolean addUser(User user) throws Exception {
 		logger.info("in addUser method.");
-		
+
 		return userDao.addUser(user);
 	}
 
-	public boolean updateUser(User user) {
+	public boolean updateUser(User user) throws Exception {
 		logger.info("in updateUser method.");
-		
+
 		return userDao.updateUser(user);
 	}
-	
-	public boolean deleteUser(User user) {
+
+	public boolean deleteUser(User user) throws Exception {
 		logger.info("in deleteUser method.");
-		
+
 		List<Asset> assets = user.getAssets();
 		if (!assets.isEmpty()) {
 			for (Asset asset : assets) {
@@ -47,42 +47,42 @@ public class UserService{
 				assetDao.updateAsset(asset);
 			}
 		}
-		
+
 		return userDao.deleteUser(user);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<User> getAllUsers() {
 		logger.info("in getAllUsers method.");
-		
+
 		return userDao.getAllUsers();
 	}
-	
+
 	@Transactional(readOnly = true)
 	public User getUserById(Long id) {
 		logger.info("in getUserById method.");
-		
+
 		return userDao.getUserById(id);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<User> getUsersByName(String name) {
 		logger.info("in getUserByName method.");
-		
+
 		return userDao.getUsersByName(name);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public User getUserByEmail(String email) {
 		logger.info("in getUserByEmail method.");
-		
+
 		return userDao.getUserByEmail(email);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<User> getUsersByRole(String role) {
 		logger.info("in getUsersByRole method.");
-		
+
 		return userDao.getUsersByRole(role);
 	}
 }

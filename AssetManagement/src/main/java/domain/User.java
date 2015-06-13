@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -99,6 +100,7 @@ public class User implements Serializable {
 	}
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	public List<Asset> getAssets() {
 		return assets;
 	}
@@ -108,6 +110,7 @@ public class User implements Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
 	public List<Transaction> getTransactions() {
 		return transactions;
 	}
@@ -117,6 +120,7 @@ public class User implements Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
 	public List<Complaint> getComplaints() {
 		return complaints;
 	}
@@ -126,6 +130,7 @@ public class User implements Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
 	public List<Request> getRequests() {
 		return requests;
 	}

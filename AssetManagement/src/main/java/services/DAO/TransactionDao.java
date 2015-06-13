@@ -16,20 +16,24 @@ import java.util.List;
 public class TransactionDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(TransactionDao.class);
 
-	public Transaction addTransaction(Transaction transaction) {
+	public boolean addTransaction(Transaction transaction) throws Exception {
 		logger.info("Inside addTransaction method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().save(transaction);
+			result = true;
+
 		} catch (Exception e) {
 			logger.error("in addTransaction method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
-		return transaction;
+		return result;
 	}
 
-	public boolean updateTransaction(Transaction transaction) {
+	public boolean updateTransaction(Transaction transaction) throws Exception {
 		logger.info("Inside updateTransaction method.");
 		boolean result = false;
 
@@ -40,22 +44,24 @@ public class TransactionDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in updateTransaction method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
 	}
 
-	public boolean deleteTransaction(Transaction transaction) {
+	public boolean deleteTransaction(Transaction transaction) throws Exception {
 		logger.info("Inside deleteTransaction method.");
 		boolean result = false;
 
 		try {
 			getCurrentSession().delete(transaction);
 			result = true;
-			
+
 		} catch (Exception e) {
 			logger.error("in deleteTransaction method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return result;
@@ -89,7 +95,7 @@ public class TransactionDao extends SessionController {
 
 		return transaction;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Transaction> getTransactionsByDate(Date date) {
 		logger.info("Inside getTransactionsByDate method.");
@@ -108,7 +114,7 @@ public class TransactionDao extends SessionController {
 
 		return transactions;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Transaction> getTransactionsByStatus(String status) {
 		logger.info("Inside getTransactionsByStatus method.");

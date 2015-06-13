@@ -13,41 +13,41 @@ import java.util.List;
 
 @Transactional
 @Service
-public class CountryService{
+public class CountryService {
 	private static final Logger logger = Logger.getLogger(CountryService.class);
 
 	@Autowired
 	CountryDao countryDao;
-	
-	public Country addCountry(Country country) {
+
+	public boolean addCountry(Country country) throws Exception {
 		logger.info("in addCountry method.");
 
 		return countryDao.addCountry(country);
 	}
 
-	public boolean updateCountry(Country country){
+	public boolean updateCountry(Country country) throws Exception {
 		logger.info("in updateCountry method.");
-		
+
 		return countryDao.updateCountry(country);
 	}
-	
-	public boolean deleteCountry(Country country) {
+
+	public boolean deleteCountry(Country country) throws Exception {
 		logger.info("in deleteCountry method.");
-		
+
 		return countryDao.deleteCountry(country);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Country> getAllCountries() {
 		logger.info("in getAllCountries method.");
 
 		return countryDao.getAllCountries();
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Country getCountryById(Long id) {
 		logger.info("in getCountryById method.");
 
 		return countryDao.getCountryById(id);
-	}	
+	}
 }
