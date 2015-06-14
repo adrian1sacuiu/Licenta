@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.*;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -100,6 +101,7 @@ public class Asset implements Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "asset")
+	@JsonIgnore
 	public List<Transaction> getTransactions() {
 		return transactions;
 	}
@@ -109,6 +111,7 @@ public class Asset implements Serializable {
 	}
 	
 	@OneToMany(mappedBy = "asset")
+	@JsonIgnore
 	public List<Complaint> getComplaints() {
 		return complaints;
 	}
@@ -118,6 +121,7 @@ public class Asset implements Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "asset")
+	@JsonIgnore
 	public List<Request> getRequests() {
 		return requests;
 	}

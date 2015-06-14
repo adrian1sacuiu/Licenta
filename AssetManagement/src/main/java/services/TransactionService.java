@@ -1,13 +1,16 @@
 package services;
 
 import domain.Transaction;
+import domain.User;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.TransactionDao;
+import services.DAO.UserDao;
 
 import java.sql.Date;
 import java.util.List;
@@ -19,6 +22,9 @@ public class TransactionService {
 
 	@Autowired
 	TransactionDao transactionDao;
+	
+	@Autowired
+	UserDao userDao;
 
 	public boolean addTransaction(Transaction transaction) throws Exception {
 		logger.info("in addTransaction method.");
@@ -52,16 +58,29 @@ public class TransactionService {
 		return transactionDao.getTransactionById(id);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Transaction> getTransactionsByDate(Date date) {
 		logger.info("Inside getTransactionsByDate method.");
 
 		return transactionDao.getTransactionsByDate(date);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Transaction> getTransactionsByStatus(String status) {
 		logger.info("Inside getTransactionsByStatus method.");
 
 		return transactionDao.getTransactionsByStatus(status);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Transaction> getTransactionsForUser(Long id){
+		logger.info("Inside getTransactionsForUser method.");
+		User user = userDao.getUserById(id);
+		
+		List<Transaction> transactions = user.getTransactions();
+		Hibernate.initialize(transactions);;
+		
+		return transactions;
 	}
 
 }

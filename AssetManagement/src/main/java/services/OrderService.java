@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.OrderDao;
 
+import java.sql.Date;
 import java.util.List;
 
 @Transactional
@@ -49,5 +50,33 @@ public class OrderService {
 		logger.info("in getOrderById method.");
 
 		return orderDao.getOrderById(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersByPrice(String price) {
+		logger.info("Inside getOrdersByPrice method.");
+
+		return orderDao.getOrdersByPrice(price);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersBySupplierName(String supplierName) {
+		logger.info("Inside getOrdersBySupplierName method.");
+
+		return orderDao.getOrdersBySupplierName(supplierName);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersByPurchaseDate(Date purchaseDate) {
+		logger.info("Inside getOrdersByPurchaseDate method.");
+
+		return orderDao.getOrdersByPurchaseDate(purchaseDate);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersByIsReceived(boolean isReceived) {
+		logger.info("Inside getOrdersByIsReceived method.");
+
+		return orderDao.getOrdersByIsReceived(isReceived);
 	}
 }

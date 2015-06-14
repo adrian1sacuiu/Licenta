@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -84,6 +85,7 @@ public class Department implements Serializable {
 	}
 	
 	@OneToMany(mappedBy = "department")
+	@JsonIgnore
 	public List<User> getUsers() {
 		return users;
 	}

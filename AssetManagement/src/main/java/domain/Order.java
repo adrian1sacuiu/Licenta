@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -82,6 +83,7 @@ public class Order implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "order")
+	@JsonIgnore
 	public List<Asset> getAssets() {
 		return assets;
 	}

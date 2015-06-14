@@ -1,13 +1,16 @@
 package services;
 
 import domain.Asset;
+import domain.User;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.AssetDao;
+import services.DAO.UserDao;
 
 import java.util.List;
 
@@ -18,6 +21,9 @@ public class AssetService {
 
 	@Autowired
 	AssetDao assetDao;
+	
+	@Autowired
+	UserDao userDao;
 
 	public Asset addAsset(Asset asset) throws Exception {
 		logger.info("in addAsset method.");
@@ -51,27 +57,42 @@ public class AssetService {
 		return assetDao.getAssetById(id);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Asset> getAssetsByName(String name) {
 		logger.info("Inside getAssetsByName method.");
 
 		return assetDao.getAssetsByName(name);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Asset> getAssetsByType(String type) {
 		logger.info("Inside getAssetsByType method.");
 
 		return assetDao.getAssetsByType(type);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Asset> getAssetsByIsAvailable(boolean isAvailable) {
 		logger.info("Inside getAssetsByIsAvailable method.");
 
 		return assetDao.getAssetsByIsAvailable(isAvailable);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) {
 		logger.info("Inside getAssetsByIsOnStock method.");
 
 		return assetDao.getAssetsByIsOnStock(isOnStock);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Asset> getAssetsForUser(Long id){
+		logger.info("Inside getAssetsForUser method.");
+		
+		User user = userDao.getUserById(id);
+		List<Asset> assets = user.getAssets();
+		Hibernate.initialize(assets);
+		
+		return assets;
 	}
 }

@@ -50,4 +50,18 @@ public class CountryService {
 
 		return countryDao.getCountryById(id);
 	}
+	
+	@Transactional(readOnly = true)
+	public Country getCountryByName(String name){
+		logger.info("in getCountryByName method.");
+
+		return countryDao.getCountryByName(name);
+	}
+	
+	@Transactional(readOnly = true)
+	public Country getCountryByCountryCode(String countryCode){
+		logger.info("in getCountryByCountryCode method.");
+
+		return countryDao.getCountryByCountryCode(countryCode);
+	}
 }

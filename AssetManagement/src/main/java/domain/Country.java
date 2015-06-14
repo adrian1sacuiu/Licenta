@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -63,6 +64,7 @@ public class Country implements Serializable {
 		return departments;
 	}
 
+	@JsonIgnore
 	public void setDepartments(List<Department> departments) {
 		this.departments = departments;
 	}

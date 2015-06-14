@@ -50,4 +50,25 @@ public class DepartmentService {
 
 		return departmentDao.getDepartmentById(id);
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Department> getDepartmentsByName(String name) {
+		logger.info("in getDepartmentsByName method.");
+
+		return departmentDao.getDepartmentsByName(name);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Department> getDepartmentsByLocation(String location) {
+		logger.info("in getDepartmentsByLocation method.");
+
+		return departmentDao.getDepartmentsByLocation(location);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Department> getDepartmentsByAddress(String address) {
+		logger.info("in getDepartmentsByAddress method.");
+
+		return departmentDao.getDepartmentsByAddress(address);
+	}
 }
