@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.UserService;
+import services.UsersService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class RegisterController {
 	private static final Logger logger = Logger.getLogger(RegisterController.class);
 
 	@Autowired
-	private UserService userService;
+	private UsersService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView createUser() {

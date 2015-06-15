@@ -8,22 +8,22 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.User;
-import services.UserService;
+import services.UsersService;
 
 @Controller
 public class LoginController {
 	private static final Logger logger = Logger.getLogger(LoginController.class);
 
 	@Autowired
-	private UserService userService;
+	private UsersService userService;
 
 	@RequestMapping(value = "login", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -40,8 +40,9 @@ public class LoginController {
 				User user = userService.getUserByEmail(email);
 
 				if (user != null) {
+					BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 					String userPassword = user.getPassword();
-					String hashedPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+					String hashedPassword = passwordEncoder.encode(password);
 
 					if (hashedPassword.equals(userPassword)) {
 						session.setAttribute("userInfo", user);

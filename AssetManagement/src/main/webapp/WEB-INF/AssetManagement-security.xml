@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+							http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<!-- <http> <form-login login-page="/views/login/Login.jsp" authentication-failure-url="/views/login/Login.jsp?login_error=t" 
+		/> <http-basic /> <logout /> <intercept-url pattern="/**" access="user" /> 
+		</http> -->
+
+	<http auto-config="false" use-expressions="true">
+		<access-denied-handler error-page="/index.jsp" />
+		<form-login login-page="/views/ajax/Login.jsp" authentication-failure-url="/views/ajax/Login.jsp?login_error" default-target-url="/" />
+		<logout invalidate-session="true" logout-success-url="/index.jsp" delete-cookies="JSESSIONID" />
+		<intercept-url pattern="/index.jsp" access="permitAll" />
+		<intercept-url pattern="/views/ajax/Login.jsp" access="isAnonymous()" />
+		<intercept-url pattern="/views/myProfile.jsp" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+	</http>
+
+	<jdbc-user-service id="userService" data-source-ref="dataSource"
+		authorities-by-username-query="select email as username, concat('ROLE_',upper(replace(ROLE, ' ', '_'))) as 'authority' from users where email=?"
+		users-by-username-query="select email, password, 1 from USERS where email=?" />
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="userService">
+			<password-encoder hash="bcrypt" />
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>

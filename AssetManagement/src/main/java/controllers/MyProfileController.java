@@ -17,14 +17,14 @@ import services.AssetService;
 import services.ComplaintService;
 import services.RequestService;
 import services.TransactionService;
-import services.UserService;
+import services.UsersService;
 
 @Controller
 public class MyProfileController {
 	private static final Logger logger = Logger.getLogger(MyProfileController.class);
 	
 	@Autowired
-	private UserService userService;
+	private UsersService userService;
 	
 	@Autowired
 	private AssetService assetService;
