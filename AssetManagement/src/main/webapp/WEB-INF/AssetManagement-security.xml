@@ -4,18 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 							http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<!-- <http> <form-login login-page="/views/login/Login.jsp" authentication-failure-url="/views/login/Login.jsp?login_error=t" 
-		/> <http-basic /> <logout /> <intercept-url pattern="/**" access="user" /> 
-		</http> -->
-
 	<http auto-config="false" use-expressions="true">
 		<access-denied-handler error-page="/index.jsp" />
 		<form-login login-page="/views/ajax/Login.jsp" authentication-failure-url="/views/ajax/Login.jsp?login_error" default-target-url="/" />
 		<logout invalidate-session="true" logout-success-url="/index.jsp" delete-cookies="JSESSIONID" />
-		<intercept-url pattern="/index.jsp" access="permitAll" />
+		<!-- <intercept-url pattern="/index.jsp" access="permitAll" />
 		<intercept-url pattern="/views/ajax/Login.jsp" access="isAnonymous()" />
 		<intercept-url pattern="/views/myProfile.jsp" access="hasRole('ROLE_USER')" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" /> -->
 	</http>
 
 	<jdbc-user-service id="userService" data-source-ref="dataSource"
