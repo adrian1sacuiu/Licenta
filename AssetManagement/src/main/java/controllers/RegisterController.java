@@ -4,6 +4,7 @@ import domain.User;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,7 +44,8 @@ public class RegisterController {
 		
 		try {
 			String password = user.getPassword();
-			String hashedPassword = DigestUtils.md5DigestAsHex(password.getBytes());
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = passwordEncoder.encode(password);
 			
 			user.setPassword(hashedPassword);
 			userService.addUser(user);
