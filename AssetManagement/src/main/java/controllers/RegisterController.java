@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import services.UsersService;
 import util.ImageUploadException;
@@ -35,18 +36,18 @@ public class RegisterController {
 	public ModelAndView createUser() {
 		logger.info("Inside createUser method");
 
-		ModelAndView mv = new ModelAndView("register");
+		ModelAndView mv = new ModelAndView("views/register.jsp");
 		mv.addObject("user", new User());
 
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
 	@PreAuthorize("isAnonymous()")
-	public Map<String, String> registerUser(@ModelAttribute("user") User user, @RequestParam(value = "image", required = false) MultipartFile image) {
+	public ModelAndView registerUser(@ModelAttribute("user") User user, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside registerUser method");
 		Map<String, String> resultMap = new HashMap<String, String>();
+		ModelAndView modelAndView = new ModelAndView("views/myProfile.jsp");
 
 		try {
 			String username = user.getUsername();
@@ -69,13 +70,17 @@ public class RegisterController {
 			logger.error("in registerUser method ImageUploadException: " + iue.getMessage() + "; Cause: " + iue.getCause());
 			resultMap.put("status", "false");
 			resultMap.put("message", iue.getMessage());
+			modelAndView.setViewName("#register");
+			modelAndView.addObject("register_error",new Gson().toJson(resultMap));
 			
 		} catch (Exception e) {
 			logger.error("in registerUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error creating user!");
+			modelAndView.setViewName("#register");
+			modelAndView.addObject("register_error", new Gson().toJson(resultMap));
 		}
 
-		return resultMap;
+		return modelAndView;
 	}
 }
