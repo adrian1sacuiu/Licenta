@@ -86,9 +86,10 @@ public class ComplaintService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Complaint> getComplaintsForUser(Long id){
+	public List<Complaint> getComplaintsForUser(String username){
 		logger.info("Inside getComplaintsForUser method.");
-		User user = userDao.getUserById(id);
+		
+		User user = userDao.getUserByUsername(username);
 		List<Complaint> complaints = user.getComplaints();
 		Hibernate.initialize(complaints);;
 		

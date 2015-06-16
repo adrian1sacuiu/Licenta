@@ -19,12 +19,13 @@ public class OperationsUtils {
 		}
 	}
 
-	public static void saveImage(Long userId, String filename, MultipartFile image) throws ImageUploadException {
+	public static void saveImage(String username, MultipartFile image) throws ImageUploadException {
 		logger.info("Inside saveImage method.");
 		
 		try {
-			File file = new File("src/main/webapp/resources/images/" + userId + "/" + filename);
+			File file = new File("src/main/webapp/resources/images/" + username);
 			file.mkdirs();
+			file = new File(file, "/" + username + ".jpg");
 			FileUtils.writeByteArrayToFile(file, image.getBytes());
 			
 		} catch (IOException e) {

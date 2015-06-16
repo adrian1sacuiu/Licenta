@@ -1,13 +1,17 @@
 package controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import domain.Asset;
 import domain.Complaint;
@@ -38,13 +42,14 @@ public class MyProfileController {
 	@Autowired
 	private TransactionService transactionService;
 	
-	@RequestMapping(value = "userAssets/{userId}", produces = "application/json")
+	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "userAssets/{username}", produces = "application/json")
 	@ResponseBody
-	public List<Asset> getUserAssets(@PathVariable Long userId){
+	public List<Asset> getUserAssets(@PathVariable String username){
 		logger.info("Inside getUserAssets method");
 		List<Asset> userAssets = null;
 		try{
-			userAssets = assetService.getAssetsForUser(userId);
+			userAssets = assetService.getAssetsForUser(username);
 			
 		} catch(Exception e){
 			logger.error("in getUserAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -53,13 +58,14 @@ public class MyProfileController {
 		return userAssets;
 	}
 	
-	@RequestMapping(value = "userComplaints/{userId}", produces = "application/json")
+	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "userComplaints/{username}", produces = "application/json")
 	@ResponseBody
-	public List<Complaint> getUserComplaints(@PathVariable Long userId){
+	public List<Complaint> getUserComplaints(@PathVariable String username){
 		logger.info("Inside getUserComplaints method");
 		List<Complaint> userComplaints = null;
 		try{
-			userComplaints = complaintService.getComplaintsForUser(userId);
+			userComplaints = complaintService.getComplaintsForUser(username);
 			
 		} catch(Exception e){
 			logger.error("in getUserComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -68,13 +74,14 @@ public class MyProfileController {
 		return userComplaints;
 	}
 	
-	@RequestMapping(value = "userRequests/{userId}", produces = "application/json")
+	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "userRequests/{username}", produces = "application/json")
 	@ResponseBody
-	public List<Request> getUserRequests(@PathVariable Long userId){
+	public List<Request> getUserRequests(@PathVariable String username){
 		logger.info("Inside getUserRequests method");
 		List<Request> userRequests = null;
 		try{
-			userRequests = requestService.getRequetsForUser(userId);
+			userRequests = requestService.getRequetsForUser(username);
 			
 		} catch(Exception e){
 			logger.error("in getUserRequests method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -83,13 +90,14 @@ public class MyProfileController {
 		return userRequests;
 	}
 	
-	@RequestMapping(value = "userTransactions/{userId}", produces = "application/json")
+	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "userTransactions/{username}", produces = "application/json")
 	@ResponseBody
-	public List<Transaction> getUserTransactions(@PathVariable Long userId){
+	public List<Transaction> getUserTransactions(@PathVariable String username){
 		logger.info("Inside getUserTransactions method");
 		List<Transaction> userTransactions = null;
 		try{
-			userTransactions = transactionService.getTransactionsForUser(userId);
+			userTransactions = transactionService.getTransactionsForUser(username);
 			
 		} catch(Exception e){
 			logger.error("in getUserTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -97,5 +105,13 @@ public class MyProfileController {
 		
 		return userTransactions;
 	}
-		
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "test", produces = "application/json")
+	@ResponseBody
+	public Principal testPrincipal(@AuthenticationPrincipal Principal principal){
+		logger.info("Inside testPrincipal method");
+		return principal;
+	}
+	
 }

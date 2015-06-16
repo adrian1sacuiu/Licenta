@@ -9,14 +9,9 @@ import services.UsersService;
 public class Test {
 
 	public static void main(String[] args) {
-		/*ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
-		UsersService userService = (UsersService)ctx.getBean("userService");
-		AssetService assetService = (AssetService)ctx.getBean("assetService");*/
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
+		UsersService userService = (UsersService)ctx.getBean("usersService");
 		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode("test");
-		
-		System.out.println(hashedPassword);
-		
+		System.out.println(userService.getUserByEmail("tst@test.com"));
 	}
 }

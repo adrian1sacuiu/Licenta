@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <!-- START PAGE SOURCE -->
@@ -16,9 +17,10 @@
 						</center>
 						<div class="form-group">
 							<div class="form-group" style="width: 150px; margin: 0 auto;">
-								<img src="<c:url value="resources/images/${user.name}.jpg"/>"
+							<sec:authentication var="username" property="principal.username" scope="request"/>
+								<img src="../resources/images/${username}/${username}.jpg"
 									width="150" class="img-thumbnail"
-									onerror="this.src='<c:url value="resources/images/placeholder.png"/>';">
+									onerror="this.src='<c:url value="../resources/images/placeholder.png"/>';">
 							</div>
 							<br>
 							<p>

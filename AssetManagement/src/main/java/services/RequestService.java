@@ -4,6 +4,7 @@ import domain.Request;
 import domain.User;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,10 +80,13 @@ public class RequestService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Request> getRequetsForUser(Long id){
+	public List<Request> getRequetsForUser(String username){
 		logger.info("Inside getRequetsForUser method.");
-		User user = userDao.getUserById(id);
 		
-		return user.getRequests();
+		User user = userDao.getUserByUsername(username);
+		List<Request> requests = user.getRequests();
+		Hibernate.initialize(requests);
+		
+		return requests;
 	}
 }

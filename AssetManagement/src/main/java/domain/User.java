@@ -20,7 +20,9 @@ import java.util.List;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="getUsersByName", query="FROM User u WHERE u.name = :name"),
+	@NamedQuery(name="getUserByUsername", query="FROM User u WHERE u.username = :username"),
+	@NamedQuery(name="getUsersByFirstName", query="FROM User u WHERE u.firstName = :firstName"),
+	@NamedQuery(name="getUsersByLastName", query="FROM User u WHERE u.lastName = :lastName"),
 	@NamedQuery(name="getUsersByPassword", query="FROM User u WHERE u.password = :password"),
 	@NamedQuery(name="getUserByEmail", query="FROM User u WHERE u.email = :email"),
 	@NamedQuery(name="getUsersByRole", query="FROM User u WHERE u.role = :role")
@@ -30,7 +32,9 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long idUser;
-	private String name;
+	private String username;
+	private String firstName;
+	private String lastName;
 	private String password;
 	private String email;
 	private String role;
@@ -44,7 +48,7 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_user")
+	@Column(name = "ID_USER")
 	public Long getIdUser() {
 		return idUser;
 	}
@@ -53,16 +57,34 @@ public class User implements Serializable {
 		this.idUser = idUser;
 	}
 
-	@Column(name = "name")
-	public String getName() {
-		return name;
+	@Column(name = "USERNAME")
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	@Column(name = "password")
+	@Column(name = "FIRST_NAME")
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	@Column(name = "LAST_NAME")
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	@Column(name = "PASSWORD")
 	public String getPassword() {
 		return password;
 	}
@@ -71,7 +93,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "email")
+	@Column(name = "EMAIL")
 	public String getEmail() {
 		return email;
 	}
@@ -80,7 +102,7 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "role")
+	@Column(name = "ROLE")
 	public String getRole() {
 		return role;
 	}
@@ -144,10 +166,12 @@ public class User implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((idUser == null) ? 0 : idUser.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -165,15 +189,20 @@ public class User implements Serializable {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
 		if (idUser == null) {
 			if (other.idUser != null)
 				return false;
 		} else if (!idUser.equals(other.idUser))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (lastName == null) {
+			if (other.lastName != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!lastName.equals(other.lastName))
 			return false;
 		if (password == null) {
 			if (other.password != null)
@@ -185,12 +214,17 @@ public class User implements Serializable {
 				return false;
 		} else if (!role.equals(other.role))
 			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [idUser=" + idUser + ", name=" + name + ", password=" + password + ", email=" + email + ", role=" + role + "]";
+		return "User [idUser=" + idUser + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", email=" + email + ", role=" + role + "]";
 	}
 
 }

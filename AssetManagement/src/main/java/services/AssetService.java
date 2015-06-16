@@ -86,10 +86,10 @@ public class AssetService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Asset> getAssetsForUser(Long id){
+	public List<Asset> getAssetsForUser(String username){
 		logger.info("Inside getAssetsForUser method.");
 		
-		User user = userDao.getUserById(id);
+		User user = userDao.getUserByUsername(username);
 		List<Asset> assets = user.getAssets();
 		Hibernate.initialize(assets);
 		

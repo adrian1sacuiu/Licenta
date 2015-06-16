@@ -96,19 +96,56 @@ public class UserDao extends SessionController {
 		return user;
 	}
 
+	public User getUserByUsername(String username) {
+		logger.info("Inside getUserByUsername method.");
+		User user = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getUserByUsername");
+			query.setParameter("username", username);
+
+			user = (User) query.uniqueResult();
+
+		} catch (Exception e) {
+			logger.error("in getUserByUsername method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return user;
+	}
+
 	@SuppressWarnings("unchecked")
-	public List<User> getUsersByName(String name) {
-		logger.info("Inside getUsersByName method.");
+	public List<User> getUsersByFirstName(String firstName) {
+		logger.info("Inside getUsersByFirstName method.");
 		List<User> users = null;
 
 		try {
-			Query query = getCurrentSession().getNamedQuery("getUsersByName");
-			query.setParameter("name", name);
+			Query query = getCurrentSession().getNamedQuery("getUsersByFirstName");
+			query.setParameter("firstName", firstName);
 
 			users = (List<User>) query.list();
 
 		} catch (Exception e) {
-			logger.error("in getUsersByName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			logger.error("in getUsersByFirstName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return users;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<User> getUsersByLastName(String lastName) {
+		logger.info("Inside getUsersByLastName method.");
+		List<User> users = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getUsersByLastName");
+			query.setParameter("lastName", lastName);
+
+			users = (List<User>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getUsersByLastName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 

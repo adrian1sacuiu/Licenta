@@ -82,6 +82,7 @@ public class Asset implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "ID_USER")
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

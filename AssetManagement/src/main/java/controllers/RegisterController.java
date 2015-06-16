@@ -4,6 +4,7 @@ import domain.User;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +30,7 @@ public class RegisterController {
 	@Autowired
 	private UsersService userService;
 
+	@PreAuthorize("isAnonymous()")
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView createUser() {
 		logger.info("Inside createUser method");
@@ -41,17 +43,17 @@ public class RegisterController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
+	@PreAuthorize("isAnonymous()")
 	public Map<String, String> registerUser(@ModelAttribute("user") User user, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside registerUser method");
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		try {
-			Long userId = user.getIdUser();
-			String userName = user.getName();
+			String username = user.getUsername();
 			
 			if (!image.isEmpty()) {
 				validateImage(image);
-				saveImage(userId, userName + ".jpg", image);
+				saveImage(username, image);
 			}
 			
 			String password = user.getPassword();

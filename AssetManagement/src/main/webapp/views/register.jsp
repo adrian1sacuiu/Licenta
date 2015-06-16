@@ -9,13 +9,12 @@
 				<sf:form class="form-horizontal" role="form" modelAttribute="user"
 					method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="inputName1" class="col-sm-3 control-label">Full
-							Name</label>
+						<label for="inputName1" class="col-sm-3 control-label">Username</label>
 						<div class="col-sm-9">
 							<sf:input type="text" class="form-control" id="inputName1"
-								placeholder="Full Name" path="name" />
+								placeholder="Username" path="username" />
 							<br />
-							<sf:errors path="name" cssClass="error" />
+							<sf:errors path="username" cssClass="error" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -37,6 +36,12 @@
 						</div>
 					</div>
 					<div class="form-group">
+                        <label for="image" class="col-sm-3 control-label">Profile Image</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" id="image" name="image">
+                        </div>
+                    </div>
+					<div class="form-group">
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-10">
 								<button type="submit" class="btn btn-primary btn-lg">Register</button>
@@ -48,6 +53,7 @@
 							</div>
 						</div>
 						<sf:input type="hidden" value="user" path="role" />
+					</div>
 				</sf:form>
 			</div>
 	</section>

@@ -73,10 +73,10 @@ public class TransactionService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Transaction> getTransactionsForUser(Long id){
+	public List<Transaction> getTransactionsForUser(String username){
 		logger.info("Inside getTransactionsForUser method.");
-		User user = userDao.getUserById(id);
-		
+
+		User user = userDao.getUserByUsername(username);		
 		List<Transaction> transactions = user.getTransactions();
 		Hibernate.initialize(transactions);;
 		

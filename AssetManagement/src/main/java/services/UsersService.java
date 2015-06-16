@@ -66,10 +66,24 @@ public class UsersService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<User> getUsersByName(String name) {
-		logger.info("in getUserByName method.");
+	public User getUserByUsername(String username) {
+		logger.info("in getUserByUsername method.");
 
-		return userDao.getUsersByName(name);
+		return userDao.getUserByUsername(username);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<User> getUsersByFirstName(String firstName) {
+		logger.info("in getUsersByFirstName method.");
+
+		return userDao.getUsersByFirstName(firstName);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<User> getUsersByLastName(String lastName) {
+		logger.info("in getUsersByLastName method.");
+
+		return userDao.getUsersByLastName(lastName);
 	}
 
 	@Transactional(readOnly = true)
