@@ -6,16 +6,15 @@
 <div class="main">
 	<section id="content">
 			<div id="info">
-				<sf:form class="form-horizontal" role="form" modelAttribute="user"
+				<sf:form class="form-horizontal" role="form" action="register" modelAttribute="user"
 					method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="inputName1" class="col-sm-3 control-label">Full
 							Name</label>
 						<div class="col-sm-9">
 							<sf:input type="text" class="form-control" id="inputName1"
-								placeholder="Full Name" path="name" />
+								placeholder="Username" path="username" />
 							<br />
-							<sf:errors path="name" cssClass="error" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -24,7 +23,6 @@
 							<sf:input type="email" class="form-control" id="inputEmail1"
 								placeholder="Email" path="email" />
 							<br />
-							<sf:errors path="email" cssClass="error" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -33,13 +31,12 @@
 							<sf:input type="password" class="form-control"
 								id="inputPassword1" placeholder="Password" path="password" />
 							<br />
-							<sf:errors path="password" cssClass="error" />
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-10">
-								<button type="button" id="register" class="btn btn-primary btn-lg">Register</button>
+								<button type="submit" id="register" class="btn btn-primary btn-lg">Register</button>
 							</div>
 						</div>
 						<div class="form-group">
