@@ -7,57 +7,48 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <head>
 <title>Assets</title>
-<meta charset="utf-8">
-<link rel="stylesheet"
-	href="<c:url value="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>">
-<link rel="stylesheet" href="<c:url value="resources/css/reset.css"/>"
-	type="text/css" media="all">
-<link rel="stylesheet" href="<c:url value="resources/css/layout.css"/>"
-	type="text/css" media="all">
-<link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"
-	type="text/css" media="all">
-<script type="text/javascript"
-	src="http://widgets.feedzilla.com/news/iframe/js/widget.js"></script>
-</head>
-<body id="page1">
-	<div class="body1">
-		<div class="main">
-			<header>
-				<div class="wrapper">
-					<h1>
-						<a href="../index.jsp" id="logo">Qualitance</a><span id="project">Assets
-							Management</span>
-					</h1>
-					<div class="right">
-						<nav>
-							<ul id="top_nav">
-								<li><a href="#"><img
-										src="<c:url value="resources/images/img1.gif"/>" alt=""></a></li>
-								<li><a href="#"><img
-										src="<c:url value="resources/images/img2.gif"/>" alt=""></a></li>
-								<li class="bg_none"><a href="#"><img
-										src="<c:url value="resources/images/img3.gif"/>" alt=""></a></li>
-							</ul>
-						</nav>
-						<nav>
-							<ul id="menu">
-								<li id="menu_active"><a
-									href="<c:url value="../index.jsp"/>">Home</a></li>
-								<li><a href="../index.jsp">Account</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</header>
-		</div>
-	</div>
-	<div class="main">
-		<div id="banner">
-			<div class="text1">
-				<p></p>
-			</div>
-		</div>
-	</div>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="resources/css/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Assets Management</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>

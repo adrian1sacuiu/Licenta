@@ -6,31 +6,23 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<article class="col1">
-	<div class="feedzilla-news-widget feedzilla-8419175315648317"
-		style="width: 350px; padding: 0; text-align: center; font-size: 11px; border: 0;">
-		<!-- <script type="text/javascript">
-            new FEEDZILLA.Widget({
-                style: 'slide-left-to-right',
-                culture_code: 'en_all',
-                c: '1090',
-                sc: '28585',
-                headerBackgroundColor: '#1c3842',
-                footerBackgroundColor: '#1c3842',
-                title: 'IT',
-                caption: 'Business Intelligence',
-                order: 'relevance',
-                count: '20',
-                w: '350',
-                h: '500',
-                timestamp: 'true',
-                scrollbar: 'false',
-                theme: 'start',
-                className: 'feedzilla-8419175315648317'
-            });
-        </script> -->
-		<br /> <a
-			href="http://widgets.feedzilla.com/news/builder/index.html?utm_source=feedzilla&utm_medium=widget&utm_campaign=widget%2Blink"
-			target="_blank">Get Your News Widget</a>
-	</div>
-</article>
+<div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul>
+        </div>

@@ -5,8 +5,8 @@
 <title></title>
 </head>
 <body>
-	<div id="info">
-		<form class="form-horizontal" role="form" action="<c:url value="/j_spring_security_check"/>" method="post">
+	<div id="info" class="row well center-block" style="width:50%;">
+		<form class="form-horizontal col-sm-12 " role="form" action="<c:url value="/j_spring_security_check"/>" method="post">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">Username</label>
 				<div class="col-sm-10">
