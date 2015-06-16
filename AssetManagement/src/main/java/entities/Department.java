@@ -1,4 +1,4 @@
-package domain;
+package entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -76,6 +76,7 @@ public class Department implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "ID_COUNTRY")
+	@JsonIgnore
 	public Country getCountry() {
 		return country;
 	}

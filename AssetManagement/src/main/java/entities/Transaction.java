@@ -1,4 +1,4 @@
-package domain;
+package entities;
 
 import javax.persistence.Id;
 import javax.persistence.Column;
@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -62,6 +63,7 @@ public class Transaction implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_user")
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
@@ -72,6 +74,7 @@ public class Transaction implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_asset")
+	@JsonIgnore
 	public Asset getAsset() {
 		return asset;
 	}

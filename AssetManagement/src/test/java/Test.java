@@ -2,7 +2,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import domain.User;
+import entities.User;
 import services.AssetService;
 import services.UsersService;
 

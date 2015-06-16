@@ -1,4 +1,4 @@
-package domain;
+package entities;
 
 import java.io.Serializable;
 
@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -83,6 +84,7 @@ public class Complaint implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "ID_USER")
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
@@ -93,6 +95,7 @@ public class Complaint implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_ASSET")
+	@JsonIgnore
 	public Asset getAsset() {
 		return asset;
 	}

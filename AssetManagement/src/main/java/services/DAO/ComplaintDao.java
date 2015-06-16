@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import domain.Complaint;
+import entities.Complaint;
 import services.DAO.controller.SessionController;
 
 @Repository

@@ -1,6 +1,6 @@
 package services;
 
-import domain.Country;
+import entities.Country;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

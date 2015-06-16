@@ -1,4 +1,4 @@
-package domain;
+package entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -60,11 +60,11 @@ public class Country implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "country")
+	@JsonIgnore
 	public List<Department> getDepartments() {
 		return departments;
 	}
 
-	@JsonIgnore
 	public void setDepartments(List<Department> departments) {
 		this.departments = departments;
 	}

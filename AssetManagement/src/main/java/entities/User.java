@@ -1,4 +1,4 @@
-package domain;
+package entities;
 
 import javax.persistence.Id;
 import javax.persistence.Column;
@@ -41,10 +41,10 @@ public class User implements Serializable {
 
 	private Department department;
 
-	private List<Asset> assets;
-	private List<Complaint> complaints;
-	private List<Request> requests;
-	private List<Transaction> transactions;
+	private transient List<Asset> assets;
+	private transient List<Complaint> complaints;
+	private transient List<Request> requests;
+	private transient List<Transaction> transactions;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -113,6 +113,7 @@ public class User implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "ID_DEPARTMENT")
+	@JsonIgnore
 	public Department getDepartment() {
 		return department;
 	}

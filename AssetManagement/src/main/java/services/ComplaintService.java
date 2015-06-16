@@ -1,7 +1,7 @@
 package services;
 
-import domain.Complaint;
-import domain.User;
+import entities.Complaint;
+import entities.User;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;

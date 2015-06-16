@@ -11,12 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import domain.Asset;
-import domain.Complaint;
-import domain.Request;
-import domain.Transaction;
+import entities.Asset;
+import entities.Complaint;
+import entities.Request;
+import entities.Transaction;
 import services.AssetService;
 import services.ComplaintService;
 import services.RequestService;
@@ -96,6 +95,7 @@ public class MyProfileController {
 	public List<Transaction> getUserTransactions(@PathVariable String username){
 		logger.info("Inside getUserTransactions method");
 		List<Transaction> userTransactions = null;
+		
 		try{
 			userTransactions = transactionService.getTransactionsForUser(username);
 			

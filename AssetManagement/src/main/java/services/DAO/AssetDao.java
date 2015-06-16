@@ -1,6 +1,6 @@
 package services.DAO;
 
-import domain.Asset;
+import entities.Asset;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;

@@ -1,4 +1,4 @@
-package domain;
+package entities;
 
 import javax.persistence.*;
 
@@ -93,6 +93,7 @@ public class Asset implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "ID_ORDER")
+	@JsonIgnore
 	public Order getOrder() {
 		return order;
 	}

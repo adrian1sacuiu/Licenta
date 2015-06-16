@@ -1,6 +1,6 @@
 package services.DAO;
 
-import domain.Department;
+import entities.Department;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;

@@ -1,4 +1,4 @@
-package domain;
+package entities;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -74,6 +74,7 @@ public class Request implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "ID_USER")
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

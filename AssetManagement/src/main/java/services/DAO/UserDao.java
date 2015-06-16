@@ -1,6 +1,6 @@
 package services.DAO;
 
-import domain.User;
+import entities.User;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;

@@ -1,7 +1,7 @@
 package services;
 
-import domain.Transaction;
-import domain.User;
+import entities.Transaction;
+import entities.User;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;

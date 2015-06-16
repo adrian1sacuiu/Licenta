@@ -1,6 +1,6 @@
 package services;
 
-import domain.Order;
+import entities.Order;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

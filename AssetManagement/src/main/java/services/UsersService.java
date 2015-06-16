@@ -1,7 +1,7 @@
 package services;
 
-import domain.Asset;
-import domain.User;
+import entities.Asset;
+import entities.User;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
