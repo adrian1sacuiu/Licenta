@@ -22,61 +22,142 @@ public class OrderService {
 
 	public boolean addOrder(Order order) throws Exception {
 		logger.info("in addOrder method.");
+		boolean result = false;
 
-		return orderDao.addOrder(order);
+		try {
+			result = orderDao.addOrder(order);
+
+		} catch (Exception e) {
+			logger.error("in addOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean updateOrder(Order order) throws Exception {
 		logger.info("in updateOrder method.");
+		boolean result = false;
 
-		return orderDao.updateOrder(order);
+		try {
+			result = orderDao.updateOrder(order);
+
+		} catch (Exception e) {
+			logger.error("in updateOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean deleteOrder(Order order) throws Exception {
 		logger.info("in deleteOrder method.");
+		boolean result = false;
 
-		return orderDao.deleteOrder(order);
+		try {
+			result = orderDao.deleteOrder(order);
+
+		} catch (Exception e) {
+			logger.error("in deleteOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Order> getAllOrders() {
+	public List<Order> getAllOrders() throws Exception {
 		logger.info("in getAllOrders method.");
+		List<Order> orders = null;
 
-		return orderDao.getAllOrders();
+		try {
+			orders = orderDao.getAllOrders();
+
+		} catch (Exception e) {
+			logger.error("in getAllOrders method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return orders;
 	}
 
 	@Transactional(readOnly = true)
-	public Order getOrderById(Long id) {
+	public Order getOrderById(Long id) throws Exception {
 		logger.info("in getOrderById method.");
+		Order order = null;
 
-		return orderDao.getOrderById(id);
+		try {
+			order = orderDao.getOrderById(id);
+
+		} catch (Exception e) {
+			logger.error("in getOrderById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return order;
 	}
-	
-	@Transactional(readOnly = true)
-	public List<Order> getOrdersByPrice(String price) {
-		logger.info("Inside getOrdersByPrice method.");
 
-		return orderDao.getOrdersByPrice(price);
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersByPrice(String price) throws Exception {
+		logger.info("in getOrdersByPrice method.");
+		List<Order> orders = null;
+
+		try {
+			orders = orderDao.getOrdersByPrice(price);
+
+		} catch (Exception e) {
+			logger.error("in getOrdersByPrice method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return orders;
 	}
-	
-	@Transactional(readOnly = true)
-	public List<Order> getOrdersBySupplierName(String supplierName) {
-		logger.info("Inside getOrdersBySupplierName method.");
 
-		return orderDao.getOrdersBySupplierName(supplierName);
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersBySupplierName(String supplierName) throws Exception {
+		logger.info("in getOrdersBySupplierName method.");
+		List<Order> orders = null;
+
+		try {
+			orders = orderDao.getOrdersBySupplierName(supplierName);
+
+		} catch (Exception e) {
+			logger.error("in getOrdersBySupplierName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return orders;
 	}
-	
-	@Transactional(readOnly = true)
-	public List<Order> getOrdersByPurchaseDate(Date purchaseDate) {
-		logger.info("Inside getOrdersByPurchaseDate method.");
 
-		return orderDao.getOrdersByPurchaseDate(purchaseDate);
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersByPurchaseDate(Date purchaseDate) throws Exception {
+		logger.info("in getOrdersByPurchaseDate method.");
+		List<Order> orders = null;
+
+		try {
+			orders = orderDao.getOrdersByPurchaseDate(purchaseDate);
+
+		} catch (Exception e) {
+			logger.error("in getOrdersByPurchaseDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return orders;
 	}
-	
-	@Transactional(readOnly = true)
-	public List<Order> getOrdersByIsReceived(boolean isReceived) {
-		logger.info("Inside getOrdersByIsReceived method.");
 
-		return orderDao.getOrdersByIsReceived(isReceived);
+	@Transactional(readOnly = true)
+	public List<Order> getOrdersByIsReceived(boolean isReceived) throws Exception {
+		logger.info("in getOrdersByIsReceived method.");
+		List<Order> orders = null;
+
+		try {
+			orders = orderDao.getOrdersByIsReceived(isReceived);
+
+		} catch (Exception e) {
+			logger.error("in getOrdersByIsReceived method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return orders;
 	}
 }

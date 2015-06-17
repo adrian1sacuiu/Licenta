@@ -24,75 +24,164 @@ public class ComplaintService {
 
 	@Autowired
 	UserDao userDao;
-	
+
 	public boolean addComplaint(Complaint complaint) throws Exception {
 		logger.info("in addComplaint method.");
+		boolean result = false;
 
-		return complaintDao.addComplaint(complaint);
+		try {
+			result = complaintDao.addComplaint(complaint);
+
+		} catch (Exception e) {
+			logger.error("in addComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean updateComplaint(Complaint complaint) throws Exception {
 		logger.info("in updateComplaint method.");
+		boolean result = false;
 
-		return complaintDao.updateComplaint(complaint);
+		try {
+			result = complaintDao.updateComplaint(complaint);
+
+		} catch (Exception e) {
+			logger.error("in updateComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean deleteComplaint(Complaint complaint) throws Exception {
 		logger.info("in deleteComplaint method.");
+		boolean result = false;
 
-		return complaintDao.deleteComplaint(complaint);
+		try {
+			result = complaintDao.deleteComplaint(complaint);
+
+		} catch (Exception e) {
+			logger.error("in deleteComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Complaint> getAllComplaints() {
+	public List<Complaint> getAllComplaints() throws Exception {
 		logger.info("in getAllComplaints method.");
+		List<Complaint> complaints = null;
 
-		return complaintDao.getAllComplaints();
+		try {
+			complaints = complaintDao.getAllComplaints();
+
+		} catch (Exception e) {
+			logger.error("in getAllComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return complaints;
 	}
 
 	@Transactional(readOnly = true)
-	public Complaint getComplaintById(Long id) {
+	public Complaint getComplaintById(Long id) throws Exception {
 		logger.info("in getComplaintById method.");
+		Complaint complaint = null;
 
-		return complaintDao.getComplaintById(id);
+		try {
+			complaint = complaintDao.getComplaintById(id);
+
+		} catch (Exception e) {
+			logger.error("in getComplaintById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return complaint;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Complaint> getComplaintsByTitle(String title) {
+	public List<Complaint> getComplaintsByTitle(String title) throws Exception {
 		logger.info("in getComplaintsByTitle method.");
-		
-		return getComplaintsByTitle(title);
+		List<Complaint> complaints = null;
+
+		try {
+			complaints = complaintDao.getComplaintsByTitle(title);
+
+		} catch (Exception e) {
+			logger.error("in getComplaintsByTitle method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return complaints;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Complaint> getComplaintsByDescription(String description) {
+	public List<Complaint> getComplaintsByDescription(String description) throws Exception {
 		logger.info("in getComplaintsByDescription method.");
-		
-		return getComplaintsByDescription(description);
+		List<Complaint> complaints = null;
+
+		try {
+			complaints = complaintDao.getComplaintsByDescription(description);
+
+		} catch (Exception e) {
+			logger.error("in getComplaintsByDescription method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return complaints;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Complaint> getComplaintsByPriority(String priority) {
+	public List<Complaint> getComplaintsByPriority(String priority) throws Exception {
 		logger.info("in getComplaintsByPriority method.");
-		
-		return getComplaintsByPriority(priority);
+		List<Complaint> complaints = null;
+
+		try {
+			complaints = complaintDao.getComplaintsByPriority(priority);
+
+		} catch (Exception e) {
+			logger.error("in getComplaintsByPriority method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return complaints;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Complaint> getComplaintsByStatus(String status) {
+	public List<Complaint> getComplaintsByStatus(String status) throws Exception {
 		logger.info("in getComplaintsByStatus method.");
-		
-		return getComplaintsByStatus(status);
+		List<Complaint> complaints = null;
+
+		try {
+			complaints = complaintDao.getComplaintsByStatus(status);
+
+		} catch (Exception e) {
+			logger.error("in getComplaintsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return complaints;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Complaint> getComplaintsForUser(String username){
+	public List<Complaint> getComplaintsForUser(String username) throws Exception {
 		logger.info("Inside getComplaintsForUser method.");
-		
-		User user = userDao.getUserByUsername(username);
-		List<Complaint> complaints = user.getComplaints();
-		Hibernate.initialize(complaints);;
-		
+		User user = null;
+		List<Complaint> complaints = null;
+
+		try {
+			user = userDao.getUserByUsername(username);
+			complaints = user.getComplaints();
+			Hibernate.initialize(complaints);
+
+		} catch (Exception e) {
+			logger.error("in getComplaintsForUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
 		return complaints;
 	}
 }

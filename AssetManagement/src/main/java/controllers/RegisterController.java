@@ -23,6 +23,7 @@ import static util.OperationsUtils.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @Controller
 @RequestMapping(value = "register")
 public class RegisterController {
@@ -42,39 +43,37 @@ public class RegisterController {
 		return mv;
 	}
 
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	@PreAuthorize("isAnonymous()")
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ModelAndView registerUser(@ModelAttribute("user") User user, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside registerUser method");
 		Map<String, String> resultMap = new HashMap<String, String>();
-		ModelAndView modelAndView = new ModelAndView("/index.jsp");
+		ModelAndView modelAndView = new ModelAndView("");
 
 		try {
 			String username = user.getUsername();
-			
+
 			if (image != null && !image.isEmpty()) {
 				validateImage(image);
 				saveImage(username, image);
 			}
-			
+
 			String password = user.getPassword();
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String hashedPassword = passwordEncoder.encode(password);
 			user.setPassword(hashedPassword);
-			
+
 			userService.addUser(user);
 			user.setPassword(password);
 			modelAndView.addObject("registered_user", user);
-			resultMap.put("status", "true");
-			resultMap.put("message", "User registered successfully!");
 
 		} catch (ImageUploadException iue) {
 			logger.error("in registerUser method ImageUploadException: " + iue.getMessage() + "; Cause: " + iue.getCause());
 			resultMap.put("status", "false");
 			resultMap.put("message", iue.getMessage());
 			modelAndView.setViewName("#register");
-			modelAndView.addObject("register_error",new Gson().toJson(resultMap));
-			
+			modelAndView.addObject("register_error", new Gson().toJson(resultMap));
+
 		} catch (Exception e) {
 			logger.error("in registerUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			resultMap.put("status", "false");

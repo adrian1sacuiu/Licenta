@@ -65,7 +65,7 @@ public class ComplaintDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Complaint> getAllComplaints() {
+	public List<Complaint> getAllComplaints() throws Exception {
 		logger.info("Inside getAllComplaints method.");
 		List<Complaint> complaints = null;
 
@@ -75,96 +75,99 @@ public class ComplaintDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getAllComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return complaints;
 	}
 
-	public Complaint getComplaintById(Long id) {
+	public Complaint getComplaintById(Long id) throws Exception {
 		logger.info("Inside getComplaintById method.");
 		Complaint complaint = null;
 
 		try {
 			complaint = (Complaint) getCurrentSession().get(Complaint.class, id);
+
 		} catch (Exception e) {
 			logger.error("in getComplaintById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return complaint;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Complaint> getComplaintsByTitle(String title) {
+	public List<Complaint> getComplaintsByTitle(String title) throws Exception {
 		logger.info("Inside getComplaintsByTitle method.");
 		List<Complaint> complaints = null;
 
 		try {
 			Query query = getCurrentSession().getNamedQuery("getComplaintsByTitle");
 			query.setParameter("title", title);
-
 			complaints = (List<Complaint>) query.list();
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByTitle method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return complaints;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Complaint> getComplaintsByDescription(String description) {
+	public List<Complaint> getComplaintsByDescription(String description) throws Exception {
 		logger.info("Inside getComplaintsByDescription method.");
 		List<Complaint> complaints = null;
 
 		try {
 			Query query = getCurrentSession().getNamedQuery("getComplaintsByTitle");
 			query.setParameter("description", description);
-
 			complaints = (List<Complaint>) query.list();
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByDescription method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return complaints;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Complaint> getComplaintsByPriority(String priority) {
+	public List<Complaint> getComplaintsByPriority(String priority) throws Exception {
 		logger.info("Inside getComplaintsByPriority method.");
 		List<Complaint> complaints = null;
 
 		try {
 			Query query = getCurrentSession().getNamedQuery("getComplaintsByPriority");
 			query.setParameter("priority", priority);
-
 			complaints = (List<Complaint>) query.list();
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByPriority method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return complaints;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Complaint> getComplaintsByStatus(String status) {
+	public List<Complaint> getComplaintsByStatus(String status) throws Exception {
 		logger.info("Inside getComplaintsByStatus method.");
 		List<Complaint> complaints = null;
 
 		try {
 			Query query = getCurrentSession().getNamedQuery("getComplaintsByStatus");
 			query.setParameter("status", status);
-
 			complaints = (List<Complaint>) query.list();
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return complaints;

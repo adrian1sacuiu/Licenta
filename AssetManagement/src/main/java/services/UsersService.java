@@ -26,77 +26,168 @@ public class UsersService {
 
 	public boolean addUser(User user) throws Exception {
 		logger.info("in addUser method.");
+		boolean result = false;
 
-		return userDao.addUser(user);
+		try {
+			result = userDao.addUser(user);
+
+		} catch (Exception e) {
+			logger.error("in addUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean updateUser(User user) throws Exception {
 		logger.info("in updateUser method.");
+		boolean result = false;
 
-		return userDao.updateUser(user);
+		try {
+			result = userDao.updateUser(user);
+
+		} catch (Exception e) {
+			logger.error("in updateUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean deleteUser(User user) throws Exception {
 		logger.info("in deleteUser method.");
 
-		List<Asset> assets = user.getAssets();
-		if (!assets.isEmpty()) {
-			for (Asset asset : assets) {
-				asset.setIsAvailable(true);
-				asset.setUser(null);
-				assetDao.updateAsset(asset);
+		boolean result = false;
+		List<Asset> assets = null;
+
+		try {
+			assets = user.getAssets();
+			if (!assets.isEmpty()) {
+				for (Asset asset : assets) {
+					asset.setIsAvailable(true);
+					asset.setUser(null);
+					assetDao.updateAsset(asset);
+				}
 			}
+			result = userDao.deleteUser(user);
+
+		} catch (Exception e) {
+			logger.error("in deleteUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
 		}
 
-		return userDao.deleteUser(user);
+		return result;
 	}
 
 	@Transactional(readOnly = true)
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers() throws Exception {
 		logger.info("in getAllUsers method.");
+		List<User> users = null;
 
-		return userDao.getAllUsers();
+		try {
+			users = userDao.getAllUsers();
+
+		} catch (Exception e) {
+			logger.error("in getAllUsers method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return users;
 	}
 
 	@Transactional(readOnly = true)
-	public User getUserById(Long id) {
+	public User getUserById(Long id) throws Exception {
 		logger.info("in getUserById method.");
+		User user = null;
 
-		return userDao.getUserById(id);
+		try {
+			user = userDao.getUserById(id);
+
+		} catch (Exception e) {
+			logger.error("in getUserById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return user;
 	}
 
 	@Transactional(readOnly = true)
-	public User getUserByUsername(String username) {
+	public User getUserByUsername(String username) throws Exception {
 		logger.info("in getUserByUsername method.");
+		User user = null;
 
-		return userDao.getUserByUsername(username);
+		try {
+			user = userDao.getUserByUsername(username);
+
+		} catch (Exception e) {
+			logger.error("in getUserByUsername method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return user;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<User> getUsersByFirstName(String firstName) {
+	public List<User> getUsersByFirstName(String firstName) throws Exception {
 		logger.info("in getUsersByFirstName method.");
+		List<User> users = null;
 
-		return userDao.getUsersByFirstName(firstName);
+		try {
+			users = userDao.getUsersByFirstName(firstName);
+
+		} catch (Exception e) {
+			logger.error("in getUsersByFirstName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return users;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<User> getUsersByLastName(String lastName) {
+	public List<User> getUsersByLastName(String lastName) throws Exception {
 		logger.info("in getUsersByLastName method.");
+		List<User> users = null;
 
-		return userDao.getUsersByLastName(lastName);
+		try {
+			users = userDao.getUsersByLastName(lastName);
+
+		} catch (Exception e) {
+			logger.error("in getUsersByLastName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return users;
 	}
 
 	@Transactional(readOnly = true)
-	public User getUserByEmail(String email) {
+	public User getUserByEmail(String email) throws Exception {
 		logger.info("in getUserByEmail method.");
+		User user = null;
 
-		return userDao.getUserByEmail(email);
+		try {
+			user = userDao.getUserByEmail(email);
+
+		} catch (Exception e) {
+			logger.error("in getUserByEmail method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return user;
 	}
 
 	@Transactional(readOnly = true)
-	public List<User> getUsersByRole(String role) {
+	public List<User> getUsersByRole(String role) throws Exception {
 		logger.info("in getUsersByRole method.");
+		List<User> users = null;
 
-		return userDao.getUsersByRole(role);
+		try {
+			users = userDao.getUsersByRole(role);
+
+		} catch (Exception e) {
+			logger.error("in getUsersByRole method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return users;
 	}
 }

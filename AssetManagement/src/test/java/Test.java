@@ -12,6 +12,11 @@ public class Test {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 		UsersService userService = (UsersService)ctx.getBean("usersService");
 		
-		System.out.println(userService.getUserByEmail("tst@test.com"));
+		try {
+			System.out.println(userService.getUserByEmail("tst@test.com"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

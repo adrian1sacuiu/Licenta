@@ -66,7 +66,7 @@ public class UserDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers() throws Exception {
 		logger.info("Inside getAllUsers method.");
 		List<User> users = null;
 
@@ -81,7 +81,7 @@ public class UserDao extends SessionController {
 		return users;
 	}
 
-	public User getUserById(Long id) {
+	public User getUserById(Long id) throws Exception {
 		logger.info("Inside getUserById method.");
 		User user = null;
 
@@ -96,7 +96,7 @@ public class UserDao extends SessionController {
 		return user;
 	}
 
-	public User getUserByUsername(String username) {
+	public User getUserByUsername(String username) throws Exception {
 		logger.info("Inside getUserByUsername method.");
 		User user = null;
 
@@ -115,7 +115,7 @@ public class UserDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> getUsersByFirstName(String firstName) {
+	public List<User> getUsersByFirstName(String firstName) throws Exception {
 		logger.info("Inside getUsersByFirstName method.");
 		List<User> users = null;
 

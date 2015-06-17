@@ -41,10 +41,10 @@ public class User implements Serializable {
 
 	private Department department;
 
-	private transient List<Asset> assets;
-	private transient List<Complaint> complaints;
-	private transient List<Request> requests;
-	private transient List<Transaction> transactions;
+	private List<Asset> assets;
+	private List<Complaint> complaints;
+	private List<Request> requests;
+	private List<Transaction> transactions;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

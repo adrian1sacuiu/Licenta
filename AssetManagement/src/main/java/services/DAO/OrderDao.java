@@ -67,7 +67,7 @@ public class OrderDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Order> getAllOrders() {
+	public List<Order> getAllOrders() throws Exception {
 		logger.info("Inside getAllOrders method.");
 		List<Order> orders = null;
 
@@ -82,7 +82,7 @@ public class OrderDao extends SessionController {
 		return orders;
 	}
 
-	public Order getOrderById(Long id) {
+	public Order getOrderById(Long id) throws Exception {
 		logger.info("Inside getOrderById method.");
 		Order order = null;
 
@@ -97,7 +97,7 @@ public class OrderDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Order> getOrdersByPrice(String price) {
+	public List<Order> getOrdersByPrice(String price) throws Exception {
 		logger.info("Inside getOrdersByPrice method.");
 		List<Order> orders = null;
 
@@ -116,7 +116,7 @@ public class OrderDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Order> getOrdersBySupplierName(String supplierName) {
+	public List<Order> getOrdersBySupplierName(String supplierName) throws Exception {
 		logger.info("Inside getOrdersBySupplierName method.");
 		List<Order> orders = null;
 
@@ -135,7 +135,7 @@ public class OrderDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Order> getOrdersByPurchaseDate(Date purchaseDate) {
+	public List<Order> getOrdersByPurchaseDate(Date purchaseDate) throws Exception {
 		logger.info("Inside getOrdersByPurchaseDate method.");
 		List<Order> orders = null;
 
@@ -154,7 +154,7 @@ public class OrderDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Order> getOrdersByIsReceived(boolean isReceived) {
+	public List<Order> getOrdersByIsReceived(boolean isReceived) throws Exception {
 		logger.info("Inside getOrdersByIsReceived method.");
 		List<Order> orders = null;
 

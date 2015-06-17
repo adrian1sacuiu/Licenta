@@ -11,26 +11,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import entities.Asset;
 import entities.Complaint;
 import entities.Request;
 import entities.Transaction;
-import entities.User;
 import services.AssetService;
 import services.ComplaintService;
 import services.RequestService;
 import services.TransactionService;
-import services.UsersService;
 
 @Controller
 public class MyProfileController {
 	private static final Logger logger = Logger.getLogger(MyProfileController.class);
-	
-	@Autowired
-	private UsersService userService;
 	
 	@Autowired
 	private AssetService assetService;
@@ -43,28 +36,6 @@ public class MyProfileController {
 	
 	@Autowired
 	private TransactionService transactionService;
-	
-	@PreAuthorize("isAuthenticated()")
-	@RequestMapping(value = "/getLoggedUser", produces = "application/json")
-	public ModelAndView getLoggedUser(@AuthenticationPrincipal Principal principal){
-		logger.info("Inside getLoggedUser method");
-		
-		ModelAndView modelAndView = new ModelAndView("");
-		User user = null;
-		String username = null;
-		
-		try{
-			username = principal.getName();
-			user = userService.getUserByUsername(username);
-			modelAndView.addObject("logged_user", user);
-			
-		} catch(Exception e){
-			logger.error("in getLoggedUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-		}
-		
-		return modelAndView;
-		
-	}
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "userAssets/{username}", produces = "application/json")
@@ -132,7 +103,7 @@ public class MyProfileController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
-	@RequestMapping(value = "test", produces = "application/json")
+	@RequestMapping(value = "testPrincipal", produces = "application/json")
 	@ResponseBody
 	public Principal testPrincipal(@AuthenticationPrincipal Principal principal){
 		logger.info("Inside testPrincipal method");

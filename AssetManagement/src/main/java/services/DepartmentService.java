@@ -20,55 +20,135 @@ public class DepartmentService {
 	DepartmentDao departmentDao;
 
 	public boolean addDepartment(Department department) throws Exception {
-		logger.info("in addDepartment method.");
+		logger.info("Inside addDepartment method.");
+		boolean result = false;
 
-		return departmentDao.addDepartment(department);
+		try {
+			result = departmentDao.addDepartment(department);
+
+		} catch (Exception e) {
+			logger.error("in addDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean updateDepartment(Department department) throws Exception {
-		logger.info("in updateDepartment method.");
+		logger.info("Inside updateDepartment method.");
+		boolean result = false;
 
-		return departmentDao.updateDepartment(department);
+		try {
+			result = departmentDao.updateDepartment(department);
+
+		} catch (Exception e) {
+			logger.error("in updateDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean deleteDepartment(Department department) throws Exception {
-		logger.info("in deleteDepartment method.");
+		logger.info("Inside deleteDepartment method.");
+		boolean result = false;
 
-		return departmentDao.deleteDepartment(department);
+		try {
+			result = departmentDao.deleteDepartment(department);
+
+		} catch (Exception e) {
+			logger.error("in deleteDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return result;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Department> getAllDepartments() {
-		logger.info("in getAllDepartments method.");
+	public List<Department> getAllDepartments() throws Exception {
+		logger.info("Inside getAllDepartments method.");
+		List<Department> departments = null;
 
-		return departmentDao.getAllDepartments();
+		try {
+			departments = departmentDao.getAllDepartments();
+
+		} catch (Exception e) {
+			logger.error("in getAllDepartments method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return departments;
 	}
 
 	@Transactional(readOnly = true)
-	public Department getDepartmentById(Long id) {
-		logger.info("in getDepartmentById method.");
+	public Department getDepartmentById(Long id) throws Exception {
+		logger.info("Inside getDepartmentById method.");
+		Department department = null;
 
-		return departmentDao.getDepartmentById(id);
+		try {
+			department = departmentDao.getDepartmentById(id);
+
+		} catch (Exception e) {
+			logger.error("in getDepartmentById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return department;
 	}
-	
-	@Transactional(readOnly = true)
-	public List<Department> getDepartmentsByName(String name) {
-		logger.info("in getDepartmentsByName method.");
 
-		return departmentDao.getDepartmentsByName(name);
+	@Transactional(readOnly = true)
+	public List<Department> getDepartmentsByName(String name) throws Exception {
+		logger.info("Inside getDepartmentsByName method.");
+		List<Department> departments = null;
+
+		try {
+			departments = departmentDao.getDepartmentsByName(name);
+
+		} catch (Exception e) {
+			logger.error("in getDepartmentsByName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return departments;
 	}
-	
-	@Transactional(readOnly = true)
-	public List<Department> getDepartmentsByLocation(String location) {
-		logger.info("in getDepartmentsByLocation method.");
 
-		return departmentDao.getDepartmentsByLocation(location);
+	@Transactional(readOnly = true)
+	public List<Department> getDepartmentsByLocation(String location) throws Exception {
+		logger.info("Inside getDepartmentsByLocation method.");
+		List<Department> departments = null;
+
+		try {
+			departments = departmentDao.getDepartmentsByLocation(location);
+
+		} catch (Exception e) {
+			logger.error("in getDepartmentsByLocation method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return departments;
 	}
-	
-	@Transactional(readOnly = true)
-	public List<Department> getDepartmentsByAddress(String address) {
-		logger.info("in getDepartmentsByAddress method.");
 
-		return departmentDao.getDepartmentsByAddress(address);
+	@Transactional(readOnly = true)
+	public List<Department> getDepartmentsByAddress(String address) throws Exception {
+		logger.info("Inside getDepartmentsByAddress method.");
+		List<Department> departments = null;
+
+		try {
+			departments = departmentDao.getDepartmentsByAddress(address);
+
+		} catch (Exception e) {
+			logger.error("in getDepartmentsByAddress method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return departments;
 	}
 }

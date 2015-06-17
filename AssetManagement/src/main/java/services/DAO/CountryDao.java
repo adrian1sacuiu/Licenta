@@ -66,7 +66,7 @@ public class CountryDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Country> getAllCountries() {
+	public List<Country> getAllCountries() throws Exception {
 		logger.info("Inside getAllCountries method.");
 		List<Country> countries = null;
 
@@ -81,7 +81,7 @@ public class CountryDao extends SessionController {
 		return countries;
 	}
 
-	public Country getCountryById(Long id) {
+	public Country getCountryById(Long id) throws Exception {
 		logger.info("Inside getCountryById method.");
 		Country country = null;
 
@@ -95,7 +95,7 @@ public class CountryDao extends SessionController {
 		return country;
 	}
 
-	public Country getCountryByName(String name) {
+	public Country getCountryByName(String name) throws Exception {
 		logger.info("Inside getCountryByName method.");
 		Country country = null;
 
@@ -113,7 +113,7 @@ public class CountryDao extends SessionController {
 		return country;
 	}
 
-	public Country getCountryByCountryCode(String countryCode) {
+	public Country getCountryByCountryCode(String countryCode) throws Exception {
 		logger.info("Inside getCountryByCountryCode method.");
 		Country country = null;
 

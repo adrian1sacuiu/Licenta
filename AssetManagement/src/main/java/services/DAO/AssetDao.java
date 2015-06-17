@@ -14,11 +14,13 @@ import java.util.List;
 public class AssetDao extends SessionController {
 	private static final Logger logger = Logger.getLogger(AssetDao.class);
 
-	public Asset addAsset(Asset asset) throws Exception {
+	public boolean addAsset(Asset asset) throws Exception {
 		logger.info("Inside addAsset method.");
+		boolean result = false;
 
 		try {
 			getCurrentSession().save(asset);
+			result = true;
 
 		} catch (Exception e) {
 			logger.error("in addAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -26,7 +28,7 @@ public class AssetDao extends SessionController {
 			throw e;
 		}
 
-		return asset;
+		return result;
 	}
 
 	public boolean updateAsset(Asset asset) throws Exception {
@@ -64,7 +66,7 @@ public class AssetDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Asset> getAllAssets() {
+	public List<Asset> getAllAssets() throws Exception {
 		logger.info("Inside getAllAssets method.");
 		List<Asset> assets = null;
 
@@ -74,12 +76,13 @@ public class AssetDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getAllAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return assets;
 	}
 
-	public Asset getAssetById(Long id) {
+	public Asset getAssetById(Long id) throws Exception {
 		logger.info("Inside getAssetById method.");
 		Asset asset = null;
 
@@ -88,13 +91,14 @@ public class AssetDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getAssetById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return asset;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Asset> getAssetsByName(String name) {
+	public List<Asset> getAssetsByName(String name) throws Exception {
 		logger.info("Inside getAssetsByName method.");
 		List<Asset> assets = null;
 
@@ -107,13 +111,14 @@ public class AssetDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getAssetsByName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return assets;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Asset> getAssetsByType(String type) {
+	public List<Asset> getAssetsByType(String type) throws Exception {
 		logger.info("Inside getAssetsByType method.");
 		List<Asset> assets = null;
 
@@ -126,13 +131,14 @@ public class AssetDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getAssetsByType method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return assets;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Asset> getAssetsByIsAvailable(boolean isAvailable) {
+	public List<Asset> getAssetsByIsAvailable(boolean isAvailable) throws Exception {
 		logger.info("Inside getAssetsByIsAvailable method.");
 		List<Asset> assets = null;
 
@@ -145,13 +151,14 @@ public class AssetDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getAssetsByIsAvailable method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return assets;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) {
+	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) throws Exception {
 		logger.info("Inside getAssetsByIsOnStock method.");
 		List<Asset> assets = null;
 
@@ -164,6 +171,7 @@ public class AssetDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getAssetsByIsOnStock method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return assets;

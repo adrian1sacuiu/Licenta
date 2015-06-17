@@ -67,7 +67,7 @@ public class RequestDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Request> getAllRequests() {
+	public List<Request> getAllRequests() throws Exception {
 		logger.info("Inside getAllRequests method.");
 		List<Request> requests = null;
 
@@ -82,7 +82,7 @@ public class RequestDao extends SessionController {
 		return requests;
 	}
 
-	public Request getRequestById(Long id) {
+	public Request getRequestById(Long id) throws Exception {
 		logger.info("Inside getRequestById method.");
 		Request request = null;
 
@@ -97,7 +97,7 @@ public class RequestDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Request> getRequestsByStartDate(Date startDate) {
+	public List<Request> getRequestsByStartDate(Date startDate) throws Exception {
 		logger.info("Inside getRequestsByStartDate method.");
 		List<Request> requests = null;
 
@@ -116,7 +116,7 @@ public class RequestDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Request> getRequestsByEndDate(Date endDate) {
+	public List<Request> getRequestsByEndDate(Date endDate) throws Exception {
 		logger.info("Inside getRequestByEndDate method.");
 		List<Request> requests = null;
 
@@ -135,7 +135,7 @@ public class RequestDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Request> getRequestsByStatus(String status) {
+	public List<Request> getRequestsByStatus(String status) throws Exception {
 		logger.info("Inside getRequestsByStatus method.");
 		List<Request> requests = null;
 

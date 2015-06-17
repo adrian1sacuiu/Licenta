@@ -14,21 +14,19 @@
         <security:authorize access="isAuthenticated()">	
           <h1 class="page-header">Dashboard</h1>
           </security:authorize>
-<%--           <c:out value="${user.username}" /> --%>
-         		 <script>
+         		<script>
          		$(function() {
-         			
          				var $info = $('#info'), startInfo = $info.html();
-						var username = '<c:out value="${registered_user.username}" />';
-						var password = '<c:out value="${registered_user.password}"/>';
-
-						if(username!=""){
+						var j_username = '<c:out value="${registered_user.username}" />';
+						var j_password = '<c:out value="${registered_user.password}"/>';
+						
+						if(j_username!=""){
 						jQuery.ajax({
 							type : 'POST',
-							url : '/AssetManagement/j_spring_security_check',
-							data : {j_username:username,j_password:password},
+							url : 'j_spring_security_check',
+							data : {j_username:j_username,j_password:j_password},
 							success : function(data) {
-									location.href = "/AssetManagement/getLoggedUser";
+									location.href = "/AssetManagement/";
 							}
 						});
 						}
@@ -66,29 +64,29 @@
 			</security:authorize>
 		<security:authorize access="isAuthenticated()">	
 		<jsp:include page="views/myProfile.jsp" flush="true" />
-		</security:authorize>
-<!--           <div class="row placeholders"> -->
-<!--             <div class="col-xs-6 col-sm-3 placeholder"> -->
-<!--               <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail"> -->
-<!--               <h4>Label</h4> -->
-<!--               <span class="text-muted">Something else</span> -->
-<!--             </div> -->
-<!--             <div class="col-xs-6 col-sm-3 placeholder"> -->
-<!--               <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail"> -->
-<!--               <h4>Label</h4> -->
-<!--               <span class="text-muted">Something else</span> -->
-<!--             </div> -->
-<!--             <div class="col-xs-6 col-sm-3 placeholder"> -->
-<!--               <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail"> -->
-<!--               <h4>Label</h4> -->
-<!--               <span class="text-muted">Something else</span> -->
-<!--             </div> -->
-<!--             <div class="col-xs-6 col-sm-3 placeholder"> -->
-<!--               <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail"> -->
-<!--               <h4>Label</h4> -->
-<!--               <span class="text-muted">Something else</span> -->
-<!--             </div> -->
-<!--           </div> -->
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+          </div>
+        </security:authorize>
 		<div class="row placeholders">
    			<jsp:include page="views/Footer.jsp" flush="true" />
    		</div>

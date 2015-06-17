@@ -66,7 +66,7 @@ public class DepartmentDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Department> getAllDepartments() {
+	public List<Department> getAllDepartments() throws Exception {
 		logger.info("Inside getAllDepartments method.");
 		List<Department> departments = null;
 
@@ -81,7 +81,7 @@ public class DepartmentDao extends SessionController {
 		return departments;
 	}
 
-	public Department getDepartmentById(Long id) {
+	public Department getDepartmentById(Long id) throws Exception {
 		logger.info("Inside getDepartmentById method.");
 		Department department = null;
 
@@ -96,7 +96,7 @@ public class DepartmentDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Department> getDepartmentsByName(String name) {
+	public List<Department> getDepartmentsByName(String name) throws Exception {
 		logger.info("Inside getDepartmentsByName method.");
 		List<Department> departments = null;
 
@@ -115,7 +115,7 @@ public class DepartmentDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Department> getDepartmentsByLocation(String location) {
+	public List<Department> getDepartmentsByLocation(String location) throws Exception {
 		logger.info("Inside getDepartmentsByLocation method.");
 		List<Department> departments = null;
 
@@ -134,7 +134,7 @@ public class DepartmentDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Department> getDepartmentsByAddress(String address) {
+	public List<Department> getDepartmentsByAddress(String address) throws Exception {
 		logger.info("Inside getDepartmentsByAddress method.");
 		List<Department> departments = null;
 

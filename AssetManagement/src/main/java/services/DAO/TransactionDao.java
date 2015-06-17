@@ -68,7 +68,7 @@ public class TransactionDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Transaction> getAllTransactions() {
+	public List<Transaction> getAllTransactions() throws Exception {
 		logger.info("Inside getAllTransactions method.");
 		List<Transaction> transactions = null;
 
@@ -82,7 +82,7 @@ public class TransactionDao extends SessionController {
 		return transactions;
 	}
 
-	public Transaction getTransactionById(Long id) {
+	public Transaction getTransactionById(Long id) throws Exception {
 		logger.info("Inside getTransactionById method.");
 		Transaction transaction = null;
 
@@ -97,7 +97,7 @@ public class TransactionDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Transaction> getTransactionsByDate(Date date) {
+	public List<Transaction> getTransactionsByDate(Date date) throws Exception {
 		logger.info("Inside getTransactionsByDate method.");
 		List<Transaction> transactions = null;
 
@@ -116,7 +116,7 @@ public class TransactionDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Transaction> getTransactionsByStatus(String status) {
+	public List<Transaction> getTransactionsByStatus(String status) throws Exception {
 		logger.info("Inside getTransactionsByStatus method.");
 		List<Transaction> transactions = null;
 

@@ -21,78 +21,168 @@ public class AssetService {
 
 	@Autowired
 	AssetDao assetDao;
-	
+
 	@Autowired
 	UserDao userDao;
 
-	public Asset addAsset(Asset asset) throws Exception {
+	public boolean addAsset(Asset asset) throws Exception {
 		logger.info("in addAsset method.");
+		boolean result = false;
 
-		return assetDao.addAsset(asset);
+		try {
+			result = assetDao.addAsset(asset);
+
+		} catch (Exception e) {
+			logger.error("in addAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean updateAsset(Asset asset) throws Exception {
 		logger.info("in updateAsset method.");
+		boolean result = false;
 
-		return assetDao.updateAsset(asset);
+		try {
+			result = assetDao.updateAsset(asset);
+
+		} catch (Exception e) {
+			logger.error("in updateAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	public boolean deleteAsset(Asset asset) throws Exception {
 		logger.info("in deleteAsset method.");
+		boolean result = false;
 
-		return assetDao.deleteAsset(asset);
+		try {
+			result = assetDao.deleteAsset(asset);
+
+		} catch (Exception e) {
+			logger.error("in deleteAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Asset> getAllAssets() {
+	public List<Asset> getAllAssets() throws Exception {
 		logger.info("in getAllAssets method.");
+		List<Asset> assets = null;
 
-		return assetDao.getAllAssets();
+		try {
+			assets = assetDao.getAllAssets();
+
+		} catch (Exception e) {
+			logger.error("in getAllAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return assets;
 	}
 
 	@Transactional(readOnly = true)
-	public Asset getAssetById(Long id) {
+	public Asset getAssetById(Long id) throws Exception {
 		logger.info("in getAssetById method.");
+		Asset asset = null;
 
-		return assetDao.getAssetById(id);
+		try {
+			asset = assetDao.getAssetById(id);
+
+		} catch (Exception e) {
+			logger.error("in getAssetById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return asset;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Asset> getAssetsByName(String name) {
-		logger.info("Inside getAssetsByName method.");
+	public List<Asset> getAssetsByName(String name) throws Exception {
+		logger.info("in getAssetsByName method.");
+		List<Asset> assets = null;
 
-		return assetDao.getAssetsByName(name);
+		try {
+			assets = assetDao.getAssetsByName(name);
+
+		} catch (Exception e) {
+			logger.error("in getAssetsByName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return assets;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Asset> getAssetsByType(String type) {
-		logger.info("Inside getAssetsByType method.");
+	public List<Asset> getAssetsByType(String type) throws Exception {
+		logger.info("in getAssetsByType method.");
+		List<Asset> assets = null;
 
-		return assetDao.getAssetsByType(type);
+		try {
+			assets = assetDao.getAssetsByType(type);
+
+		} catch (Exception e) {
+			logger.error("in getAssetsByType method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return assets;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Asset> getAssetsByIsAvailable(boolean isAvailable) {
-		logger.info("Inside getAssetsByIsAvailable method.");
+	public List<Asset> getAssetsByIsAvailable(boolean isAvailable) throws Exception {
+		logger.info("in getAssetsByIsAvailable method.");
+		List<Asset> assets = null;
 
-		return assetDao.getAssetsByIsAvailable(isAvailable);
+		try {
+			assets = assetDao.getAssetsByIsAvailable(isAvailable);
+
+		} catch (Exception e) {
+			logger.error("in getAssetsByIsAvailable method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return assets;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) {
-		logger.info("Inside getAssetsByIsOnStock method.");
+	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) throws Exception {
+		logger.info("in getAssetsByIsOnStock method.");
+		List<Asset> assets = null;
 
-		return assetDao.getAssetsByIsOnStock(isOnStock);
+		try {
+			assets = assetDao.getAssetsByIsOnStock(isOnStock);
+
+		} catch (Exception e) {
+			logger.error("in getAssetsByIsOnStock method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return assets;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public List<Asset> getAssetsForUser(String username){
+	public List<Asset> getAssetsForUser(String username) throws Exception {
 		logger.info("Inside getAssetsForUser method.");
-		
-		User user = userDao.getUserByUsername(username);
-		List<Asset> assets = user.getAssets();
-		Hibernate.initialize(assets);
-		
+
+		User user = null;
+		List<Asset> assets = null;
+
+		try {
+			user = userDao.getUserByUsername(username);
+			assets = user.getAssets();
+			Hibernate.initialize(assets);
+
+		} catch (Exception e) {
+			logger.error("in getAssetsForUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
 		return assets;
 	}
 }

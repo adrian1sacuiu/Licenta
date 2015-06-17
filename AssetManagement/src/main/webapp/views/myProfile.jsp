@@ -7,6 +7,7 @@
 <div class="main">
 	<section id="content">
 		<jsp:include page="/views/LeftMenu.jsp" flush="true" />
+		<c:set var="logged_user" value="${logged_user}"/>
 		<article class="col2 pad_left1">
 			<div class="well removewidth normalwidth">
 				<div class="panel-body">
@@ -23,7 +24,7 @@
 							</div>
 							<br>
 							<p>
-								<b>Full Name :</b>
+								<b>Username :</b>
 								<c:out value="${logged_user.username}" />
 							</p>
 						</div>
