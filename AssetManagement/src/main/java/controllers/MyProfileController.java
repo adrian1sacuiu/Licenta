@@ -11,11 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import entities.Asset;
 import entities.Complaint;
 import entities.Request;
 import entities.Transaction;
+import entities.User;
 import services.AssetService;
 import services.ComplaintService;
 import services.RequestService;
@@ -40,6 +42,28 @@ public class MyProfileController {
 	
 	@Autowired
 	private TransactionService transactionService;
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/getLoggedUser", produces = "application/json")
+	public ModelAndView getLoggedUser(@AuthenticationPrincipal Principal principal){
+		logger.info("Inside getLoggedUser method");
+		
+		ModelAndView modelAndView = new ModelAndView("");
+		User user = null;
+		String username = null;
+		
+		try{
+			username = principal.getName();
+			user = userService.getUserByUsername(username);
+			modelAndView.addObject("user", user);
+			
+		} catch(Exception e){
+			logger.error("in getLoggedUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+		}
+		
+		return modelAndView;
+		
+	}
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "userAssets/{username}", produces = "application/json")
