@@ -47,12 +47,12 @@ public class RegisterController {
 	public ModelAndView registerUser(@ModelAttribute("user") User user, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside registerUser method");
 		Map<String, String> resultMap = new HashMap<String, String>();
-		ModelAndView modelAndView = new ModelAndView("views/myProfile.jsp");
+		ModelAndView modelAndView = new ModelAndView("/index.jsp");
 
 		try {
 			String username = user.getUsername();
 			
-			if (!image.isEmpty()) {
+			if (image != null && !image.isEmpty()) {
 				validateImage(image);
 				saveImage(username, image);
 			}
@@ -63,6 +63,8 @@ public class RegisterController {
 			user.setPassword(hashedPassword);
 			
 			userService.addUser(user);
+			user.setPassword(password);
+			modelAndView.addObject("registered_user", user);
 			resultMap.put("status", "true");
 			resultMap.put("message", "User registered successfully!");
 

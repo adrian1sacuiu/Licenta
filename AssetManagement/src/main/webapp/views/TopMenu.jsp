@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Adrian
-  Date: 16-Jul-14
-  Time: 1:37 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <title>Assets</title>
@@ -24,6 +18,32 @@
 
     <!-- Custom styles for this template -->
     <link href="resources/css/dashboard.css" rel="stylesheet">
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="resources/scripts/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="resources/scripts/holder.js"></script>
+     <script src="resources/scripts/require.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script type="text/javascript" src="resources/scripts/ie10-viewport-bug-workaround.js"></script>
+    <script src="resources/scripts/app.js"></script>
+    <script>
+    $(function() {
+    $.validator.setDefaults({
+		submitHandler: function() {
+			alert("submitted!");
+		}
+	});
+
+	$().ready(function() {
+		// validate the comment form when it is submitted
+		$("#register_form").validate();
+
+	});	
+	});
+	</script>
   </head>
 
   <body>
@@ -41,10 +61,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+          <security:authorize access="isAuthenticated()">	
             <li><a href="#">Dashboard</a></li>
+            </security:authorize>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <security:authorize access="isAuthenticated()">	
+            <li><a href="/AssetManagement/j_spring_security_logout">Logout</a></li>
+            </security:authorize>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">

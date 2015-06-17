@@ -9,11 +9,12 @@
 
 	<http auto-config="false" use-expressions="true">
 		<access-denied-handler error-page="/403" />
-		<form-login login-page="/views/ajax/Login.jsp" authentication-failure-url="/views/ajax/Login.jsp?login_error" default-target-url="/" />
+		<form-login login-page="/views/Login.jsp" authentication-failure-url="/#login_error" default-target-url="/getLoggedUser" />
+
 		<logout invalidate-session="true" logout-success-url="/" delete-cookies="JSESSIONID" />
 		<intercept-url pattern="/index.jsp" access="permitAll" />
 		<intercept-url pattern="/resources/**" access="permitAll" />
-		<intercept-url pattern="/views/ajax/Login.jsp" access="isAnonymous()" />
+		<intercept-url pattern="/views/Login.jsp" access="isAnonymous()" />
 		<intercept-url pattern="/views/register.jsp" access="isAnonymous()" />
 		<intercept-url pattern="/views/myProfile.jsp" access="hasRole('ROLE_USER')" />
 	</http>

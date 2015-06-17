@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import entities.Asset;
 import entities.Complaint;
@@ -55,7 +56,7 @@ public class MyProfileController {
 		try{
 			username = principal.getName();
 			user = userService.getUserByUsername(username);
-			modelAndView.addObject("user", user);
+			modelAndView.addObject("logged_user", user);
 			
 		} catch(Exception e){
 			logger.error("in getLoggedUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());

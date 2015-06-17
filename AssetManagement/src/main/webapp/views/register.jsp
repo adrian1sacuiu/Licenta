@@ -4,47 +4,70 @@
 <html lang="en">
 <!-- START PAGE SOURCE -->
 <div class="main">
+<h1>Register</h1>
+<hr>
 	<section id="content">
-			<div id="info">
-				<sf:form class="form-horizontal" role="form" action="register" modelAttribute="user"
+			<div id="info" class="row col-sm-6 well center">
+				<sf:form class="form-horizontal" role="form" id="register_form" action="register" modelAttribute="user"
 					method="post" enctype="multipart/form-data">
+					
 					<div class="form-group">
-						<label for="inputName1" class="col-sm-3 control-label">Full
-							Name</label>
+						<label for="inputName1" class="col-sm-3 control-label">Username <span class="red">*</span></label>
 						<div class="col-sm-9">
-							<sf:input type="text" class="form-control" id="inputName1"
-								placeholder="Username" path="username" />
+							<sf:input type="text" class="form-control" id="inputName1" placeholder="Username" path="username" required="required"/>
 							<br />
 						</div>
 					</div>
+					
 					<div class="form-group">
-						<label for="inputEmail1" class="col-sm-3 control-label">Email</label>
-						<div class="col-sm-9">
-							<sf:input type="email" class="form-control" id="inputEmail1"
-								placeholder="Email" path="email" />
-							<br />
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword1" class="col-sm-3 control-label">Password</label>
+						<label for="inputPassword1" class="col-sm-3 control-label">Password <span class="red">*</span></label>
 						<div class="col-sm-9">
 							<sf:input type="password" class="form-control"
-								id="inputPassword1" placeholder="Password" path="password" />
+								id="inputPassword1" placeholder="Password" path="password" required="required"/>
+							<br />
+						</div>
+					</div>
+					<hr>
+					<div class="form-group">
+						<label for="firstName" class="col-sm-3 control-label">First Name</label>
+						<div class="col-sm-9">
+							<sf:input type="text" class="form-control"
+								id="fn" placeholder="First Name" path="firstName" />
 							<br />
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-10">
-								<button type="submit" id="register" class="btn btn-primary btn-lg">Register</button>
-							</div>
+						<label for="lastName" class="col-sm-3 control-label">Last Name</label>
+						<div class="col-sm-9">
+							<sf:input type="text" class="form-control"
+								id="ln" placeholder="Last Name" path="lastName" />
+							<br />
 						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-10 col-sm-10">
-								<button type="button" id="back" class="btn btn-link">Back</button>
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail1" class="col-sm-3 control-label">Email <span class="red">*</span></label>
+						<div class="col-sm-9">
+							<sf:input type="email" class="form-control" id="inputEmail1"
+								placeholder="Email" path="email" required="required"/>
+							<br />
 						</div>
-<%-- 						<sf:input type="hidden" id="user_role" value="user" path="role" /> --%>
+					</div>
+					
+					<div class="form-group">
+						<label for="image" class="col-sm-3 control-label">Profile image</label>
+						<div class="col-sm-9">
+							<div class="btn btn-info">Browse Image<input type="file" class="" name="image" id="image"	placeholder="Upload profile image" /></div>
+							<br />
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group">
+							<div class="col-sm-2 pull-left" style="margin-top: 60px">
+								<button id="register" class="btn btn-primary btn-lg" type="submit">Register</button>
+							</div>
+							<button id="back" class="btn btn-info" type="button" style="float: right;margin-top:70px">Back</button>
+						</div>
+						<sf:input type="hidden" id="user_role" value="user" path="role" />
 				</sf:form>
 			</div>
 	</section>

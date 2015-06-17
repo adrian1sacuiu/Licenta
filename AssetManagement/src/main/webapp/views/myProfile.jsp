@@ -10,20 +10,21 @@
 		<article class="col2 pad_left1">
 			<div class="well removewidth normalwidth">
 				<div class="panel-body">
+				
 					<form role="form">
 						<center>
 							<h1 style="color: #000000">Personal Details</h1>
 						</center>
 						<div class="form-group">
 							<div class="form-group" style="width: 150px; margin: 0 auto;">
-								<img src="<c:url value="resources/images/${user.name}.jpg"/>"
+								<img src="<c:url value="resources/images/${logged_user.username}/${logged_user.username}.jpg"/>"
 									width="150" class="img-thumbnail"
 									onerror="this.src='<c:url value="resources/images/placeholder.png"/>';">
 							</div>
 							<br>
 							<p>
 								<b>Full Name :</b>
-								<c:out value="${user.name}" />
+								<c:out value="${logged_user.username}" />
 							</p>
 						</div>
 					</form>
