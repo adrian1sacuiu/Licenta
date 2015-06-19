@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Adrian
-  Date: 16-Jul-14
-  Time: 1:47 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="navbar navbar-fixed-bottom navbar-inverse bg-info">
 				<div class="text-muted pull-left" style="padding:10px;">
@@ -13,7 +7,9 @@
 					Reserved
 				</div>
 				<div class="text-muted pull-right" style="padding:10px;">
-					<a href="#">Hello</a> <a href="#">Adrian</a>
+					<security:authorize access="isAuthenticated()">	
+						<a href="#">Hello</a> <a href="#"><c:out value="${logged_user.firstName}"/> <c:out value="${logged_user.lastName}"/></a>
+						</security:authorize>
 				</div>
 				
 </div>

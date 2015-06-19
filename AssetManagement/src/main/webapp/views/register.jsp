@@ -56,7 +56,8 @@
 					<div class="form-group">
 						<label for="image" class="col-sm-3 control-label">Profile image</label>
 						<div class="col-sm-9">
-							<div class="btn btn-info">Browse Image<input type="file" class="" name="image" id="image"	placeholder="Upload profile image" /></div>
+							<div class="btn btn-info ">Browse Image<input type="file" onchange="javascript:show_upload();" class="" name="image" id="image"	placeholder="Upload profile image" /></div>
+							<div id="upload_image" class="register_image"></div>
 							<br />
 						</div>
 					</div>
@@ -65,7 +66,7 @@
 							<div class="col-sm-2 pull-left" style="margin-top: 60px">
 								<button id="register" class="btn btn-primary btn-lg" type="submit">Register</button>
 							</div>
-							<button id="back" class="btn btn-info" type="button" style="float: right;margin-top:70px">Back</button>
+							<button id="back" class="btn btn-primary btn-lg" type="button" style="float: right;margin-top:59px">Back</button>
 						</div>
 						<sf:input type="hidden" id="user_role" value="user" path="role" />
 				</sf:form>

@@ -10,7 +10,46 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../favicon.ico">
-
+	<c:set var="val" value="${pageContext.request.servletPath}"/>
+				
+	<c:choose> 
+		<c:when test="${val == '/views/AccessDenied.jsp'}">
+				<!-- Bootstrap core CSS -->
+			    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+			
+			    <!-- Custom styles for this template -->
+			    <link href="../resources/css/dashboard.css" rel="stylesheet">
+			     <!-- Bootstrap core JavaScript
+			    ================================================== -->
+			    <!-- Placed at the end of the document so the pages load faster -->
+			    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+			    <script src="../resources/scripts/bootstrap.min.js"></script>
+			    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+			    <script src="../resources/scripts/holder.js"></script>
+			     <script src="../resources/scripts/require.js"></script>
+			    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+			    <script type="text/javascript" src="../resources/scripts/ie10-viewport-bug-workaround.js"></script>
+			    <script src="../resources/scripts/app.js"></script>
+		</c:when>
+		<c:otherwise>
+				 <!-- Bootstrap core CSS -->
+			    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+			
+			    <!-- Custom styles for this template -->
+			    <link href="resources/css/dashboard.css" rel="stylesheet">
+			     <!-- Bootstrap core JavaScript
+			    ================================================== -->
+			    <!-- Placed at the end of the document so the pages load faster -->
+			    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+			    <script src="resources/scripts/bootstrap.min.js"></script>
+			    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+			    <script src="resources/scripts/holder.js"></script>
+			     <script src="resources/scripts/require.js"></script>
+			    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+			    <script type="text/javascript" src="resources/scripts/ie10-viewport-bug-workaround.js"></script>
+			    <script src="resources/scripts/app.js"></script>
+		</c:otherwise>
+	</c:choose>
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->

@@ -20,6 +20,8 @@
 </head>
 <body>
 	<div id="info" class="row well center-block" style="width:50%;">
+	<h1>Login</h1>
+<hr>
 		<form class="form-horizontal col-sm-12 " role="form" action="<c:url value="/j_spring_security_check"/>" method="post">
 			<div id="login_error" class="alert alert-danger fade in" style="display:none;">
 				  
@@ -47,8 +49,8 @@
 				
 			
 			<div class="form-group">
-				<div class="col-sm-offset-10 col-sm-10">
-					<button type="button" id="back" class="btn btn-link">Back</button>
+				<div class="col-sm-offset-11 col-sm-1">
+					<button id="back" class="btn btn-primary" type="button" style="float: right;margin-top:-50px">Back</button>
 				</div>
 			</div>
 		</form>

@@ -131,7 +131,19 @@ body {
     position: relative;
     width: 500px;
 }
+.clear{
+	clear:both;
+}
 section#content {
     margin: 0 auto;
     width: 500px;
+}
+.edit_image{
+	color: skyblue; background: rgb(255, 255, 255) none repeat scroll 0% 0%; padding: 5px; float: left; position: absolute; font-size: 20px; margin-left: 4px; margin-top: 215px;
+}
+.upload_image{
+	text-align: left; margin-top: -27px; padding-left: 155px;font-weight:bold;
+}
+.register_image{
+	text-align: left; margin-top: -27px; padding-left: 120px;font-weight:bold;
 }
