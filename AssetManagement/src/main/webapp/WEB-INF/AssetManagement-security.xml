@@ -9,8 +9,9 @@
 							http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http auto-config="false" use-expressions="true">
-		<access-denied-handler error-page="/403" />
-		<form-login login-page="/views/Login.jsp" authentication-failure-url="/#login_error" 
+		<access-denied-handler error-page="/views/AccessDenied.jsp"/>
+		
+		<form-login login-page="/#auth_request" authentication-failure-url="/#login_error" 
 			default-target-url="/saveUserOnSession" always-use-default-target="true" />
 		<logout invalidate-session="true" logout-success-url="/" delete-cookies="JSESSIONID" />
 		<intercept-url pattern="/index.jsp" access="permitAll" />
