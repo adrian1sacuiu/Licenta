@@ -45,7 +45,6 @@ $(function(){
 })
 function show_upload(){
 	jQuery('#upload_image').html(jQuery('#image').val());
-//	jQuery('#upload_image').css("text-align","left").css("margin-top","-27px").css("padding-left","120px");
 }
 function readURL(input) {
 //console.log(input);

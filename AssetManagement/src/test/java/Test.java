@@ -7,7 +7,7 @@ import services.UsersService;
 public class Test {
 
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
+		/*@SuppressWarnings("resource")
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 		UsersService usersService = (UsersService)ctx.getBean("usersService");
 		
@@ -24,7 +24,9 @@ public class Test {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}*/
+		String message = "com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry 'test' for key 'USERNAME_UNIQUE'";
+		message = message.substring(message.lastIndexOf("Exception") + "Exception".length() + 2);
+		System.out.println(message);
 	}
 }

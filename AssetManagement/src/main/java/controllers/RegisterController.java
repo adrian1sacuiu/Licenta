@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
+
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import services.UsersService;
 import util.ImageUploadException;
 import static util.OperationsUtils.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Controller
@@ -46,7 +45,6 @@ public class RegisterController {
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
 	public ModelAndView registerUser(@ModelAttribute("user") User user, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside registerUser method");
-		Map<String, String> resultMap = new HashMap<String, String>();
 		ModelAndView modelAndView = new ModelAndView("");
 
 		try {
@@ -64,18 +62,20 @@ public class RegisterController {
 			modelAndView.addObject("registered_user", user);
 
 		} catch (ImageUploadException iue) {
-			logger.error("in registerUser method ImageUploadException: " + iue.getMessage() + "; Cause: " + iue.getCause());
-			resultMap.put("status", "false");
-			resultMap.put("message", iue.getMessage());
+			logger.error("in registerUser method ImageUploadException: " + iue.getMessage());
+			iue.printStackTrace();
 			modelAndView.setViewName("#register");
-			modelAndView.addObject("register_error", new Gson().toJson(resultMap));
+			modelAndView.addObject("error", iue.getMessage());
 
-		} catch (Exception e) {
-			logger.error("in registerUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			resultMap.put("status", "false");
-			resultMap.put("message", "Error creating user!");
+		} catch (MySQLIntegrityConstraintViolationException ice) {
+			logger.error("in registerUser method MySQLIntegrityConstraintViolationException: " + ice.getMessage() + "; Cause: " + ice.getCause());
 			modelAndView.setViewName("#register");
-			modelAndView.addObject("register_error", new Gson().toJson(resultMap));
+			modelAndView.addObject("error", "Username or email address already exist!");
+		}
+		catch (Exception e) {
+			logger.error("in registerUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			modelAndView.setViewName("#register");
+			modelAndView.addObject("error", "Error registering new user!");
 		}
 
 		return modelAndView;
