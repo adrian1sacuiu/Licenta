@@ -20,7 +20,9 @@ import org.hibernate.annotations.NamedQuery;
 	@NamedQuery(name="getComplaintsByTitle", query="FROM Complaint c WHERE c.title = :title"),
 	@NamedQuery(name="getComplaintsByDescription", query="FROM Complaint c WHERE c.description = :description"),
 	@NamedQuery(name="getComplaintsByPriority", query="FROM Complaint c WHERE c.priority = :priority"),
-	@NamedQuery(name="getComplaintsByStatus", query="FROM Complaint c WHERE c.status = :status")
+	@NamedQuery(name="getComplaintsByStatus", query="FROM Complaint c WHERE c.status = :status"),
+	@NamedQuery(name="getComplaintsByUser", query="SELECT c FROM Complaint c INNER JOIN c.user u WHERE u.username=:username"),
+	@NamedQuery(name="getComplaintsByAsset", query="FROM Complaint c WHERE c.asset.idAsset = :idAsset")
 })
 @Table(name = "COMPLAINTS")
 public class Complaint implements Serializable {

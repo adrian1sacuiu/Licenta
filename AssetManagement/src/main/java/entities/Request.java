@@ -20,7 +20,9 @@ import org.hibernate.annotations.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="getRequestsByStartDate", query="FROM Request r WHERE r.startDate = :startDate"),
 	@NamedQuery(name="getRequestsByEndDate", query="FROM Request r WHERE r.endDate = :endDate"),
-	@NamedQuery(name="getRequestsByStatus", query="FROM Request r WHERE r.status = :status")
+	@NamedQuery(name="getRequestsByStatus", query="FROM Request r WHERE r.status = :status"),
+	@NamedQuery(name="getRequestsByUser", query="SELECT r FROM Request r INNER JOIN r.user u WHERE u.username=:username"),
+	@NamedQuery(name="getRequestsByAsset", query="FROM Request r WHERE r.asset.idAsset = :idAsset")
 })
 @Table(name = "REQUESTS")
 public class Request implements Serializable {

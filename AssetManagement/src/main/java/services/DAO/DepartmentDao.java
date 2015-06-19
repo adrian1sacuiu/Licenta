@@ -36,7 +36,7 @@ public class DepartmentDao extends SessionController {
 		boolean result = false;
 
 		try {
-			getCurrentSession().update(department);
+			getCurrentSession().merge(department);
 			result = true;
 
 		} catch (Exception e) {
@@ -146,6 +146,25 @@ public class DepartmentDao extends SessionController {
 
 		} catch (Exception e) {
 			logger.error("in getDepartmentsByAddress method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return departments;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Department> getDepartmentsByCountry(Long idCountry) throws Exception {
+		logger.info("Inside getDepartmentsByCountry method.");
+		List<Department> departments = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getDepartmentsByCountry");
+			query.setParameter("idCountry", idCountry);
+
+			departments = (List<Department>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getDepartmentsByCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 

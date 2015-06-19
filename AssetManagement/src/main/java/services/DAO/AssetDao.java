@@ -36,7 +36,7 @@ public class AssetDao extends SessionController {
 		boolean result = false;
 
 		try {
-			getCurrentSession().update(asset);
+			getCurrentSession().merge(asset);
 			result = true;
 
 		} catch (Exception e) {
@@ -176,5 +176,44 @@ public class AssetDao extends SessionController {
 
 		return assets;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Asset> getAssetsByUser(String username) throws Exception {
+		logger.info("Inside getAssetsByUser method.");
+		List<Asset> assets = null;
 
+		try {
+			Query query = getCurrentSession().getNamedQuery("getAssetsByUser");
+			query.setParameter("username", username);
+
+			assets = (List<Asset>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getAssetsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return assets;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Asset> getAssetsByOrder(Long idOrder) throws Exception {
+		logger.info("Inside getAssetsByOrder method.");
+		List<Asset> assets = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getAssetsByOrder");
+			query.setParameter("idOrder", idOrder);
+
+			assets = (List<Asset>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getAssetsByOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return assets;
+	}
 }

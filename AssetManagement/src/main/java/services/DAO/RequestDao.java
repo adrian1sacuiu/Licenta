@@ -37,7 +37,7 @@ public class RequestDao extends SessionController {
 		boolean result = false;
 
 		try {
-			getCurrentSession().update(request);
+			getCurrentSession().merge(request);
 			result = true;
 
 		} catch (Exception e) {
@@ -152,5 +152,43 @@ public class RequestDao extends SessionController {
 
 		return requests;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Request> getRequestsByUser(String username) throws Exception {
+		logger.info("Inside getRequestsByUser method.");
+		List<Request> requests = null;
 
+		try {
+			Query query = getCurrentSession().getNamedQuery("getRequestsByUser");
+			query.setParameter("username", username);
+
+			requests = (List<Request>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getRequestsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return requests;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Request> getRequestsByAsset(Long idAsset) throws Exception {
+		logger.info("Inside getRequestsByAsset method.");
+		List<Request> requests = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getRequestsByAsset");
+			query.setParameter("idAsset", idAsset);
+
+			requests = (List<Request>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getRequestsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return requests;
+	}
+	
 }

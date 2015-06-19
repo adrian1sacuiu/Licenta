@@ -36,7 +36,7 @@ public class CountryDao extends SessionController {
 		boolean result = false;
 
 		try {
-			getCurrentSession().update(country);
+			getCurrentSession().merge(country);
 			result = true;
 
 		} catch (Exception e) {

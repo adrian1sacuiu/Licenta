@@ -14,7 +14,10 @@ import java.util.List;
 	@NamedQuery(name="getAssetsByName", query="FROM Asset a WHERE a.name = :name"),
 	@NamedQuery(name="getAssetsByType", query="FROM Asset a WHERE a.type = :type"),
 	@NamedQuery(name="getAssetsByIsAvailable", query="FROM Asset a WHERE a.isAvailable = :isAvailable"),
-	@NamedQuery(name="getAssetsByIsOnStock", query="FROM Asset a WHERE a.isOnStock = :isOnStock")
+	@NamedQuery(name="getAssetsByIsOnStock", query="FROM Asset a WHERE a.isOnStock = :isOnStock"),
+	@NamedQuery(name="getAssetsByUser", query="SELECT a FROM Asset a INNER JOIN a.user u WHERE u.username=:username"),
+	@NamedQuery(name="getAssetsByOrder", query="FROM Asset a WHERE a.order.idOrder=:idOrder")
+	
 })
 @Table(name = "ASSETS")
 public class Asset implements Serializable {
@@ -102,7 +105,7 @@ public class Asset implements Serializable {
 		this.order = order;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "asset")
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "asset")
 	@JsonIgnore
 	public List<Transaction> getTransactions() {
 		return transactions;
@@ -112,7 +115,7 @@ public class Asset implements Serializable {
 		this.transactions = transactions;
 	}
 	
-	@OneToMany(mappedBy = "asset")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "asset")
 	@JsonIgnore
 	public List<Complaint> getComplaints() {
 		return complaints;
@@ -122,7 +125,7 @@ public class Asset implements Serializable {
 		this.complaints = complaints;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "asset")
+	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "asset")
 	@JsonIgnore
 	public List<Request> getRequests() {
 		return requests;

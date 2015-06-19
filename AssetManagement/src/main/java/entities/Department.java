@@ -1,7 +1,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -21,7 +19,8 @@ import org.hibernate.annotations.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="getDepartmentsByName", query="FROM Department d WHERE d.name = :name"),
 	@NamedQuery(name="getDepartmentsByLocation", query="FROM Department d WHERE d.location = :location"),
-	@NamedQuery(name="getDepartmentsByAddress", query="FROM Department d WHERE d.address = :address")
+	@NamedQuery(name="getDepartmentsByAddress", query="FROM Department d WHERE d.address = :address"),
+	@NamedQuery(name="getDepartmentsByCountry", query="FROM Department d WHERE d.country.idCountry = :idCountry")
 })
 @Table(name = "DEPARTMENTS")
 public class Department implements Serializable {
@@ -33,8 +32,6 @@ public class Department implements Serializable {
 	private String address;
 
 	private Country country;
-
-	private List<User> users;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -83,16 +80,6 @@ public class Department implements Serializable {
 
 	public void setCountry(Country country) {
 		this.country = country;
-	}
-	
-	@OneToMany(mappedBy = "department")
-	@JsonIgnore
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 	@Override

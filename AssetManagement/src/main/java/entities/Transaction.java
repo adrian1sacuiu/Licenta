@@ -19,7 +19,9 @@ import java.util.Date;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="getTransactionsByDate", query="FROM Transaction t WHERE t.date = :date"),
-	@NamedQuery(name="getTransactionsByStatus", query="FROM Transaction t WHERE t.status = :status")
+	@NamedQuery(name="getTransactionsByStatus", query="FROM Transaction t WHERE t.status = :status"),
+	@NamedQuery(name="getTransactionsByUser", query="SELECT t FROM Transaction t INNER JOIN t.user u WHERE u.username=:username"),
+	@NamedQuery(name="getTransactionsByAsset", query="FROM Transaction t WHERE t.asset.idAsset = :idAsset")
 })
 @Table(name = "TRANSACTIONS")
 public class Transaction implements Serializable {

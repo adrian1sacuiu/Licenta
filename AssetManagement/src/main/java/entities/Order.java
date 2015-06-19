@@ -2,17 +2,14 @@ package entities;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -21,7 +18,7 @@ import org.hibernate.annotations.NamedQuery;
 	@NamedQuery(name="getOrdersByPrice", query="FROM Order o WHERE o.price = :price"),
 	@NamedQuery(name="getOrdersBySupplierName", query="FROM Order o WHERE o.supplierName = :supplierName"),
 	@NamedQuery(name="getOrdersByPurchaseDate", query="FROM Order o WHERE o.purchaseDate = :purchaseDate"),
-	@NamedQuery(name="getOrdersByIsReceived", query="FROM Order o WHERE o.isReceived = :isReceived")
+	@NamedQuery(name="getOrdersByIsReceived", query="FROM Order o WHERE o.isReceived = :isReceived"),
 })
 @Table(name = "ORDERS")
 public class Order implements Serializable {
@@ -32,8 +29,6 @@ public class Order implements Serializable {
 	private String supplierName;
 	private Date purchaseDate;
 	private boolean isReceived;
-
-	private List<Asset> assets;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -80,16 +75,6 @@ public class Order implements Serializable {
 
 	public void setIsReceived(boolean isReceived) {
 		this.isReceived = isReceived;
-	}
-
-	@OneToMany(mappedBy = "order")
-	@JsonIgnore
-	public List<Asset> getAssets() {
-		return assets;
-	}
-
-	public void setAssets(List<Asset> assets) {
-		this.assets = assets;
 	}
 
 	@Override

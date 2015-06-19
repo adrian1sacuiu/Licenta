@@ -36,7 +36,7 @@ public class UserDao extends SessionController {
 		boolean result = false;
 
 		try {
-			getCurrentSession().update(user);
+			getCurrentSession().merge(user);
 			result = true;
 
 		} catch (Exception e) {
@@ -54,7 +54,6 @@ public class UserDao extends SessionController {
 
 		try {
 			getCurrentSession().delete(user);
-			result = true;
 
 		} catch (Exception e) {
 			logger.error("in deleteUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -76,6 +75,7 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getAllUsers method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return users;
@@ -91,6 +91,7 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getUserById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return user;
@@ -109,6 +110,7 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getUserByUsername method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return user;
@@ -128,13 +130,14 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getUsersByFirstName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return users;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> getUsersByLastName(String lastName) {
+	public List<User> getUsersByLastName(String lastName) throws Exception {
 		logger.info("Inside getUsersByLastName method.");
 		List<User> users = null;
 
@@ -147,13 +150,14 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getUsersByLastName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return users;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> getUsersByPassword(String password) {
+	public List<User> getUsersByPassword(String password) throws Exception {
 		logger.info("Inside getUsersByPassword method.");
 		List<User> users = null;
 
@@ -166,12 +170,13 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getUsersByPassword method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return users;
 	}
 
-	public User getUserByEmail(String email) {
+	public User getUserByEmail(String email) throws Exception {
 		logger.info("Inside getUserByEmail method.");
 		User user = null;
 
@@ -184,13 +189,14 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getUserByEmail method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		}
 
 		return user;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<User> getUsersByRole(String role) {
+	public List<User> getUsersByRole(String role) throws Exception {
 		logger.info("Inside getUsersByRole method.");
 		List<User> users = null;
 
@@ -203,6 +209,27 @@ public class UserDao extends SessionController {
 		} catch (Exception e) {
 			logger.error("in getUsersByRole method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
+		}
+
+		return users;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> getUserByDepartment(Long idDepartment) throws Exception {
+		logger.info("Inside getUserByDepartment method.");
+		List<User> users = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getUserByDepartment");
+			query.setParameter("idDepartment", idDepartment);
+
+			users = (List<User>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getUserByDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
 		}
 
 		return users;

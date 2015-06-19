@@ -38,7 +38,7 @@ public class TransactionDao extends SessionController {
 		boolean result = false;
 
 		try {
-			getCurrentSession().update(transaction);
+			getCurrentSession().merge(transaction);
 			result = true;
 
 		} catch (Exception e) {
@@ -128,6 +128,44 @@ public class TransactionDao extends SessionController {
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return transactions;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Transaction> getTransactionsByUser(String username) throws Exception {
+		logger.info("Inside getTransactionsByUser method.");
+		List<Transaction> transactions = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getTransactionsByUser");
+			query.setParameter("username", username);
+
+			transactions = (List<Transaction>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getTransactionsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return transactions;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Transaction> getTransactionsByAsset(Long idAsset) throws Exception {
+		logger.info("Inside getTransactionsByAsset method.");
+		List<Transaction> transactions = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getTransactionsByAsset");
+			query.setParameter("idAsset", idAsset);
+
+			transactions = (List<Transaction>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getTransactionsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 

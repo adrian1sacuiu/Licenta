@@ -40,6 +40,7 @@ public class LoginController {
 			
 		} catch(Exception e){
 			logger.error("in saveUserOnSession method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 		}
 		
 		return modelAndView;

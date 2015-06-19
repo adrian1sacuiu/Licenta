@@ -23,14 +23,39 @@ public class OperationsUtils {
 		logger.info("Inside saveImage method.");
 		
 		try {
-			File file = new File("src/main/webapp/resources/images/" + username);
-			file.mkdirs();
-			file = new File(file, "/" + username + ".jpg");
-			FileUtils.writeByteArrayToFile(file, image.getBytes());
+			File userFolder = new File(Constants.ImagesFolder + username);
+			userFolder.mkdirs();
+			userFolder = new File(userFolder, "/" + username + ".jpg");
+			FileUtils.writeByteArrayToFile(userFolder, image.getBytes());
 			
 		} catch (IOException e) {
 			logger.error("in saveImage method IOException: " + e.getMessage() + ";Cause: " + e.getCause());
 			throw new ImageUploadException("Unable to save image.", e);
 		}
+	}
+	
+	public static boolean deleteDir(File dir) {
+		logger.info("Inside deleteDir method.");
+		boolean result = false;
+		
+	    try {
+			if (dir.exists() && dir.isDirectory()) {
+			    String[] children = dir.list();
+			    for (int i = 0; i < children.length; i++) {
+			        boolean success = deleteDir(new File(dir, children[i]));
+			        if (!success) {
+			            return false;
+			        }
+			    }
+			}
+			
+			result = dir.delete();
+			
+		} catch (Exception e) {
+			logger.error("in deleteDir method Exception: " + e.getMessage() + ";Cause: " + e.getCause());
+			e.printStackTrace();
+		} 
+	    
+	    return result; 
 	}
 }

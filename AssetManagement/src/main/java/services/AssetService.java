@@ -1,10 +1,8 @@
 package services;
 
 import entities.Asset;
-import entities.User;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -165,21 +163,33 @@ public class AssetService {
 
 		return assets;
 	}
-
+	
 	@Transactional(readOnly = true)
-	public List<Asset> getAssetsForUser(String username) throws Exception {
-		logger.info("Inside getAssetsForUser method.");
-
-		User user = null;
+	public List<Asset> getAssetsByUser(String username) throws Exception {
+		logger.info("Inside getAssetsByUser method.");
 		List<Asset> assets = null;
 
 		try {
-			user = userDao.getUserByUsername(username);
-			assets = user.getAssets();
-			Hibernate.initialize(assets);
+			assets = assetDao.getAssetsByUser(username);
 
 		} catch (Exception e) {
-			logger.error("in getAssetsForUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			logger.error("in getAssetsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return assets;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Asset> getAssetsByOrder(Long idOrder) throws Exception {
+		logger.info("Inside getAssetsByOrder method.");
+		List<Asset> assets = null;
+
+		try {
+			assets = assetDao.getAssetsByOrder(idOrder);
+
+		} catch (Exception e) {
+			logger.error("in getAssetsByOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			throw e;
 		}
 

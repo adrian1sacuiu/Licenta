@@ -5,12 +5,16 @@ import entities.User;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.AssetDao;
 import services.DAO.UserDao;
+import util.Constants;
+import util.OperationsUtils;
 
+import java.io.File;
 import java.util.List;
 
 @Service
@@ -29,6 +33,14 @@ public class UsersService {
 		boolean result = false;
 
 		try {
+			String password = user.getPassword();
+
+			if (password != null) {
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				String hashedPassword = passwordEncoder.encode(password);
+				user.setPassword(hashedPassword);
+			}
+
 			result = userDao.addUser(user);
 
 		} catch (Exception e) {
@@ -44,6 +56,19 @@ public class UsersService {
 		boolean result = false;
 
 		try {
+			String password = user.getPassword();
+
+			if (password != null) {
+				User oldUser = userDao.getUserById(user.getIdUser());
+				String oldPassword = oldUser.getPassword();
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				
+				if(oldPassword == null || !oldPassword.equals(password)){
+					String hashedPassword = passwordEncoder.encode(password);
+					user.setPassword(hashedPassword);
+				}
+			}
+			
 			result = userDao.updateUser(user);
 
 		} catch (Exception e) {
@@ -61,7 +86,7 @@ public class UsersService {
 		List<Asset> assets = null;
 
 		try {
-			assets = user.getAssets();
+			assets = assetDao.getAssetsByUser(user.getUsername());
 			if (!assets.isEmpty()) {
 				for (Asset asset : assets) {
 					asset.setIsAvailable(true);
@@ -70,6 +95,16 @@ public class UsersService {
 				}
 			}
 			result = userDao.deleteUser(user);
+
+			if (result) {
+				File userFolder = new File(Constants.ImagesFolder + user.getUsername());
+				boolean deleteSuccess = OperationsUtils.deleteDir(userFolder);
+				if (deleteSuccess) {
+					logger.info("User images folder deleted successfully!");
+				} else {
+					logger.info("Couldn't delete user images folder!");
+				}
+			}
 
 		} catch (Exception e) {
 			logger.error("in deleteUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -185,6 +220,22 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getUsersByRole method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return users;
+	}
+
+	@Transactional(readOnly = true)
+	public List<User> getUserByDepartment(Long idDepartment) throws Exception {
+		logger.info("in getUserByDepartment method.");
+		List<User> users = null;
+
+		try {
+			users = userDao.getUserByDepartment(idDepartment);
+
+		} catch (Exception e) {
+			logger.error("in getUserByDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			throw e;
 		}
 

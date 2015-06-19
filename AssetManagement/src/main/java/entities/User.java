@@ -8,15 +8,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -25,7 +22,8 @@ import java.util.List;
 	@NamedQuery(name="getUsersByLastName", query="FROM User u WHERE u.lastName = :lastName"),
 	@NamedQuery(name="getUsersByPassword", query="FROM User u WHERE u.password = :password"),
 	@NamedQuery(name="getUserByEmail", query="FROM User u WHERE u.email = :email"),
-	@NamedQuery(name="getUsersByRole", query="FROM User u WHERE u.role = :role")
+	@NamedQuery(name="getUsersByRole", query="FROM User u WHERE u.role = :role"),
+	@NamedQuery(name="getUserByDepartment", query="FROM User u WHERE u.department.idDepartment = :idDepartment")
 })
 @Table(name = "USERS")
 public class User implements Serializable {
@@ -40,11 +38,6 @@ public class User implements Serializable {
 	private String role;
 
 	private Department department;
-
-	private List<Asset> assets;
-	private List<Complaint> complaints;
-	private List<Request> requests;
-	private List<Transaction> transactions;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -120,46 +113,6 @@ public class User implements Serializable {
 
 	public void setDepartment(Department department) {
 		this.department = department;
-	}
-	
-	@OneToMany(mappedBy = "user")
-	@JsonIgnore
-	public List<Asset> getAssets() {
-		return assets;
-	}
-
-	public void setAssets(List<Asset> assets) {
-		this.assets = assets;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	@JsonIgnore
-	public List<Transaction> getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	@JsonIgnore
-	public List<Complaint> getComplaints() {
-		return complaints;
-	}
-
-	public void setComplaints(List<Complaint> complaints) {
-		this.complaints = complaints;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	@JsonIgnore
-	public List<Request> getRequests() {
-		return requests;
-	}
-
-	public void setRequests(List<Request> requests) {
-		this.requests = requests;
 	}
 
 	@Override

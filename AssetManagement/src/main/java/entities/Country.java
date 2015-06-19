@@ -1,17 +1,14 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -27,8 +24,6 @@ public class Country implements Serializable {
 	private long idCountry;
 	private String name;
 	private String countryCode;
-
-	private List<Department> departments;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,16 +52,6 @@ public class Country implements Serializable {
 
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
-	}
-
-	@OneToMany(mappedBy = "country")
-	@JsonIgnore
-	public List<Department> getDepartments() {
-		return departments;
-	}
-
-	public void setDepartments(List<Department> departments) {
-		this.departments = departments;
 	}
 
 	@Override

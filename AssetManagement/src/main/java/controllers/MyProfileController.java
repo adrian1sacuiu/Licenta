@@ -21,6 +21,7 @@ import services.ComplaintService;
 import services.RequestService;
 import services.TransactionService;
 
+@PreAuthorize("isAuthenticated()")
 @Controller
 public class MyProfileController {
 	private static final Logger logger = Logger.getLogger(MyProfileController.class);
@@ -44,7 +45,7 @@ public class MyProfileController {
 		logger.info("Inside getUserAssets method");
 		List<Asset> userAssets = null;
 		try{
-			userAssets = assetService.getAssetsForUser(username);
+			userAssets = assetService.getAssetsByUser(username);
 			
 		} catch(Exception e){
 			logger.error("in getUserAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -60,7 +61,7 @@ public class MyProfileController {
 		logger.info("Inside getUserComplaints method");
 		List<Complaint> userComplaints = null;
 		try{
-			userComplaints = complaintService.getComplaintsForUser(username);
+			userComplaints = complaintService.getComplaintsByUser(username);
 			
 		} catch(Exception e){
 			logger.error("in getUserComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -76,7 +77,7 @@ public class MyProfileController {
 		logger.info("Inside getUserRequests method");
 		List<Request> userRequests = null;
 		try{
-			userRequests = requestService.getRequetsForUser(username);
+			userRequests = requestService.getRequetsByUser(username);
 			
 		} catch(Exception e){
 			logger.error("in getUserRequests method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -93,7 +94,7 @@ public class MyProfileController {
 		List<Transaction> userTransactions = null;
 		
 		try{
-			userTransactions = transactionService.getTransactionsForUser(username);
+			userTransactions = transactionService.getTransactionsByUser(username);
 			
 		} catch(Exception e){
 			logger.error("in getUserTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());

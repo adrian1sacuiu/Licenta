@@ -5,7 +5,6 @@ import entities.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,11 +58,8 @@ public class RegisterController {
 			}
 
 			String password = user.getPassword();
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String hashedPassword = passwordEncoder.encode(password);
-			user.setPassword(hashedPassword);
-
 			userService.addUser(user);
+			
 			user.setPassword(password);
 			modelAndView.addObject("registered_user", user);
 

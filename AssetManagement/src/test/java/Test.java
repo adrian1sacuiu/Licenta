@@ -1,22 +1,30 @@
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import entities.User;
-import services.AssetService;
 import services.UsersService;
 
 public class Test {
 
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
-		UsersService userService = (UsersService)ctx.getBean("usersService");
+		UsersService usersService = (UsersService)ctx.getBean("usersService");
 		
 		try {
-			System.out.println(userService.getUserByEmail("tst@test.com"));
+			User user = new User();
+			user.setUsername("test");
+			user.setPassword("test");
+			user.setEmail("test@test.com");
+			//usersService.addUser(user);
+			
+			user.setIdUser(3l);
+			user.setPassword("test2");
+			usersService.updateUser(user);
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 }

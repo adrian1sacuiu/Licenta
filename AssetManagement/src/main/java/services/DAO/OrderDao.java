@@ -37,7 +37,7 @@ public class OrderDao extends SessionController {
 		boolean result = false;
 
 		try {
-			getCurrentSession().update(order);
+			getCurrentSession().merge(order);
 			result = true;
 
 		} catch (Exception e) {

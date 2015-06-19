@@ -1,16 +1,13 @@
 package services;
 
 import entities.Complaint;
-import entities.User;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.ComplaintDao;
-import services.DAO.UserDao;
 
 import java.util.List;
 
@@ -21,9 +18,6 @@ public class ComplaintService {
 
 	@Autowired
 	ComplaintDao complaintDao;
-
-	@Autowired
-	UserDao userDao;
 
 	public boolean addComplaint(Complaint complaint) throws Exception {
 		logger.info("in addComplaint method.");
@@ -167,18 +161,31 @@ public class ComplaintService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Complaint> getComplaintsForUser(String username) throws Exception {
-		logger.info("Inside getComplaintsForUser method.");
-		User user = null;
+	public List<Complaint> getComplaintsByUser(String username) throws Exception {
+		logger.info("Inside getComplaintsByUser method.");
 		List<Complaint> complaints = null;
 
 		try {
-			user = userDao.getUserByUsername(username);
-			complaints = user.getComplaints();
-			Hibernate.initialize(complaints);
+			complaints = complaintDao.getComplaintsByUser(username);
 
 		} catch (Exception e) {
-			logger.error("in getComplaintsForUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			logger.error("in getComplaintsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return complaints;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Complaint> getComplaintsByAsset(Long idAsset) throws Exception {
+		logger.info("Inside getComplaintsByAsset method.");
+		List<Complaint> complaints = null;
+
+		try {
+			complaints = complaintDao.getComplaintsByAsset(idAsset);
+
+		} catch (Exception e) {
+			logger.error("in getComplaintsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			throw e;
 		}
 

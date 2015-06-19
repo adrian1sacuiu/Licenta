@@ -151,4 +151,21 @@ public class DepartmentService {
 
 		return departments;
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Department> getDepartmentsByCountry(Long idCountry) throws Exception {
+		logger.info("Inside getDepartmentsByCountry method.");
+		List<Department> departments = null;
+
+		try {
+			departments = departmentDao.getDepartmentsByCountry(idCountry);
+
+		} catch (Exception e) {
+			logger.error("in getDepartmentsByCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return departments;
+	}
 }

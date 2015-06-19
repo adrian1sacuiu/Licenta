@@ -35,7 +35,7 @@ public class ComplaintDao extends SessionController {
 		boolean result = false;
 
 		try {
-			getCurrentSession().update(complaint);
+			getCurrentSession().merge(complaint);
 			result = true;
 
 		} catch (Exception e) {
@@ -155,6 +155,25 @@ public class ComplaintDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Complaint> getComplaintsByUser(String username) throws Exception {
+		logger.info("Inside getComplaintsByUser method.");
+		List<Complaint> complaints = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getComplaintsByUser");
+			query.setParameter("username", username);
+			complaints = (List<Complaint>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getComplaintsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return complaints;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Complaint> getComplaintsByStatus(String status) throws Exception {
 		logger.info("Inside getComplaintsByStatus method.");
 		List<Complaint> complaints = null;
@@ -166,6 +185,25 @@ public class ComplaintDao extends SessionController {
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return complaints;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Complaint> getComplaintsByAsset(Long idAsset) throws Exception {
+		logger.info("Inside getComplaintsByAsset method.");
+		List<Complaint> complaints = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getComplaintsByAsset");
+			query.setParameter("idAsset", idAsset);
+			complaints = (List<Complaint>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getComplaintsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 			throw e;
 		}
