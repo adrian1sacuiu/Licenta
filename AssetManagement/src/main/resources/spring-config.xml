@@ -29,7 +29,7 @@
 		<property name="packagesToScan" value="entities" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 			</props>
 		</property>
 	</bean>

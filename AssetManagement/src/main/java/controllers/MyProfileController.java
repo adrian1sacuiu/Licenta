@@ -1,7 +1,9 @@
 package controllers;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import entities.Asset;
 import entities.Complaint;
@@ -41,82 +42,91 @@ public class MyProfileController {
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "userAssets/{username}", produces = "application/json")
-	public List<Asset> getUserAssets(@PathVariable String username, ModelAndView modelAndView){
+	@ResponseBody
+	public Map<String, Object> getUserAssets(@PathVariable String username){
 		logger.info("Inside getUserAssets method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Asset> userAssets = null;
 		
-		modelAndView.setViewName("#userAssets");
 		try{
 			userAssets = assetService.getAssetsByUser(username);
-			modelAndView.addObject(userAssets);
+			resultMap.put("status", "true");
+			resultMap.put("message", userAssets);
 			
 		} catch(Exception e){
 			logger.error("in getUserAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			modelAndView.addObject("error", "Error getting user assets!");
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting user assets!");
 		}
 		
-		return userAssets;
+		return resultMap;
 	}
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "userComplaints/{username}", produces = "application/json")
 	@ResponseBody
-	public List<Complaint> getUserComplaints(@PathVariable String username, ModelAndView modelAndView){
+	public Map<String, Object> getUserComplaints(@PathVariable String username){
 		logger.info("Inside getUserComplaints method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Complaint> userComplaints = null;
 		
-		modelAndView.setViewName("#userComplaints");
 		try{
 			userComplaints = complaintService.getComplaintsByUser(username);
-			modelAndView.addObject(userComplaints);
+			resultMap.put("status", "true");
+			resultMap.put("message", userComplaints);
 			
 		} catch(Exception e){
 			logger.error("in getUserComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			modelAndView.addObject("error", "Error getting user complaints!");
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting user complaints!");
 		}
 		
-		return userComplaints;
+		return resultMap;
 	}
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "userRequests/{username}", produces = "application/json")
 	@ResponseBody
-	public List<Request> getUserRequests(@PathVariable String username, ModelAndView modelAndView){
+	public Map<String, Object> getUserRequests(@PathVariable String username){
 		logger.info("Inside getUserRequests method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Request> userRequests = null;
 		
-		modelAndView.setViewName("#userRequests");
 		try{
 			userRequests = requestService.getRequetsByUser(username);
-			modelAndView.addObject(userRequests);
+			resultMap.put("status", "true");
+			resultMap.put("message", userRequests);
 			
 		} catch(Exception e){
 			logger.error("in getUserRequests method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			modelAndView.addObject("error", "Error getting user requests!");
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting user requests!");
 		}
 		
-		return userRequests;
+		return resultMap;
 	}
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username) or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "userTransactions/{username}", produces = "application/json")
 	@ResponseBody
-	public List<Transaction> getUserTransactions(@PathVariable String username, ModelAndView modelAndView){
+	public Map<String, Object> getUserTransactions(@PathVariable String username){
 		logger.info("Inside getUserTransactions method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Transaction> userTransactions = null;
 		
-		modelAndView.setViewName("#userTransactions");
 		
 		try{
 			userTransactions = transactionService.getTransactionsByUser(username);
-			modelAndView.addObject(userTransactions);
+			resultMap.put("status", "true");
+			resultMap.put("message", userTransactions);
 			
 		} catch(Exception e){
 			logger.error("in getUserTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			modelAndView.addObject("error", "Error getting user transactions!");
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting user transactions!");
 		}
 		
-		return userTransactions;
+		return resultMap;
 	}
 	
 	@PreAuthorize("isAuthenticated()")
