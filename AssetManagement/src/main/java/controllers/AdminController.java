@@ -8,8 +8,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import services.AssetService;
 import services.ComplaintService;
@@ -144,6 +147,42 @@ public class AdminController {
 			resultMap.put("message", "Error getting transactions!");
 		}
 		
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "createAsset", method = RequestMethod.POST)
+	public ModelAndView addAssetModel(){
+		logger.info("Inside addAssetModel method");
+
+		ModelAndView mv = new ModelAndView("views/createAsset.jsp");
+		mv.addObject("asset", new Asset());
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "createAsset", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> createAsset(@ModelAttribute("asset") Asset asset){
+		logger.info("Inside createAsset method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		try{
+			boolean result = assetService.addAsset(asset);
+			if(result){
+				resultMap.put("status", "true");
+				resultMap.put("message", "Asset created successfully!");
+				
+			} else {
+				logger.error("Error creating new asset!");
+				resultMap.put("status", "false");
+				resultMap.put("message", "Error creating new asset!");
+			}
+			
+		} catch(Exception e){
+			logger.error("in createAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error creating new asset!");
+		}
 		return resultMap;
 	}
 }

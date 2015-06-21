@@ -97,18 +97,37 @@ public class TransactionDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Transaction> getTransactionsByDate(Date date) throws Exception {
-		logger.info("Inside getTransactionsByDate method.");
+	public List<Transaction> getTransactionsByStartDate(Date startDate) throws Exception {
+		logger.info("Inside getTransactionsByStartDate method.");
 		List<Transaction> transactions = null;
 
 		try {
-			Query query = getCurrentSession().getNamedQuery("getTransactionsByDate");
-			query.setParameter("date", date);
+			Query query = getCurrentSession().getNamedQuery("getTransactionsByStartDate");
+			query.setParameter("startDate", startDate);
 
 			transactions = (List<Transaction>) query.list();
 
 		} catch (Exception e) {
-			logger.error("in getTransactionsByDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			logger.error("in getTransactionsByStartDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return transactions;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Transaction> getTransactionsByEndDate(Date endDate) throws Exception {
+		logger.info("Inside getTransactionsByEndDate method.");
+		List<Transaction> transactions = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getTransactionsByEndDate");
+			query.setParameter("endDate", endDate);
+
+			transactions = (List<Transaction>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getTransactionsByEndDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 

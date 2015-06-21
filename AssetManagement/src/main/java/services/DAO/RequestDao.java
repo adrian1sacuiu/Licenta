@@ -97,37 +97,18 @@ public class RequestDao extends SessionController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Request> getRequestsByStartDate(Date startDate) throws Exception {
-		logger.info("Inside getRequestsByStartDate method.");
+	public List<Request> getRequestsByDate(Date date) throws Exception {
+		logger.info("Inside getRequestsByDate method.");
 		List<Request> requests = null;
 
 		try {
-			Query query = getCurrentSession().getNamedQuery("getRequestsByStartDate");
-			query.setParameter("startDate", startDate);
+			Query query = getCurrentSession().getNamedQuery("getRequestsByDate");
+			query.setParameter("date", date);
 
 			requests = (List<Request>) query.list();
 
 		} catch (Exception e) {
-			logger.error("in getRequestsByStartDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			e.printStackTrace();
-		}
-
-		return requests;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Request> getRequestsByEndDate(Date endDate) throws Exception {
-		logger.info("Inside getRequestByEndDate method.");
-		List<Request> requests = null;
-
-		try {
-			Query query = getCurrentSession().getNamedQuery("getRequestsByEndDate");
-			query.setParameter("endDate", endDate);
-
-			requests = (List<Request>) query.list();
-
-		} catch (Exception e) {
-			logger.error("in getRequesstByEndDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			logger.error("in getRequestsByDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 		}
 

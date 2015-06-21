@@ -18,7 +18,8 @@ import java.util.Date;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="getTransactionsByDate", query="FROM Transaction t WHERE t.date = :date"),
+	@NamedQuery(name="getTransactionsByStartDate", query="FROM Transaction t WHERE t.startDate = :startDate"),
+	@NamedQuery(name="getTransactionsByEndDate", query="FROM Transaction t WHERE t.endDate = :endDate"),
 	@NamedQuery(name="getTransactionsByStatus", query="FROM Transaction t WHERE t.status = :status"),
 	@NamedQuery(name="getTransactionsByUser", query="SELECT t FROM Transaction t INNER JOIN t.user u WHERE u.username=:username"),
 	@NamedQuery(name="getTransactionsByAsset", query="FROM Transaction t WHERE t.asset.idAsset = :idAsset")
@@ -28,7 +29,8 @@ public class Transaction implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long idTransaction;
-	private Date date;
+	private Date startDate;
+	private Date endDate;
 	private String status;
 
 	private User user;
@@ -45,13 +47,22 @@ public class Transaction implements Serializable {
 		this.idTransaction = idTransaction;
 	}
 
-	@Column(name = "date")
-	public Date getDate() {
-		return date;
+	@Column(name = "START_DATE")
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Column(name = "END_DATE")
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	@Column(name = "status")
@@ -89,8 +100,9 @@ public class Transaction implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((idTransaction == null) ? 0 : idTransaction.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -104,15 +116,20 @@ public class Transaction implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Transaction other = (Transaction) obj;
-		if (date == null) {
-			if (other.date != null)
+		if (endDate == null) {
+			if (other.endDate != null)
 				return false;
-		} else if (!date.equals(other.date))
+		} else if (!endDate.equals(other.endDate))
 			return false;
 		if (idTransaction == null) {
 			if (other.idTransaction != null)
 				return false;
 		} else if (!idTransaction.equals(other.idTransaction))
+			return false;
+		if (startDate == null) {
+			if (other.startDate != null)
+				return false;
+		} else if (!startDate.equals(other.startDate))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -124,7 +141,9 @@ public class Transaction implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Transaction [idTransaction=" + idTransaction + ", date=" + date + ", status=" + status + "]";
+		return "Transaction [idTransaction=" + idTransaction + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + "]";
 	}
+
+	
 
 }

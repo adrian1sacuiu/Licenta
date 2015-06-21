@@ -102,31 +102,15 @@ public class RequestService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Request> getRequestsByStartDate(Date startDate) throws Exception {
-		logger.info("in getRequestsByStartDate method.");
+	public List<Request> getRequestsByDate(Date date) throws Exception {
+		logger.info("in getRequestsByDate method.");
 		List<Request> requests = null;
 
 		try {
-			requests = requestDao.getRequestsByStartDate(startDate);
+			requests = requestDao.getRequestsByDate(date);
 
 		} catch (Exception e) {
-			logger.error("in getRequestsByStartDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			throw e;
-		}
-
-		return requests;
-	}
-
-	@Transactional(readOnly = true)
-	public List<Request> getRequestsByEndDate(Date endDate) throws Exception {
-		logger.info("in getRequestsByEndDate method.");
-		List<Request> requests = null;
-
-		try {
-			requests = requestDao.getRequestsByEndDate(endDate);
-
-		} catch (Exception e) {
-			logger.error("in getRequestsByEndDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			logger.error("in getRequestsByDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			throw e;
 		}
 

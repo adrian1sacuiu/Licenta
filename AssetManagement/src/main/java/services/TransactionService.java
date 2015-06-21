@@ -102,15 +102,31 @@ public class TransactionService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Transaction> getTransactionsByDate(Date date) throws Exception {
-		logger.info("in getTransactionsByDate method.");
+	public List<Transaction> getTransactionsByStartDate(Date startDate) throws Exception {
+		logger.info("in getTransactionsByStatDate method.");
 		List<Transaction> transactions = null;
 
 		try {
-			transactions = transactionDao.getTransactionsByDate(date);
+			transactions = transactionDao.getTransactionsByStartDate(startDate);
 
 		} catch (Exception e) {
-			logger.error("in getTransactionsByDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			logger.error("in getTransactionsByStartDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return transactions;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Transaction> getTransactionsByEndDate(Date endDate) throws Exception {
+		logger.info("in getTransactionsByEndDate method.");
+		List<Transaction> transactions = null;
+
+		try {
+			transactions = transactionDao.getTransactionsByEndDate(endDate);
+
+		} catch (Exception e) {
+			logger.error("in getTransactionsByEndDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			throw e;
 		}
 

@@ -18,8 +18,7 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="getRequestsByStartDate", query="FROM Request r WHERE r.startDate = :startDate"),
-	@NamedQuery(name="getRequestsByEndDate", query="FROM Request r WHERE r.endDate = :endDate"),
+	@NamedQuery(name="getRequestsByDate", query="FROM Request r WHERE r.date = :date"),
 	@NamedQuery(name="getRequestsByStatus", query="FROM Request r WHERE r.status = :status"),
 	@NamedQuery(name="getRequestsByUser", query="SELECT r FROM Request r INNER JOIN r.user u WHERE u.username=:username"),
 	@NamedQuery(name="getRequestsByAsset", query="FROM Request r WHERE r.asset.idAsset = :idAsset")
@@ -29,8 +28,7 @@ public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long idRequest;
-	private Date startDate;
-	private Date endDate;
+	private Date date;
 	private String status;
 
 	private User user;
@@ -47,22 +45,13 @@ public class Request implements Serializable {
 		this.idRequest = idRequest;
 	}
 
-	@Column(name = "START_DATE")
-	public Date getStartDate() {
-		return startDate;
+	@Column(name = "DATE")
+	public Date getDate() {
+		return date;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	@Column(name = "END_DATE")
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Column(name = "STATUS")
@@ -100,9 +89,8 @@ public class Request implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + (int) (idRequest ^ (idRequest >>> 32));
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -116,17 +104,12 @@ public class Request implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Request other = (Request) obj;
-		if (endDate == null) {
-			if (other.endDate != null)
+		if (date == null) {
+			if (other.date != null)
 				return false;
-		} else if (!endDate.equals(other.endDate))
+		} else if (!date.equals(other.date))
 			return false;
 		if (idRequest != other.idRequest)
-			return false;
-		if (startDate == null) {
-			if (other.startDate != null)
-				return false;
-		} else if (!startDate.equals(other.startDate))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -138,8 +121,9 @@ public class Request implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Requests [idRequest=" + idRequest + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + "]";
+		return "Request [idRequest=" + idRequest + ", date=" + date + ", status=" + status + "]";
 	}
+
 	
 	
 }
