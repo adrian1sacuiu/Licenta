@@ -23,10 +23,10 @@ public class UsersService {
 	private static final Logger logger = Logger.getLogger(UsersService.class);
 
 	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
 
 	@Autowired
-	AssetDao assetDao;
+	private AssetDao assetDao;
 
 	public boolean addUser(User user) throws Exception {
 		logger.info("in addUser method.");

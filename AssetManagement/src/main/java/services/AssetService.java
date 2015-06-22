@@ -18,16 +18,17 @@ public class AssetService {
 	private static final Logger logger = Logger.getLogger(AssetService.class);
 
 	@Autowired
-	AssetDao assetDao;
+	private AssetDao assetDao;
 
 	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
 
 	public boolean addAsset(Asset asset) throws Exception {
 		logger.info("in addAsset method.");
 		boolean result = false;
 
 		try {
+			asset.setIsAvailable(true);
 			result = assetDao.addAsset(asset);
 
 		} catch (Exception e) {

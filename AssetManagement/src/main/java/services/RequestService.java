@@ -1,6 +1,9 @@
 package services;
 
+import entities.Asset;
 import entities.Request;
+import entities.Transaction;
+import entities.User;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.RequestDao;
+import services.DAO.TransactionDao;
 import services.DAO.UserDao;
 
 import java.sql.Date;
@@ -19,10 +23,12 @@ public class RequestService {
 	private static final Logger logger = Logger.getLogger(RequestService.class);
 
 	@Autowired
-	RequestDao requestDao;
+	private RequestDao requestDao;
 
 	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
+	
+	private TransactionDao transactionDao;
 
 	public boolean addRequest(Request request) throws Exception {
 		logger.info("in addRequest method.");
@@ -30,6 +36,22 @@ public class RequestService {
 
 		try {
 			result = requestDao.addRequest(request);
+			if(result){
+				User user = request.getUser();
+				Asset asset = request.getAsset();
+				
+				Transaction transaction = new Transaction();
+				transaction.setUser(user);
+				transaction.setAsset(asset);
+				transaction.setStartDate(new Date(System.currentTimeMillis()));
+				transaction.setStatus("Pending");
+				
+				result = transactionDao.addTransaction(transaction);
+				if(!result){
+					logger.error("Could not create new transaction for this request!");
+					requestDao.deleteRequest(request);
+				}
+			}
 
 		} catch (Exception e) {
 			logger.error("in addRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());

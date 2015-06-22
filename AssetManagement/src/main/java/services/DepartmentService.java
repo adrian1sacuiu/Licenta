@@ -17,7 +17,7 @@ public class DepartmentService {
 	private static final Logger logger = Logger.getLogger(DepartmentService.class);
 
 	@Autowired
-	DepartmentDao departmentDao;
+	private DepartmentDao departmentDao;
 
 	public boolean addDepartment(Department department) throws Exception {
 		logger.info("Inside addDepartment method.");

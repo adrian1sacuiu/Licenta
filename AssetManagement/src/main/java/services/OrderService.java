@@ -18,7 +18,7 @@ public class OrderService {
 	private static final Logger logger = Logger.getLogger(OrderService.class);
 
 	@Autowired
-	OrderDao orderDao;
+	private OrderDao orderDao;
 
 	public boolean addOrder(Order order) throws Exception {
 		logger.info("in addOrder method.");

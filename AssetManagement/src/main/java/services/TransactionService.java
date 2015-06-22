@@ -19,10 +19,10 @@ public class TransactionService {
 	private static final Logger logger = Logger.getLogger(TransactionService.class);
 
 	@Autowired
-	TransactionDao transactionDao;
+	private TransactionDao transactionDao;
 
 	@Autowired
-	UserDao userDao;
+	private UserDao userDao;
 
 	public boolean addTransaction(Transaction transaction) throws Exception {
 		logger.info("in addTransaction method.");

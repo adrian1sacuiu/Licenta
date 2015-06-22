@@ -150,7 +150,7 @@ public class AdminController {
 		return resultMap;
 	}
 	
-	@RequestMapping(value = "createAsset", method = RequestMethod.POST)
+	@RequestMapping(value = "createAsset", method = RequestMethod.GET)
 	public ModelAndView addAssetModel(){
 		logger.info("Inside addAssetModel method");
 

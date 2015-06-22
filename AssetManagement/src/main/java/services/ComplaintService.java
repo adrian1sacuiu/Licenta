@@ -17,7 +17,7 @@ public class ComplaintService {
 	private static final Logger logger = Logger.getLogger(ComplaintService.class);
 
 	@Autowired
-	ComplaintDao complaintDao;
+	private ComplaintDao complaintDao;
 
 	public boolean addComplaint(Complaint complaint) throws Exception {
 		logger.info("in addComplaint method.");

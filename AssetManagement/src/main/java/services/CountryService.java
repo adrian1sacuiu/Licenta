@@ -17,7 +17,7 @@ public class CountryService {
 	private static final Logger logger = Logger.getLogger(CountryService.class);
 
 	@Autowired
-	CountryDao countryDao;
+	private CountryDao countryDao;
 
 	public boolean addCountry(Country country) throws Exception {
 		logger.info("in addCountry method.");
