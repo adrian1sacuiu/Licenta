@@ -1,11 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="en">
+
 <!-- START PAGE SOURCE -->
 <jsp:include page="/views/TopMenu.jsp" flush="true" />
 <div class="main">
-	<section id="content">
+	<div id="content">
 		<jsp:include page="/views/LeftMenu.jsp" flush="true" />
 		<c:set var="logged_user" value="${logged_user}"/>
 		<article class="col2 pad_left1">
@@ -92,9 +91,8 @@
 				</div>
 			</div>
 		</article>
-	</section>
+	</div>
 </div>
 <jsp:include page="/views/Footer.jsp" flush="true" />
 <!-- END PAGE SOURCE -->
-</body>
-</html>
+

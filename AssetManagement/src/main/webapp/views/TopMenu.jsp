@@ -13,26 +13,8 @@
 	<c:set var="val" value="${pageContext.request.servletPath}"/>
 				
 	<c:choose> 
-		<c:when test="${val == '/views/AccessDenied.jsp'}">
-				<!-- Bootstrap core CSS -->
-			    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-			
-			    <!-- Custom styles for this template -->
-			    <link href="../resources/css/dashboard.css" rel="stylesheet">
-			     <!-- Bootstrap core JavaScript
-			    ================================================== -->
-			    <!-- Placed at the end of the document so the pages load faster -->
-			    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-			    <script src="../resources/scripts/bootstrap.min.js"></script>
-			    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-			    <script src="../resources/scripts/holder.js"></script>
-			     <script src="../resources/scripts/require.js"></script>
-			    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-			    <script type="text/javascript" src="../resources/scripts/ie10-viewport-bug-workaround.js"></script>
-			    <script src="../resources/scripts/app.js"></script>
-		</c:when>
-		<c:otherwise>
-				 <!-- Bootstrap core CSS -->
+		<c:when test="${val == '/index.jsp'}">
+			 <!-- Bootstrap core CSS -->
 			    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 			
 			    <!-- Custom styles for this template -->
@@ -48,45 +30,36 @@
 			    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 			    <script type="text/javascript" src="resources/scripts/ie10-viewport-bug-workaround.js"></script>
 			    <script src="resources/scripts/app.js"></script>
+			    
+				
+		</c:when>
+		<c:otherwise>
+		<!-- Bootstrap core CSS -->
+			    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+			
+			    <!-- Custom styles for this template -->
+			    <link href="../resources/css/dashboard.css" rel="stylesheet">
+			     <!-- Bootstrap core JavaScript
+			    ================================================== -->
+			    <!-- Placed at the end of the document so the pages load faster -->
+			    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+			    <script src="../resources/scripts/bootstrap.min.js"></script>
+			    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+			    <script src="../resources/scripts/holder.js"></script>
+			     <script src="../resources/scripts/require.js"></script>
+			    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+			    <script type="text/javascript" src="../resources/scripts/ie10-viewport-bug-workaround.js"></script>
+			    <script src="../resources/scripts/app.js"></script>
+				
 		</c:otherwise>
 	</c:choose>
+	
     <title>Dashboard Template for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="resources/css/dashboard.css" rel="stylesheet">
-     <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="resources/scripts/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="resources/scripts/holder.js"></script>
-     <script src="resources/scripts/require.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script type="text/javascript" src="resources/scripts/ie10-viewport-bug-workaround.js"></script>
-    <script src="resources/scripts/app.js"></script>
-    <script>
-    $(function() {
-    $.validator.setDefaults({
-		submitHandler: function() {
-			alert("submitted!");
-		}
-	});
-
-	$().ready(function() {
-		// validate the comment form when it is submitted
-		$("#register_form").validate();
-
-	});	
-	});
-	</script>
   </head>
 
   <body>
-
+<%-- <h1><c:out value="${val}"/></h1> --%>
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -103,15 +76,12 @@
           <security:authorize access="isAuthenticated()">	
             <li><a href="#">Dashboard</a></li>
             </security:authorize>
-            <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <security:authorize access="isAuthenticated()">	
             <li><a href="/AssetManagement/j_spring_security_logout">Logout</a></li>
             </security:authorize>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+         
         </div>
       </div>
     </nav>
