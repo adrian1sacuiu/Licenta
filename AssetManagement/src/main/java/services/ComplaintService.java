@@ -28,6 +28,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in addComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -43,6 +44,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in updateComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -58,6 +60,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in deleteComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -74,6 +77,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in getAllComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -90,6 +94,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in getComplaintById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -106,6 +111,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByTitle method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -122,6 +128,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByDescription method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -138,6 +145,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByPriority method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -154,6 +162,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -170,6 +179,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -186,6 +196,7 @@ public class ComplaintService {
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 

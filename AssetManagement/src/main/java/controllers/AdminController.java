@@ -59,6 +59,7 @@ public class AdminController {
 			
 		} catch(Exception e){
 			logger.error("in getAllUsers method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting users!");
 		}
@@ -80,6 +81,7 @@ public class AdminController {
 			
 		} catch(Exception e){
 			logger.error("in getAllAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting assets!");
 		}
@@ -101,6 +103,7 @@ public class AdminController {
 			
 		} catch(Exception e){
 			logger.error("in getAllComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting complaints!");
 		}
@@ -122,6 +125,7 @@ public class AdminController {
 			
 		} catch(Exception e){
 			logger.error("in getAllRequests method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting requests!");
 		}
@@ -143,6 +147,7 @@ public class AdminController {
 			
 		} catch(Exception e){
 			logger.error("in getAllTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting transactions!");
 		}
@@ -180,6 +185,7 @@ public class AdminController {
 			
 		} catch(Exception e){
 			logger.error("in createAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error creating new asset!");
 		}

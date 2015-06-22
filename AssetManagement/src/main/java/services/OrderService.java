@@ -29,6 +29,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in addOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -44,6 +45,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in updateOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -59,6 +61,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in deleteOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -75,6 +78,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in getAllOrders method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -91,6 +95,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in getOrderById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -107,6 +112,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in getOrdersByPrice method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -123,6 +129,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in getOrdersBySupplierName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -139,6 +146,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in getOrdersByPurchaseDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -155,6 +163,7 @@ public class OrderService {
 
 		} catch (Exception e) {
 			logger.error("in getOrdersByIsReceived method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 

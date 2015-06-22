@@ -33,6 +33,7 @@ public class UserController {
 	
 	@Autowired
 	private AssetService assetService;
+	
 	@Autowired
 	private ComplaintService complaintService;
 	
@@ -43,7 +44,7 @@ public class UserController {
 	private TransactionService transactionService;
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
-	@RequestMapping(value = "createRequest/{username}", produces = "application/json")
+	@RequestMapping(value = "{username}/createRequest", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> createRequest(@PathVariable String username, HttpServletRequest request){
 		logger.info("Inside createRequest method");
@@ -75,14 +76,16 @@ public class UserController {
 			
 		} catch(Exception e){
 			logger.error("in createRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error creating new request!");
 		}
+		
 		return resultMap;
 	}
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
-	@RequestMapping(value = "createComplaint/{username}", produces = "application/json")
+	@RequestMapping(value = "{username}/createComplaint", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> createComplaint(@PathVariable String username, HttpServletRequest request){
 		logger.info("Inside createComplaint method");
@@ -112,11 +115,48 @@ public class UserController {
 			
 		} catch(Exception e){
 			logger.error("in createComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error creating new complaint!");
 		}
+		
 		return resultMap;
 	}
 	
+	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
+	@RequestMapping(value = "{username}/removeAsset", produces = "application/json")
+	@ResponseBody
+	public Map<String, String> removeAsset(@PathVariable String username, HttpServletRequest request){
+		logger.info("Inside removeAsset method");
+		Map<String, String> resultMap = new HashMap<String, String>();
+		Long idAsset = 0L;
+		
+		try{
+			idAsset = Long.parseLong(request.getParameter("idAsset"));
+			Asset asset = assetService.getAssetById(idAsset);
+			
+			asset.setUser(null);
+			asset.setIsAvailable(true);
+			
+			boolean result = assetService.updateAsset(asset);
+			if(result){
+				resultMap.put("status", "true");
+				resultMap.put("message", "Asset removed successfully!");
+				
+			} else {
+				logger.error("Error creating new request!");
+				resultMap.put("status", "false");
+				resultMap.put("message", "Error removing asset!");
+			}
+			
+		} catch(Exception e){
+			logger.error("in removeAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error removing asset!");
+		}
+		
+		return resultMap;
+	}
 	
 }

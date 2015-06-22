@@ -17,7 +17,7 @@
             <li id="my_profile"><a onclick="javascript:getAssets('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-th-list"></span> My profile</h1></a></li>
            	 <li id="assets"><a onclick="javascript:getAssets('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-th-list"></span> Assets</h1></a></li>
              <li id="complaints"><a onclick="javascript:getAssets('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-th"></span> Complaints</h1></a></li>
-             <li id="tranzactions"><a onclick="javascript:getAssets('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-th-list"></span> Tranzactions</h1></a></li>
+             <li id="transactions"><a onclick="javascript:getAssets('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-th-list"></span> Transactions</h1></a></li>
             </security:authorize>
           </ul>
         </div>

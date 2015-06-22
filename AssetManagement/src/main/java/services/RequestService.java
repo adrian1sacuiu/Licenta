@@ -28,6 +28,7 @@ public class RequestService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
 	private TransactionDao transactionDao;
 
 	public boolean addRequest(Request request) throws Exception {
@@ -55,6 +56,7 @@ public class RequestService {
 
 		} catch (Exception e) {
 			logger.error("in addRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -85,6 +87,7 @@ public class RequestService {
 
 		} catch (Exception e) {
 			logger.error("in deleteRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -117,6 +120,7 @@ public class RequestService {
 
 		} catch (Exception e) {
 			logger.error("in getRequestById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -133,6 +137,7 @@ public class RequestService {
 
 		} catch (Exception e) {
 			logger.error("in getRequestsByDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -149,6 +154,7 @@ public class RequestService {
 
 		} catch (Exception e) {
 			logger.error("in getRequestsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -165,6 +171,7 @@ public class RequestService {
 
 		} catch (Exception e) {
 			logger.error("in getRequetsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 

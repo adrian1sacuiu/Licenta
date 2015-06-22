@@ -28,6 +28,7 @@ public class CountryService {
 
 		} catch (Exception e) {
 			logger.error("in addCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -43,6 +44,7 @@ public class CountryService {
 
 		} catch (Exception e) {
 			logger.error("in updateCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -58,6 +60,7 @@ public class CountryService {
 
 		} catch (Exception e) {
 			logger.error("in deleteCountry method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -74,6 +77,7 @@ public class CountryService {
 
 		} catch (Exception e) {
 			logger.error("in getAllCountries method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -90,6 +94,7 @@ public class CountryService {
 
 		} catch (Exception e) {
 			logger.error("in getCountryById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -106,6 +111,7 @@ public class CountryService {
 
 		} catch (Exception e) {
 			logger.error("in getCountryByName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -122,6 +128,7 @@ public class CountryService {
 
 		} catch (Exception e) {
 			logger.error("in getCountryByCountryCode method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 

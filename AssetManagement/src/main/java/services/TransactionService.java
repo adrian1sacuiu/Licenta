@@ -33,6 +33,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in addTransaction method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -48,6 +49,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in updateTransaction method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -63,6 +65,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in deleteTransaction method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -79,6 +82,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in getAllTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -95,6 +99,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in getTransactionById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -111,6 +116,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByStartDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -127,6 +133,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByEndDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -143,6 +150,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -159,6 +167,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -175,6 +184,7 @@ public class TransactionService {
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 

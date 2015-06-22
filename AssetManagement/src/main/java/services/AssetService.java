@@ -33,6 +33,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in addAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -48,6 +49,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in updateAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -63,6 +65,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in deleteAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -79,6 +82,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in getAllAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -95,6 +99,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in getAssetById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -111,6 +116,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in getAssetsByName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -127,6 +133,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in getAssetsByType method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -143,6 +150,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in getAssetsByIsAvailable method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -159,6 +167,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in getAssetsByIsOnStock method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -175,6 +184,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in getAssetsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -191,6 +201,7 @@ public class AssetService {
 
 		} catch (Exception e) {
 			logger.error("in getAssetsByOrder method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 

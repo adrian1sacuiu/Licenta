@@ -71,6 +71,7 @@ public class RegisterController {
 		}*/
 		catch (Exception e) {
 			logger.error("in registerUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			modelAndView.setViewName("#register");
 			modelAndView.addObject("error", "Error registering new user!");
 		}

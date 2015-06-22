@@ -45,6 +45,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in addUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -73,6 +74,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in updateUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -108,6 +110,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in deleteUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -124,6 +127,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getAllUsers method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -140,6 +144,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getUserById method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -156,6 +161,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getUserByUsername method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -172,6 +178,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getUsersByFirstName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -188,6 +195,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getUsersByLastName method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -204,6 +212,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getUserByEmail method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -220,6 +229,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getUsersByRole method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 
@@ -236,6 +246,7 @@ public class UsersService {
 
 		} catch (Exception e) {
 			logger.error("in getUserByDepartment method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			throw e;
 		}
 

@@ -55,6 +55,7 @@ public class MyProfileController {
 			
 		} catch(Exception e){
 			logger.error("in getUserAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting user assets!");
 		}
@@ -77,6 +78,7 @@ public class MyProfileController {
 			
 		} catch(Exception e){
 			logger.error("in getUserComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting user complaints!");
 		}
@@ -99,6 +101,7 @@ public class MyProfileController {
 			
 		} catch(Exception e){
 			logger.error("in getUserRequests method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting user requests!");
 		}
@@ -122,6 +125,7 @@ public class MyProfileController {
 			
 		} catch(Exception e){
 			logger.error("in getUserTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error getting user transactions!");
 		}
