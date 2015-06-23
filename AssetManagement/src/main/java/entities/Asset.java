@@ -11,13 +11,12 @@ import java.util.List;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="getAllAssets", query="FROM Asset a ORDER BY a.name"),
+	@NamedQuery(name="getAvailableAssets", query="FROM Asset a WHERE a.isAvailable = true"),
 	@NamedQuery(name="getAssetsByName", query="FROM Asset a WHERE a.name = :name"),
 	@NamedQuery(name="getAssetsByType", query="FROM Asset a WHERE a.type = :type"),
 	@NamedQuery(name="getAssetsByIsAvailable", query="FROM Asset a WHERE a.isAvailable = :isAvailable"),
-	@NamedQuery(name="getAssetsByIsOnStock", query="FROM Asset a WHERE a.isOnStock = :isOnStock"),
-	@NamedQuery(name="getAssetsByUser", query="SELECT a FROM Asset a INNER JOIN a.user u WHERE u.username=:username"),
-	@NamedQuery(name="getAssetsByOrder", query="FROM Asset a WHERE a.order.idOrder=:idOrder")
-	
+	@NamedQuery(name="getAssetsByUser", query="SELECT a FROM Asset a INNER JOIN a.user u WHERE u.username=:username")
 })
 @Table(name = "ASSETS")
 public class Asset implements Serializable {
@@ -27,10 +26,8 @@ public class Asset implements Serializable {
 	private String name;
 	private String type;
 	private boolean isAvailable;
-	private boolean isOnStock;
 
 	private User user;
-	private Order order;
 
 	private List<Complaint> complaints;
 	private List<Request> requests;
@@ -74,15 +71,6 @@ public class Asset implements Serializable {
 		this.isAvailable = isAvailable;
 	}
 
-	@Column(name = "IS_ON_STOCK")
-	public boolean getIsOnStock() {
-		return isOnStock;
-	}
-
-	public void setIsOnStock(boolean isOnStock) {
-		this.isOnStock = isOnStock;
-	}
-
 	@ManyToOne
 	@JoinColumn(name = "ID_USER")
 	@JsonIgnore
@@ -92,17 +80,6 @@ public class Asset implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "ID_ORDER")
-	@JsonIgnore
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
 	}
 
 	@OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "asset")
@@ -139,10 +116,9 @@ public class Asset implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (isAvailable ? 1231 : 1237);
 		result = prime * result + ((idAsset == null) ? 0 : idAsset.hashCode());
+		result = prime * result + (isAvailable ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + (isOnStock ? 1231 : 1237);
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -156,19 +132,17 @@ public class Asset implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Asset other = (Asset) obj;
-		if (isAvailable != other.isAvailable)
-			return false;
 		if (idAsset == null) {
 			if (other.idAsset != null)
 				return false;
 		} else if (!idAsset.equals(other.idAsset))
 			return false;
+		if (isAvailable != other.isAvailable)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (isOnStock != other.isOnStock)
 			return false;
 		if (type == null) {
 			if (other.type != null)
@@ -180,7 +154,8 @@ public class Asset implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Asset [idAsset=" + idAsset + ", name=" + name + ", type=" + type + ", isAvailable=" + isAvailable + ", isOnStock=" + isOnStock + "]";
+		return "Asset [idAsset=" + idAsset + ", name=" + name + ", type=" + type + ", isAvailable=" + isAvailable + "]";
 	}
+
 
 }

@@ -1,8 +1,11 @@
 package controllers;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -191,4 +194,73 @@ public class AdminController {
 		}
 		return resultMap;
 	}
+	
+	@RequestMapping(value = "assignAsset", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> assignAsset(HttpServletRequest servletRequest){
+		logger.info("Inside assignAsset method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Long idUser = 0L;
+		Long idAsset = 0L;
+		
+		try {
+			idUser = Long.parseLong(servletRequest.getParameter("idUser"));
+			idAsset = Long.parseLong(servletRequest.getParameter("idAsset"));
+			
+			User user = usersService.getUserById(idUser);
+			Asset asset = assetService.getAssetById(idAsset);
+			Request request = requestService.getNewRequestByUserAndAsset(idUser, idAsset);
+			Transaction transaction = transactionService.getPendingTransactionByUserAndAsset(idUser, idAsset);
+			
+			if(request != null && transaction != null){
+				try {
+					asset.setUser(user);
+					asset.setIsAvailable(false);
+					assetService.updateAsset(asset);
+					
+					request.setStatus("Done");
+					requestService.updateRequest(request);
+					
+					transaction.setStatus("Success");
+					transaction.setEndDate(new Date(System.currentTimeMillis()));
+					transactionService.updateTransaction(transaction);
+					
+					resultMap.put("status", "true");
+					resultMap.put("message", "Asset assigned successfully!");
+					
+				} catch (Exception e) {
+					if(asset.getIsAvailable() == false){
+						asset.setUser(null);
+						asset.setIsAvailable(true);
+						assetService.updateAsset(asset);
+						
+					} else if(request.getStatus().equals("Done")){
+						request.setStatus("New");
+						requestService.updateRequest(request);
+					}
+					
+					e.printStackTrace();
+					logger.error("in assignAsset method Exception1: " + e.getMessage() + "; Cause: " + e.getCause());
+					resultMap.put("status", "false");
+					resultMap.put("message", "Error assigning asset!");
+				}
+				
+				
+			} else{
+				logger.error("Error assigning asset! No request or transaction!");
+				resultMap.put("status", "false");
+				resultMap.put("message", "Error assigning asset!");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("in assignAsset method Exception2: " + e.getMessage() + "; Cause: " + e.getCause());
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error assigning asset!");
+		}
+		
+		
+		return resultMap;
+	}
+	
 }

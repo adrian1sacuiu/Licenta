@@ -71,7 +71,8 @@ public class AssetDao extends SessionController {
 		List<Asset> assets = null;
 
 		try {
-			assets = getCurrentSession().createCriteria(Asset.class).list();
+			Query query = getCurrentSession().getNamedQuery("getAllAssets");
+			assets = (List<Asset>) query.list();
 
 		} catch (Exception e) {
 			logger.error("in getAllAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -97,6 +98,24 @@ public class AssetDao extends SessionController {
 		return asset;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Asset> getAvailableAssets() throws Exception {
+		logger.info("Inside getAvailableAssets method.");
+		List<Asset> assets = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getAvailableAssets");
+			assets = (List<Asset>) query.list();
+
+		} catch (Exception e) {
+			logger.error("in getAvailableAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return assets;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Asset> getAssetsByName(String name) throws Exception {
 		logger.info("Inside getAssetsByName method.");
@@ -157,26 +176,6 @@ public class AssetDao extends SessionController {
 		return assets;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) throws Exception {
-		logger.info("Inside getAssetsByIsOnStock method.");
-		List<Asset> assets = null;
-
-		try {
-			Query query = getCurrentSession().getNamedQuery("getAssetsByIsOnStock");
-			query.setParameter("isOnStock", isOnStock);
-
-			assets = (List<Asset>) query.list();
-
-		} catch (Exception e) {
-			logger.error("in getAssetsByIsOnStock method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			e.printStackTrace();
-			throw e;
-		}
-
-		return assets;
-	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Asset> getAssetsByUser(String username) throws Exception {
 		logger.info("Inside getAssetsByUser method.");

@@ -1,11 +1,14 @@
-import java.sql.Date;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import entities.Asset;
 import entities.Request;
+import entities.Transaction;
 import entities.User;
+import services.AssetService;
+import services.ComplaintService;
 import services.RequestService;
+import services.TransactionService;
 import services.UsersService;
 
 public class Test {
@@ -13,12 +16,13 @@ public class Test {
 		try {
 			@SuppressWarnings("resource")
 			ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
-			RequestService requestService = (RequestService)ctx.getBean("requestService");
-			Request request = new Request();
-			request.setDate(new Date(System.currentTimeMillis()));
-			
-			requestService.addRequest(request);
-			System.out.println(requestService.getRequestById(request.getIdRequest()));
+			//AssetService assetService = (AssetService)ctx.getBean("assetService");
+			//RequestService requestService = (RequestService)ctx.getBean("requestService");
+			//TransactionService transactionService = (TransactionService)ctx.getBean("transactionService");
+			ComplaintService complaintService = (ComplaintService)ctx.getBean("complaintService");
+			//System.out.println(transactionService.getAllTransactions());
+			//System.out.println(requestService.getAllRequests());
+			System.out.println(complaintService.getAllComplaints());
 
 		} catch (Exception e) {
 			e.printStackTrace();

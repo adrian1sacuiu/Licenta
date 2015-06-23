@@ -17,6 +17,7 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="getAllDepartments", query="FROM Department d ORDER BY d.name"),
 	@NamedQuery(name="getDepartmentsByName", query="FROM Department d WHERE d.name = :name"),
 	@NamedQuery(name="getDepartmentsByLocation", query="FROM Department d WHERE d.location = :location"),
 	@NamedQuery(name="getDepartmentsByAddress", query="FROM Department d WHERE d.address = :address"),

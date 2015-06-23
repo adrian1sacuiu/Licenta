@@ -70,7 +70,8 @@ public class UserDao extends SessionController {
 		List<User> users = null;
 
 		try {
-			users = getCurrentSession().createCriteria(User.class).list();
+			Query query = getCurrentSession().getNamedQuery("getAllUsers");
+			users = (List<User>) query.list();
 
 		} catch (Exception e) {
 			logger.error("in getAllUsers method Exception: " + e.getMessage() + "; Cause: " + e.getCause());

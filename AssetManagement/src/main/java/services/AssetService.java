@@ -107,6 +107,23 @@ public class AssetService {
 	}
 
 	@Transactional(readOnly = true)
+	public List<Asset> getAvailableAssets() throws Exception {
+		logger.info("in getAssetsByName method.");
+		List<Asset> assets = null;
+
+		try {
+			assets = assetDao.getAvailableAssets();
+
+		} catch (Exception e) {
+			logger.error("in getAvailableAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return assets;
+	}
+	
+	@Transactional(readOnly = true)
 	public List<Asset> getAssetsByName(String name) throws Exception {
 		logger.info("in getAssetsByName method.");
 		List<Asset> assets = null;
@@ -157,23 +174,6 @@ public class AssetService {
 		return assets;
 	}
 
-	@Transactional(readOnly = true)
-	public List<Asset> getAssetsByIsOnStock(boolean isOnStock) throws Exception {
-		logger.info("in getAssetsByIsOnStock method.");
-		List<Asset> assets = null;
-
-		try {
-			assets = assetDao.getAssetsByIsOnStock(isOnStock);
-
-		} catch (Exception e) {
-			logger.error("in getAssetsByIsOnStock method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			e.printStackTrace();
-			throw e;
-		}
-
-		return assets;
-	}
-	
 	@Transactional(readOnly = true)
 	public List<Asset> getAssetsByUser(String username) throws Exception {
 		logger.info("Inside getAssetsByUser method.");

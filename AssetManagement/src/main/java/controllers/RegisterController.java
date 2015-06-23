@@ -64,11 +64,7 @@ public class RegisterController {
 			modelAndView.addObject("error", iue.getMessage());
 
 		} 
-		/*catch (MySQLIntegrityConstraintViolationException ice) {
-			logger.error("in registerUser method MySQLIntegrityConstraintViolationException: " + ice.getMessage() + "; Cause: " + ice.getCause());
-			modelAndView.setViewName("#register");
-			modelAndView.addObject("error", "Username or email address already exist!");
-		}*/
+		
 		catch (Exception e) {
 			logger.error("in registerUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();

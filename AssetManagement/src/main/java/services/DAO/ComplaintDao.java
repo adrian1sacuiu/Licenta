@@ -1,5 +1,6 @@
 package services.DAO;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import entities.Complaint;
 import services.DAO.controller.SessionController;
+import util.ComplaintComparator;
 
 @Repository
 public class ComplaintDao extends SessionController {
@@ -70,7 +72,9 @@ public class ComplaintDao extends SessionController {
 		List<Complaint> complaints = null;
 
 		try {
-			complaints = getCurrentSession().createCriteria(Complaint.class).list();
+			Query query = getCurrentSession().getNamedQuery("getAllComplaints");
+			complaints = (List<Complaint>) query.list();
+			Collections.sort(complaints, new ComplaintComparator());
 
 		} catch (Exception e) {
 			logger.error("in getAllComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -143,6 +147,7 @@ public class ComplaintDao extends SessionController {
 		try {
 			Query query = getCurrentSession().getNamedQuery("getComplaintsByPriority");
 			query.setParameter("priority", priority);
+			
 			complaints = (List<Complaint>) query.list();
 
 		} catch (Exception e) {
@@ -162,6 +167,7 @@ public class ComplaintDao extends SessionController {
 		try {
 			Query query = getCurrentSession().getNamedQuery("getComplaintsByUser");
 			query.setParameter("username", username);
+			
 			complaints = (List<Complaint>) query.list();
 
 		} catch (Exception e) {
@@ -181,6 +187,7 @@ public class ComplaintDao extends SessionController {
 		try {
 			Query query = getCurrentSession().getNamedQuery("getComplaintsByStatus");
 			query.setParameter("status", status);
+			
 			complaints = (List<Complaint>) query.list();
 
 		} catch (Exception e) {
@@ -200,6 +207,7 @@ public class ComplaintDao extends SessionController {
 		try {
 			Query query = getCurrentSession().getNamedQuery("getComplaintsByAsset");
 			query.setParameter("idAsset", idAsset);
+			
 			complaints = (List<Complaint>) query.list();
 
 		} catch (Exception e) {

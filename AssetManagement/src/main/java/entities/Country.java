@@ -14,6 +14,7 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="getAllCountries", query="FROM Country c ORDER BY c.name"),
 	@NamedQuery(name="getCountryByName", query="FROM Country c WHERE c.name = :name"),
 	@NamedQuery(name="getCountryByCountryCode", query="FROM Country c WHERE c.countryCode = :countryCode")
 })

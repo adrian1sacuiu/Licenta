@@ -44,8 +44,6 @@ public class RequestService {
 				Transaction transaction = new Transaction();
 				transaction.setUser(user);
 				transaction.setAsset(asset);
-				transaction.setStartDate(new Date(System.currentTimeMillis()));
-				transaction.setStatus("Pending");
 				
 				result = transactionDao.addTransaction(transaction);
 				if(!result){
@@ -193,4 +191,21 @@ public class RequestService {
 
 		return requests;
 	}
+	
+	@Transactional(readOnly = true)
+	public Request getNewRequestByUserAndAsset(Long idUser, Long idAsset) throws Exception {
+		logger.info("Inside getNewRequestByUserAndAsset method.");
+		Request request = null;
+
+		try {
+			request = requestDao.getNewRequestByUserAndAsset(idUser, idAsset);
+
+		} catch (Exception e) {
+			logger.error("in getNewRequestByUserAndAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return request;
+	}
+	
 }

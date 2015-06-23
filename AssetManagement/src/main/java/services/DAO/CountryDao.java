@@ -71,7 +71,8 @@ public class CountryDao extends SessionController {
 		List<Country> countries = null;
 
 		try {
-			countries = getCurrentSession().createCriteria(Country.class).list();
+			Query query = getCurrentSession().getNamedQuery("getAllCountries");
+			countries = (List<Country>) query.list();
 
 		} catch (Exception e) {
 			logger.error("in getAllCountrys method Exception: " + e.getMessage() + "; Cause: " + e.getCause());

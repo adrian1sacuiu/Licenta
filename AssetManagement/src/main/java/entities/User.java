@@ -17,6 +17,7 @@ import java.io.Serializable;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="getAllUsers", query="FROM User u ORDER BY u.username"),
 	@NamedQuery(name="getUserByUsername", query="FROM User u WHERE u.username = :username"),
 	@NamedQuery(name="getUsersByFirstName", query="FROM User u WHERE u.firstName = :firstName"),
 	@NamedQuery(name="getUsersByLastName", query="FROM User u WHERE u.lastName = :lastName"),

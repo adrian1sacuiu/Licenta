@@ -71,7 +71,8 @@ public class DepartmentDao extends SessionController {
 		List<Department> departments = null;
 
 		try {
-			departments = getCurrentSession().createCriteria(Department.class).list();
+			Query query = getCurrentSession().getNamedQuery("getAllDepartments");
+			departments = (List<Department>) query.list();
 
 		} catch (Exception e) {
 			logger.error("in getAllDepartments method Exception: " + e.getMessage() + "; Cause: " + e.getCause());

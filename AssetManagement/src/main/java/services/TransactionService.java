@@ -29,6 +29,9 @@ public class TransactionService {
 		boolean result = false;
 
 		try {
+			transaction.setStartDate(new Date(System.currentTimeMillis()));
+			transaction.setStatus("Pending");
+			
 			result = transactionDao.addTransaction(transaction);
 
 		} catch (Exception e) {
@@ -189,6 +192,23 @@ public class TransactionService {
 		}
 
 		return transactions;
+	}
+	
+	@Transactional(readOnly = true)
+	public Transaction getPendingTransactionByUserAndAsset(Long idUser, Long idAsset) throws Exception {
+		logger.info("Inside getPendingTransactionsByUserAndAsset method.");
+		Transaction transaction = null;
+
+		try {
+			transaction = transactionDao.getPendingTransactionByUserAndAsset(idUser, idAsset);
+
+		} catch (Exception e) {
+			logger.error("in getPendingTransactionByUserAndAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		}
+
+		return transaction;
 	}
 
 }

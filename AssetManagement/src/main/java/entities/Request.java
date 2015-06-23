@@ -18,10 +18,12 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="getAllRequests", query="FROM Request r ORDER BY r.status DESC"),
 	@NamedQuery(name="getRequestsByDate", query="FROM Request r WHERE r.date = :date"),
 	@NamedQuery(name="getRequestsByStatus", query="FROM Request r WHERE r.status = :status"),
 	@NamedQuery(name="getRequestsByUser", query="SELECT r FROM Request r INNER JOIN r.user u WHERE u.username=:username"),
-	@NamedQuery(name="getRequestsByAsset", query="FROM Request r WHERE r.asset.idAsset = :idAsset")
+	@NamedQuery(name="getRequestsByAsset", query="FROM Request r WHERE r.asset.idAsset = :idAsset"),
+	@NamedQuery(name="getNewRequestByUserAndAsset", query="FROM Request r WHERE status='New' and r.user.idUser = :idUser and r.asset.idAsset = :idAsset")
 })
 @Table(name = "REQUESTS")
 public class Request implements Serializable {

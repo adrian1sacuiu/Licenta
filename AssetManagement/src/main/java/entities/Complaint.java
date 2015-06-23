@@ -17,6 +17,7 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="getAllComplaints", query="FROM Complaint c ORDER BY c.title DESC, c.priority DESC"),
 	@NamedQuery(name="getComplaintsByTitle", query="FROM Complaint c WHERE c.title = :title"),
 	@NamedQuery(name="getComplaintsByDescription", query="FROM Complaint c WHERE c.description = :description"),
 	@NamedQuery(name="getComplaintsByPriority", query="FROM Complaint c WHERE c.priority = :priority"),

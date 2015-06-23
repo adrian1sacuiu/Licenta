@@ -73,7 +73,9 @@ public class TransactionDao extends SessionController {
 		List<Transaction> transactions = null;
 
 		try {
-			transactions = getCurrentSession().createCriteria(Transaction.class).list();
+			Query query = getCurrentSession().getNamedQuery("getAllTransactions");
+			transactions = (List<Transaction>) query.list();
+			
 		} catch (HibernateException e) {
 			logger.error("in getAllTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
@@ -189,6 +191,25 @@ public class TransactionDao extends SessionController {
 		}
 
 		return transactions;
+	}
+	
+	public Transaction getPendingTransactionByUserAndAsset(Long idUser, Long idAsset) throws Exception {
+		logger.info("Inside getPendingTransactionByUserAndAsset method.");
+		Transaction transaction = null;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("getPendingTransactionByUserAndAsset");
+			query.setParameter("idUser", idUser);
+			query.setParameter("idAsset", idAsset);
+
+			transaction = (Transaction) query.uniqueResult();
+
+		} catch (Exception e) {
+			logger.error("in getPendingTransactionByUserAndAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return transaction;
 	}
 
 }
