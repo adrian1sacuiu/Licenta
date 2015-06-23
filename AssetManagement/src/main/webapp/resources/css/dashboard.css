@@ -161,8 +161,12 @@ section#content {
 }
 .nav-sidebar li{
 	border-bottom:1px solid #ccc;
-	background:#e1e1e1;
-	
+	background:#e1e1e1;	
 	font-family:arial;
-
+}
+.nav-sidebar li a h1 span {
+    padding-right: 15px;
+}
+table tbody tr.odd{
+	background:#e1e1e1 !important;
 }

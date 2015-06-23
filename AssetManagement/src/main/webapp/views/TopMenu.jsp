@@ -19,6 +19,7 @@
 			
 			    <!-- Custom styles for this template -->
 			    <link href="resources/css/dashboard.css" rel="stylesheet">
+			    <link href="resources/css/shCore.css" rel="stylesheet">
 			     <!-- Bootstrap core JavaScript
 			    ================================================== -->
 			    <!-- Placed at the end of the document so the pages load faster -->
@@ -29,8 +30,10 @@
 			     <script src="resources/scripts/require.js"></script>
 			    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 			    <script type="text/javascript" src="resources/scripts/ie10-viewport-bug-workaround.js"></script>
+			    <script src="resources/scripts/shCore.js"></script>
 			    <script src="resources/scripts/app.js"></script>
-			    
+			    <script src="resources/scripts/adminApp.js"></script>
+			    <script src="resources/scripts/assetsUser.js"></script>
 				
 		</c:when>
 		<c:otherwise>
@@ -39,6 +42,7 @@
 			
 			    <!-- Custom styles for this template -->
 			    <link href="../resources/css/dashboard.css" rel="stylesheet">
+			    <link href="../resources/css/shCore.css" rel="stylesheet">
 			     <!-- Bootstrap core JavaScript
 			    ================================================== -->
 			    <!-- Placed at the end of the document so the pages load faster -->
@@ -49,8 +53,10 @@
 			     <script src="../resources/scripts/require.js"></script>
 			    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 			    <script type="text/javascript" src="../resources/scripts/ie10-viewport-bug-workaround.js"></script>
+			    <script src="../resources/scripts/shCore.js"></script>
 			    <script src="../resources/scripts/app.js"></script>
-				
+				<script src="../resources/scripts/adminApp.js"></script>
+				<script src="../resources/scripts/assetsUser.js"></script>
 		</c:otherwise>
 	</c:choose>
 	

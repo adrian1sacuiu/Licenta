@@ -1,5 +1,7 @@
 $(function(){
 	$(document).on("ready",function(event){
+		//alert(1);
+		
 		$('#edit_user_details').hide();
 		$('#user_details').show();
 		$('#edit').click(function(){
@@ -59,32 +61,14 @@ $(function(){
 			history.pushState("", document.title, window.location.pathname);
 		}
 	});
+	$('#my_profile').addClass("active");
+	$('#asset_confirm_del').hide();
+	$('#asset_error').hide();
+	
 })
-function getAssets(username){
-	window.username = username;
-	xhr = $.ajax({
-		type : 'GET',
-		url : 'userAssets/'+username,
-		data : '',
-		success : function(data) {
-			var a = "";
-			$('#content').html('<div id="asset_error"></div><table class="table table-hover"><thead><tr><th>Asset Name</th><th>Asset Type</th></tr></thead><tbody id="asset_info"></tbody></table>');
-			if(data.status == "true"){
-				for(i=0;i<data.message.length;i++){
-					if(i%2==0){
-						a += '<tr class="success" onclick="getAsset('+data.message[i].idAsset+')" style="cursor:pointer;"><td>'+data.message[i].name+'</td><td>'+data.message[i].name+'</td></tr>';
-					}else{
-						a += ' <tr class="info" onclick="getAsset('+data.message[i].idAsset+')" style="cursor:pointer;"><td>'+data.message[i].name+'</td><td>'+data.message[i].name+'</td></tr>';
-					}
-				}
-				$('#asset_info').append(a);
-				$('#assets').addClass("active");
-			}else{   
-				$('#asset_error').append(data.message[0]);
-				$('#assets').addClass("active");
-			}
-		}
-	});
+
+function requestAsset(){
+	
 }
 function getAsset(assetId){
 	xhr = $.ajax({
@@ -97,22 +81,48 @@ function getAsset(assetId){
 			if(data.status == "true"){
 				for(i=0;i<data.message.length;i++){
 					if(data.message[i].idAsset == assetId){
-						a = ' <div class="info"><h2>Name: '+data.message[i].name+'</h2><h4>Type: '+data.message[i].type+'</h4><button class="btn-danger btn-lg" onclick="deleteAsset('+data.message[i].idAsset+')" style="cursor:pointer">Remove Asset</button></div>';
+						a = ' <div class="info"><h2>Name: '+data.message[i].name+'</h2><h4>Type: '+data.message[i].type+'</h4><button class="btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="deleteAsset('+data.message[i].idAsset+')" style="cursor:pointer">Remove Asset</button></div>';
 					}
-					//alert(data);
 				}
 				
 				$('#info_asset').append(a);
-				//$('#assets').addClass("active");
 			}else{   
 				$('#asset_error').append(data.message[0]);
-				//$('#assets').addClass("active");
+				$('#asset_error').show();
 			}
 		}
 	});
 }
+function deleteAsset(assetId){
+	xhr = $.ajax({
+				type : 'POST',
+				url : window.username+'/removeAsset?idAsset='+assetId,
+				data : '',
+				success : function(data) {
+					var a = "";
+					$('#content').html('<div id="asset_error"></div><div id="info_asset"></div>');
+					if(data.status == "true"){
+						getAssets(window.username);
+						$('#info_asset').append(a);
+						$('#asset_confirm_del').show();
+						$('#asset_confirm_del').text(data.message);
+						$('#asset_error').hide();
+						setTimeout(function() {$('#myModal').modal('hide');}, 3000);
+					}else{   
+						$('#asset_error').append(data.message[0]);
+						$('#asset_error').show();
+						setTimeout(function() {$('#myModal').modal('hide');}, 3000);
+					}
+				}
+			});
+}
 function getComplaints(username){
 	
+}
+function getMyProfile(){
+	location.href="/AssetManagement"
+	$('#my_profile').addClass("active");
+	$('#assets').removeClass("active");
 }
 function show_upload(){
 	jQuery('#upload_image').html(jQuery('#image').val());

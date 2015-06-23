@@ -2,10 +2,31 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- START PAGE SOURCE -->
-<jsp:include page="/views/TopMenu.jsp" flush="true" />
+<%-- <jsp:include page="/views/TopMenu.jsp" flush="true" /> --%>
 <div class="main">
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h2 id="asset_error" ></h2><h2 id="asset_confirm_del">'+msg+'</h2>
+        <div id="content_data"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 	<div id="content">
-		<jsp:include page="/views/LeftMenu.jsp" flush="true" />
+<%-- 		<jsp:include page="/views/LeftMenu.jsp" flush="true" /> --%>
 		<c:set var="logged_user" value="${logged_user}"/>
 		<article class="col2 pad_left1">
 			<div class="well removewidth normalwidth">
