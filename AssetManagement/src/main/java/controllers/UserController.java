@@ -95,6 +95,9 @@ public class UserController {
 		Long idAsset = 0L;
 
 		try {
+			complaint.setTitle(request.getParameter("idAsset"));
+			complaint.setDescription(request.getParameter("description"));
+			complaint.setPriority(request.getParameter("priority"));
 			idAsset = Long.parseLong(request.getParameter("idAsset"));
 
 			User user = usersService.getUserByUsername(username);

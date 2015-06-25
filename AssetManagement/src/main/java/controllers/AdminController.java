@@ -214,19 +214,26 @@ public class AdminController {
 			
 			if(request != null && transaction != null){
 				try {
+					boolean result = false;
 					asset.setUser(user);
 					asset.setIsAvailable(false);
-					assetService.updateAsset(asset);
+					result = assetService.updateAsset(asset);
 					
 					request.setStatus("Done");
-					requestService.updateRequest(request);
+					result = requestService.updateRequest(request);
 					
 					transaction.setStatus("Success");
 					transaction.setEndDate(new Date(System.currentTimeMillis()));
-					transactionService.updateTransaction(transaction);
+					result = transactionService.updateTransaction(transaction);
 					
-					resultMap.put("status", "true");
-					resultMap.put("message", "Asset assigned successfully!");
+					if(result){
+						resultMap.put("status", "true");
+						resultMap.put("message", "Asset assigned successfully!");
+						
+					} else {
+						resultMap.put("status", "false");
+						resultMap.put("message", "Error assigning asset!");
+					}
 					
 				} catch (Exception e) {
 					if(asset.getIsAvailable() == false){

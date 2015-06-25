@@ -36,6 +36,9 @@ public class RequestService {
 		boolean result = false;
 
 		try {
+			request.setDate(new Date(System.currentTimeMillis()));
+			request.setStatus("New");
+			
 			result = requestDao.addRequest(request);
 			if(result){
 				User user = request.getUser();
