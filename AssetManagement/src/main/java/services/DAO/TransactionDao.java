@@ -211,5 +211,24 @@ public class TransactionDao extends SessionController {
 
 		return transaction;
 	}
+	
+	public boolean declineTransactionsByIdAsset(Long idAsset) throws Exception {
+		logger.info("Inside declineTransactionsByIdAsset method.");
+		int updatedTransactions = 0;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("declineTransactionsByIdAsset");
+			query.setParameter("idAsset", idAsset);
+
+			updatedTransactions = query.executeUpdate();
+			
+
+		} catch (Exception e) {
+			logger.error("in declineTransactionsByIdAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return updatedTransactions > 0;
+	}
 
 }

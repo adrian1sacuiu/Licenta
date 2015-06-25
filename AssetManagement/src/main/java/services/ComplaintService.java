@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.ComplaintDao;
+import util.ComplaintComparator;
 
+import java.util.Collections;
 import java.util.List;
 
 @Transactional
@@ -74,6 +76,7 @@ public class ComplaintService {
 
 		try {
 			complaints = complaintDao.getAllComplaints();
+			Collections.sort(complaints, new ComplaintComparator());
 
 		} catch (Exception e) {
 			logger.error("in getAllComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -108,6 +111,7 @@ public class ComplaintService {
 
 		try {
 			complaints = complaintDao.getComplaintsByTitle(title);
+			Collections.sort(complaints, new ComplaintComparator());
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByTitle method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -125,6 +129,7 @@ public class ComplaintService {
 
 		try {
 			complaints = complaintDao.getComplaintsByDescription(description);
+			Collections.sort(complaints, new ComplaintComparator());
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByDescription method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -142,6 +147,7 @@ public class ComplaintService {
 
 		try {
 			complaints = complaintDao.getComplaintsByPriority(priority);
+			Collections.sort(complaints, new ComplaintComparator());
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByPriority method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -159,6 +165,7 @@ public class ComplaintService {
 
 		try {
 			complaints = complaintDao.getComplaintsByStatus(status);
+			Collections.sort(complaints, new ComplaintComparator());
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -176,6 +183,7 @@ public class ComplaintService {
 
 		try {
 			complaints = complaintDao.getComplaintsByUser(username);
+			Collections.sort(complaints, new ComplaintComparator());
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -193,6 +201,7 @@ public class ComplaintService {
 
 		try {
 			complaints = complaintDao.getComplaintsByAsset(idAsset);
+			Collections.sort(complaints, new ComplaintComparator());
 
 		} catch (Exception e) {
 			logger.error("in getComplaintsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());

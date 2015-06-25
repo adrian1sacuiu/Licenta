@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.RequestDao;
-import services.DAO.TransactionDao;
 import services.DAO.UserDao;
+import util.RequestComparator;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 @Transactional
@@ -29,7 +30,7 @@ public class RequestService {
 	private UserDao userDao;
 	
 	@Autowired
-	private TransactionDao transactionDao;
+	private TransactionService transactionService;
 
 	public boolean addRequest(Request request) throws Exception {
 		logger.info("in addRequest method.");
@@ -48,7 +49,7 @@ public class RequestService {
 				transaction.setUser(user);
 				transaction.setAsset(asset);
 				
-				result = transactionDao.addTransaction(transaction);
+				result = transactionService.addTransaction(transaction);
 				if(!result){
 					logger.error("Could not create new transaction for this request!");
 					requestDao.deleteRequest(request);
@@ -102,6 +103,7 @@ public class RequestService {
 
 		try {
 			requests = requestDao.getAllRequests();
+			Collections.sort(requests, new RequestComparator());
 
 		} catch (Exception e) {
 			logger.error("in getAllRequests method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -135,6 +137,7 @@ public class RequestService {
 
 		try {
 			requests = requestDao.getRequestsByDate(date);
+			Collections.sort(requests, new RequestComparator());
 
 		} catch (Exception e) {
 			logger.error("in getRequestsByDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -152,6 +155,7 @@ public class RequestService {
 
 		try {
 			requests = requestDao.getRequestsByStatus(status);
+			Collections.sort(requests, new RequestComparator());
 
 		} catch (Exception e) {
 			logger.error("in getRequestsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -169,6 +173,7 @@ public class RequestService {
 
 		try {
 			requests = requestDao.getRequestsByUser(username);
+			Collections.sort(requests, new RequestComparator());
 
 		} catch (Exception e) {
 			logger.error("in getRequetsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -186,6 +191,7 @@ public class RequestService {
 
 		try {
 			requests = requestDao.getRequestsByAsset(idAsset);
+			Collections.sort(requests, new RequestComparator());
 
 		} catch (Exception e) {
 			logger.error("in getRequestsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -209,6 +215,21 @@ public class RequestService {
 		}
 
 		return request;
+	}
+	
+	public boolean rejectRequestsByIdAsset(Long idAsset) throws Exception {
+		logger.info("Inside rejectRequestsByIdAsset method.");
+		boolean result = false;
+
+		try {
+			result = requestDao.rejectRequestsByIdAsset(idAsset);
+
+		} catch (Exception e) {
+			logger.error("in rejectRequestsByIdAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 	
 }

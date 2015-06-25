@@ -27,7 +27,7 @@ public class ComplaintComparator implements Comparator<Complaint> {
 			else if(priority1.equals("Medium")){
 				return -1;
 				
-			} else if(priority2.equals("Medium")){
+			} else {
 				return 1;
 			}
 			

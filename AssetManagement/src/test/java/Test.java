@@ -18,11 +18,11 @@ public class Test {
 			ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 			//AssetService assetService = (AssetService)ctx.getBean("assetService");
 			//RequestService requestService = (RequestService)ctx.getBean("requestService");
-			//TransactionService transactionService = (TransactionService)ctx.getBean("transactionService");
-			ComplaintService complaintService = (ComplaintService)ctx.getBean("complaintService");
-			//System.out.println(transactionService.getAllTransactions());
+			TransactionService transactionService = (TransactionService)ctx.getBean("transactionService");
+			//ComplaintService complaintService = (ComplaintService)ctx.getBean("complaintService");
+			System.out.println(transactionService.getAllTransactions());
 			//System.out.println(requestService.getAllRequests());
-			System.out.println(complaintService.getAllComplaints());
+			//System.out.println(complaintService.getAllComplaints());
 
 		} catch (Exception e) {
 			e.printStackTrace();

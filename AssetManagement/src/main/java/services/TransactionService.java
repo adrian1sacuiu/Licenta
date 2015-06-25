@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import services.DAO.TransactionDao;
 import services.DAO.UserDao;
+import util.TransactionComparator;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 @Transactional
@@ -82,6 +84,7 @@ public class TransactionService {
 
 		try {
 			transactions = transactionDao.getAllTransactions();
+			Collections.sort(transactions, new TransactionComparator());
 
 		} catch (Exception e) {
 			logger.error("in getAllTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -116,6 +119,7 @@ public class TransactionService {
 
 		try {
 			transactions = transactionDao.getTransactionsByStartDate(startDate);
+			Collections.sort(transactions, new TransactionComparator());
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByStartDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -133,6 +137,7 @@ public class TransactionService {
 
 		try {
 			transactions = transactionDao.getTransactionsByEndDate(endDate);
+			Collections.sort(transactions, new TransactionComparator());
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByEndDate method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -150,6 +155,7 @@ public class TransactionService {
 
 		try {
 			transactions = transactionDao.getTransactionsByStatus(status);
+			Collections.sort(transactions, new TransactionComparator());
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByStatus method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -167,6 +173,7 @@ public class TransactionService {
 
 		try {
 			transactions = transactionDao.getTransactionsByUser(username);
+			Collections.sort(transactions, new TransactionComparator());
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -184,6 +191,7 @@ public class TransactionService {
 
 		try {
 			transactions = transactionDao.getTransactionsByAsset(idAsset);
+			Collections.sort(transactions, new TransactionComparator());
 
 		} catch (Exception e) {
 			logger.error("in getTransactionsByAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
@@ -209,6 +217,21 @@ public class TransactionService {
 		}
 
 		return transaction;
+	}
+	
+	public boolean declineTransactionsByIdAsset(Long idAsset) throws Exception {
+		logger.info("Inside declineTransactionsByIdAsset method.");
+		boolean result = false;
+
+		try {
+			result = transactionDao.declineTransactionsByIdAsset(idAsset);
+
+		} catch (Exception e) {
+			logger.error("in declineTransactionsByIdAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			throw e;
+		}
+
+		return result;
 	}
 
 }

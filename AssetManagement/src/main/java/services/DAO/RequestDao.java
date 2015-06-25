@@ -192,4 +192,23 @@ public class RequestDao extends SessionController {
 		return request;
 	}
 	
+	public boolean rejectRequestsByIdAsset(Long idAsset) throws Exception {
+		logger.info("Inside rejectRequestsByIdAsset method.");
+		int updatedRequests = 0;
+
+		try {
+			Query query = getCurrentSession().getNamedQuery("rejectRequestsByIdAsset");
+			query.setParameter("idAsset", idAsset);
+
+			updatedRequests = query.executeUpdate();
+			
+
+		} catch (Exception e) {
+			logger.error("in rejectRequestsByIdAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+		}
+
+		return updatedRequests > 0;
+	}
+	
 }
