@@ -1,0 +1,39 @@
+﻿4.2. Prezentarea aplicației
+	4.2.1. Baza de date
+	În continuare vom vizualiza structura bazei de date. Instrucțiunile pentru crearea
+acesteia sunt trecute în Anexa(!!!!de trecut aici numărul anexei!!!).
+	Baza de date este formată din 7 tabele: USERS, ASSETS, REQUESTS, TRANSACTIONS, COMPLAINTS, DEPARTMENTS și COUNTRY.
+	Relațiile  dintre acestea sunt următoarele:
+USERS    1:n   ASSETS cu cheia străina în ASSETS cu numele ID_USER;
+USERS    1:n   REQUESTS cu cheia străina în REQUESTS cu numele ID_USER;
+USERS    1:n   TRANSACTIONS cu cheia străina în TRANSACTIONS cu numele ID_USER;
+USERS    1:n   COMPLAINTS cu cheia străina în COMPLAINTS cu numele ID_USER;
+USERS    n:1   DEPARTMENTS cu cheia străina în USERS cu numele ID_DEPARTMENT;
+
+ASSETS   1:n   REQUESTS cu cheia străina în REQUESTS cu numele ID_ASSET;
+ASSETS   1:n   TRANSACTIONS cu cheia străina în TRANSACTIONS cu numele ID_ASSET;
+ASSETS   1:n   COMPLAINTS cu cheia străina în COMPLAINTS cu numele ID_ASSET;
+ASSETS   n:1   USERS cu cheia străina în ASSETS cu numele ID_USER;
+
+REQUESTS   n:1   USERS cu cheia străina în REQUESTS cu numele ID_USER;
+REQUESTS   n:1   ASSETS  cu cheia străina în REQUESTS cu numele ID_ASSET;
+
+TRANSACTIONS   n:1  USERS cu cheia străina în TRANSACTIONS cu numele ID_USER;
+TRANSACTIONS   n:1  ASSETS  cu cheia străina în TRANSACTIONS cu numele ID_ASSET;
+
+
+
+COMPLAINTS   n:1  USERS cu cheia străina în COMPLAINTS cu numele ID_USER;
+COMPLAINTS   n:1   ASSETS  cu cheia străina în COMPLAINTS cu numele ID_ASSET;
+
+DEPARTMENTS    1:n   USERS cu cheia străina în USERS cu numele ID_DEPARTMENT;
+
+COUNTRY    1:n   DEPARTMENTS cu cheia străina în DEPARTMENTS cu numele ID_COUNTRY;
+
+Capitolul 4. Descrierea aplicației
+        4.1. Instalare programelor necesare aplicației
+ 	4.1.1. Instalare MariaDB Galera Server 
+ 	4.1.2. Instalare Java
+ 	4.1.3. Instalare Eclipse
+        4.2. Prezentarea aplicației		
+		4.2.1. Baza de date
