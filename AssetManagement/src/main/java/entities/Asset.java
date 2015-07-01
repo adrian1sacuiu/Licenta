@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="getAllAssets", query="FROM Asset a ORDER BY a.name"),
+	@NamedQuery(name="getAllAssets", query="FROM Asset a ORDER BY a.isAvailable"),
 	@NamedQuery(name="getAvailableAssets", query="FROM Asset a WHERE a.isAvailable = true"),
 	@NamedQuery(name="getAssetsByName", query="FROM Asset a WHERE a.name = :name"),
 	@NamedQuery(name="getAssetsByType", query="FROM Asset a WHERE a.type = :type"),

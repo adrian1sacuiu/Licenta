@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.List;
+
+import entities.Department;
 import entities.User;
 
 import org.apache.log4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.DepartmentService;
 import services.UsersService;
 import util.ImageUploadException;
 import static util.OperationsUtils.*;
@@ -25,6 +29,9 @@ public class RegisterController {
 
 	@Autowired
 	private UsersService userService;
+	
+	@Autowired
+	private DepartmentService departmentService;
 
 	@PreAuthorize("isAnonymous()")
 	@RequestMapping(method = RequestMethod.GET)
@@ -32,8 +39,14 @@ public class RegisterController {
 		logger.info("Inside createUser method");
 
 		ModelAndView mv = new ModelAndView("views/register.jsp");
-		mv.addObject("user", new User());
-
+		try{
+			List<Department> departments = departmentService.getAllDepartments();
+			mv.addObject("user", new User());
+			mv.addObject("departments", departments);
+			
+		} catch(Exception e){
+			logger.error("in createUser method Exception: " + e.getMessage());
+		}
 		return mv;
 	}
 
