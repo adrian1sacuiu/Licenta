@@ -271,11 +271,22 @@ public class AdminController {
 		logger.info("Inside viewRequest method");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Request request = null;
+		User user = null;
+		Asset asset = null;
 
 		try {
 			request = requestService.getRequestById(idRequest);
+			
+			Long idUser = request.getUser().getIdUser();
+			Long idAsset = request.getAsset().getIdAsset();
+			
+			user = usersService.getUserById(idUser);
+			asset = assetService.getAssetById(idAsset);
+			
 			resultMap.put("status", "true");
-			resultMap.put("message", request);
+			resultMap.put("request", request);
+			resultMap.put("user", user);
+			resultMap.put("asset", asset);
 
 		} catch (Exception e) {
 			logger.error("in viewRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
