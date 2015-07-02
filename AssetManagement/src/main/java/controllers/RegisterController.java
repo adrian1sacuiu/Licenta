@@ -24,9 +24,8 @@ import services.UsersService;
 import util.ImageUploadException;
 import static util.OperationsUtils.*;
 
-
+@PreAuthorize("isAnonymous()")
 @Controller
-@RequestMapping(value = "register")
 public class RegisterController {
 	private static final Logger logger = Logger.getLogger(RegisterController.class);
 
@@ -37,7 +36,7 @@ public class RegisterController {
 	private DepartmentService departmentService;
 
 	@PreAuthorize("isAnonymous()")
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "register", method = RequestMethod.GET)
 	public ModelAndView createUser() {
 		logger.info("Inside createUser method");
 
@@ -54,7 +53,7 @@ public class RegisterController {
 	}
 
 	@PreAuthorize("isAnonymous()")
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "register", method = RequestMethod.POST, produces = "application/json")
 	public ModelAndView registerUser(@ModelAttribute("user") User user, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside registerUser method");
 		ModelAndView modelAndView = new ModelAndView("");
