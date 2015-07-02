@@ -362,5 +362,31 @@ public class AdminController {
 
 		return resultMap;
 	}
+	
+	@RequestMapping(value = "closeComplaint/{idComplaint}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> closeComplaint(@PathVariable Long idComplaint) {
+		logger.info("Inside viewComplaint method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Complaint complaint = null;
+		
+		try {
+			complaint = complaintService.getComplaintById(idComplaint);
+			complaint.setStatus("Closed");
+			
+			complaintService.updateComplaint(complaint);
+			
+			resultMap.put("status", "true");
+			resultMap.put("message", "Complaint closed successfully!");
+
+		} catch (Exception e) {
+			logger.error("in closeComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error closing complaint!");
+		}
+
+		return resultMap;
+	}
 
 }
