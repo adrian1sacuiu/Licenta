@@ -297,5 +297,38 @@ public class AdminController {
 
 		return resultMap;
 	}
+	
+	@RequestMapping(value = "rejectRequest/{idRequest}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> rejectRequest(@PathVariable Long idRequest) {
+		logger.info("Inside rejectRequest method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Request request = null;
+		Transaction transaction = null;
+		Long idUser = 0L;
+		Long idAsset = 0L;
+		
+		try {
+			request = requestService.getRequestById(idRequest);
+			idUser = request.getUser().getIdUser();
+			idAsset = request.getAsset().getIdAsset();
+			transaction = transactionService.getPendingTransactionByUserAndAsset(idUser, idAsset);
+			
+			transaction.setEndDate(new Date(System.currentTimeMillis()));
+			transaction.setStatus("Declined");
+			request.setStatus("Rejected");
+			
+			resultMap.put("status", "true");
+			resultMap.put("message", "Request rejected successfully");
+
+		} catch (Exception e) {
+			logger.error("in rejectRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error rejecting request!");
+		}
+
+		return resultMap;
+	}
 
 }
