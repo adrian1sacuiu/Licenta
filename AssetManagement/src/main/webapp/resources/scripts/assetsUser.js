@@ -42,14 +42,21 @@ function getAssets(username){
 				   	
 				} );
 				//$('#asset_info').append('<br><button class="btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="requestAsset()" style="cursor:pointer">Request New Asset</button>');
+				$('#assets').addClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
-				$('#assets').addClass("active");
+				$('#requests').removeClass("active");
+				$('#transactions').removeClass("active");
+				$('#complaints').removeClass("active");
 				
 			}else{   
 				$('#asset_error').append(data.message[0]);
 				$('#assets').addClass("active");
+				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
+				$('#requests').removeClass("active");
+				$('#transactions').removeClass("active");
+				$('#complaints').removeClass("active");
 				
 			}
 		}
@@ -103,7 +110,7 @@ function getComplaints(username){
 				   	
 				} );
 				//$('#asset_info').append('<br><button class="btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="requestAsset()" style="cursor:pointer">Request New Asset</button>');
-				$('#assets_admin').removeClass("active");
+				$('#assets').removeClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
 				$('#requests').removeClass("active");
@@ -112,7 +119,7 @@ function getComplaints(username){
 				
 			}else{   
 				$('#asset_error').append(data.message[0]);
-				$('#assets_admin').removeClass("active");
+				$('#assets').removeClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
 				$('#requests').removeClass("active");
@@ -189,7 +196,7 @@ function getRequests(username){
 //				} );
 				
 				//$('#asset_info').append('<br><button class="btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="requestAsset()" style="cursor:pointer">Request New Asset</button>');
-				$('#assets_admin').removeClass("active");
+				$('#assets').removeClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
 				$('#requests').addClass("active");
@@ -198,7 +205,7 @@ function getRequests(username){
 				
 			}else{   
 				$('#asset_error').append(data.message[0]);
-				$('#assets_admin').removeClass("active");
+				$('#assets').removeClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
 				$('#requests').addClass("active");
@@ -273,7 +280,7 @@ function getTransactions(username){
 				//	$("td",this).eq(0).hide();
 				});
 				//$('#asset_info').append('<br><button class="btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="requestAsset()" style="cursor:pointer">Request New Asset</button>');
-				$('#assets_admin').removeClass("active");
+				$('#assets').removeClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
 				$('#requests').removeClass("active");
@@ -282,7 +289,7 @@ function getTransactions(username){
 				
 			}else{   
 				$('#asset_error').append(data.message[0]);
-				$('#assets_admin').removeClass("active");
+				$('#assets').removeClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
 				$('#requests').removeClass("active");
