@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -259,6 +260,28 @@ public class AdminController {
 			logger.error("in assignAsset method Exception2: " + e.getMessage() + "; Cause: " + e.getCause());
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error assigning asset!");
+		}
+
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "viewRequest/{idRequest}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> viewRequest(@PathVariable Long idRequest) {
+		logger.info("Inside viewRequest method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Request request = null;
+
+		try {
+			request = requestService.getRequestById(idRequest);
+			resultMap.put("status", "true");
+			resultMap.put("message", request);
+
+		} catch (Exception e) {
+			logger.error("in viewRequest method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting request!");
 		}
 
 		return resultMap;
