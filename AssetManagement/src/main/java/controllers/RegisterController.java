@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import entities.Department;
 import entities.User;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -86,5 +89,28 @@ public class RegisterController {
 		}
 
 		return modelAndView;
+	}
+	
+
+	@RequestMapping(value = "departments", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> getAllDepartments() {
+		logger.info("Inside getAllDepartments method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Department> departments = null;
+
+		try {
+			departments = departmentService.getAllDepartments();
+			resultMap.put("status", "true");
+			resultMap.put("message", departments);
+
+		} catch (Exception e) {
+			logger.error("in getAllDepartments method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting departments!");
+		}
+
+		return resultMap;
 	}
 }

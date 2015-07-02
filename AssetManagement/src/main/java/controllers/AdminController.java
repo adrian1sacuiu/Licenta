@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import services.AssetService;
 import services.ComplaintService;
+import services.DepartmentService;
 import services.RequestService;
 import services.TransactionService;
 import services.UsersService;
@@ -45,6 +46,9 @@ public class AdminController {
 
 	@Autowired
 	private TransactionService transactionService;
+	
+	@Autowired
+	private DepartmentService departmentService;
 
 	@RequestMapping(value = "users", produces = "application/json")
 	@ResponseBody
