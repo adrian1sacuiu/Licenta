@@ -318,6 +318,9 @@ public class AdminController {
 			transaction.setStatus("Declined");
 			request.setStatus("Rejected");
 			
+			transactionService.updateTransaction(transaction);
+			requestService.updateRequest(request);
+			
 			resultMap.put("status", "true");
 			resultMap.put("message", "Request rejected successfully");
 
@@ -326,6 +329,35 @@ public class AdminController {
 			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error rejecting request!");
+		}
+
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "adminViewComplaint/{idComplaint}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> adminViewComplaint(@PathVariable Long idComplaint) {
+		logger.info("Inside viewComplaint method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Complaint complaint = null;
+		User user = null;
+		Asset asset = null;
+		
+		try {
+			complaint = complaintService.getComplaintById(idComplaint);
+			user = complaint.getUser();
+			asset = complaint.getAsset();
+			
+			resultMap.put("status", "true");
+			resultMap.put("complaint", complaint);
+			resultMap.put("user", user);
+			resultMap.put("asset", asset);
+
+		} catch (Exception e) {
+			logger.error("in adminViewComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting complaint!");
 		}
 
 		return resultMap;

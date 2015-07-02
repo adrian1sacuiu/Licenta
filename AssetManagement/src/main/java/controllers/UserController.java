@@ -23,6 +23,7 @@ import services.UsersService;
 import entities.Asset;
 import entities.Complaint;
 import entities.Request;
+import entities.Transaction;
 import entities.User;
 
 @Controller
@@ -85,6 +86,99 @@ public class UserController {
 		return resultMap;
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER') and #username == principal.username")
+	@RequestMapping(value = "userAssets/{username}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> getUserAssets(@PathVariable String username){
+		logger.info("Inside getUserAssets method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Asset> userAssets = null;
+		
+		try{
+			userAssets = assetService.getAssetsByUser(username);
+			resultMap.put("status", "true");
+			resultMap.put("message", userAssets);
+			
+		} catch(Exception e){
+			logger.error("in getUserAssets method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting user assets!");
+		}
+		
+		return resultMap;
+	}
+	
+	@PreAuthorize("hasRole('ROLE_USER') and #username == principal.username")
+	@RequestMapping(value = "userComplaints/{username}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> getUserComplaints(@PathVariable String username){
+		logger.info("Inside getUserComplaints method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Complaint> userComplaints = null;
+		
+		try{
+			userComplaints = complaintService.getComplaintsByUser(username);
+			resultMap.put("status", "true");
+			resultMap.put("message", userComplaints);
+			
+		} catch(Exception e){
+			logger.error("in getUserComplaints method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting user complaints!");
+		}
+		
+		return resultMap;
+	}
+	
+	@PreAuthorize("hasRole('ROLE_USER') and #username == principal.username")
+	@RequestMapping(value = "userRequests/{username}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> getUserRequests(@PathVariable String username){
+		logger.info("Inside getUserRequests method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Request> userRequests = null;
+		
+		try{
+			userRequests = requestService.getRequetsByUser(username);
+			resultMap.put("status", "true");
+			resultMap.put("message", userRequests);
+			
+		} catch(Exception e){
+			logger.error("in getUserRequests method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting user requests!");
+		}
+		
+		return resultMap;
+	}
+	
+	@PreAuthorize("hasRole('ROLE_USER') and #username == principal.username")
+	@RequestMapping(value = "userTransactions/{username}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> getUserTransactions(@PathVariable String username){
+		logger.info("Inside getUserTransactions method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Transaction> userTransactions = null;
+		
+		
+		try{
+			userTransactions = transactionService.getTransactionsByUser(username);
+			resultMap.put("status", "true");
+			resultMap.put("message", userTransactions);
+			
+		} catch(Exception e){
+			logger.error("in getUserTransactions method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting user transactions!");
+		}
+		
+		return resultMap;
+	}
+	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
 	@RequestMapping(value = "{username}/createComplaint", produces = "application/json")
 	@ResponseBody
@@ -188,6 +282,33 @@ public class UserController {
 			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error removing asset!");
+		}
+
+		return resultMap;
+	}
+	
+	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
+	@RequestMapping(value = "{username}/userViewComplaint/{idComplaint}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> userViewComplaint(@PathVariable Long idComplaint) {
+		logger.info("Inside userViewComplaint method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Complaint complaint = null;
+		Asset asset = null;
+		
+		try {
+			complaint = complaintService.getComplaintById(idComplaint);
+			asset = complaint.getAsset();
+			
+			resultMap.put("status", "true");
+			resultMap.put("complaint", complaint);
+			resultMap.put("asset", asset);
+
+		} catch (Exception e) {
+			logger.error("in userViewComplaint method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting complaint!");
 		}
 
 		return resultMap;
