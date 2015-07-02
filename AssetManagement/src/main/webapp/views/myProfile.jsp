@@ -57,9 +57,15 @@
 									<div class="col-sm-8">
 										<span class="form-control"><c:out value="${logged_user.lastName}" /></span>
 									</div>
+									
 									<label for="inputName1" class="col-sm-4 control-label">Email:</label>
 									<div class="col-sm-8">
 										<span class="form-control"><c:out value="${logged_user.email}" /></span>
+									</div>
+									
+									<label for="inputName1" class="col-sm-4 control-label">Department Name:</label>
+									<div class="col-sm-8">
+										<span class="form-control"><c:out value="${logged_user.department.name}" /></span>
 									</div>
 	
 							<div class="col-sm-8">

@@ -57,7 +57,7 @@
 						<label for="department" class="col-sm-3 control-label">Department</label>
 						<div class="col-sm-9">
 							<select type="text" class="form-control"
-								id="department" placeholder="Select Department" path="department">
+								id="department" placeholder="Select Department" name="idDepartment">
 								<option value="0" selected="selected">Select Department</option>
 								<c:forEach items="${departments}" var="department">
 							    	<option value="<c:out value="${department.idDepartment}"/>">${department.name}</option>

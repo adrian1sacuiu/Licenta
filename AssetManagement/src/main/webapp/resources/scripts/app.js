@@ -133,9 +133,9 @@ function createRequestAsset(){
 				
 				$('#assets_data tbody').on('click', 'tr', function () {
 				    var id = $("td",this).eq(0).text();
-				 
-				    getAsset(id);
-				   	
+				    //alert(id);
+				    newRequest(id);
+				   
 				} );
 				//$('#asset_info').append('<br><button class="btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="requestAsset()" style="cursor:pointer">Request New Asset</button>');
 				$('#edit_user').removeClass("active");
@@ -148,6 +148,18 @@ function createRequestAsset(){
 				$('#my_profile').removeClass("active");
 				
 			}
+		}
+	});
+}
+function newRequest(id){
+	$.ajax({
+		type : 'POST',
+		url : window.username+'/createRequest?idAsset='+id,
+		//url: 'availableAssets',
+		data : '',
+		success : function(data) {
+			alert('Request Sent');
+			getAssets(window.username);
 		}
 	});
 }
@@ -254,16 +266,6 @@ $(function() {
 			url : 'register',
 			data : '',
 			success : function(data) {
-				departments = $.ajax({
-					type : 'GET',
-					url : 'departments',
-					data : '',
-					success : function(data) {
-						for(i=0;i<data.message.length;i++){
-							$('#department').append('<sf:option value="'+data.message[i].idDepartment+'">'+data.message[i].name+'</sf:option>');
-						}
-					}
-				});
 				$info.html(data);
 			}
 		});

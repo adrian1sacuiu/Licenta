@@ -170,3 +170,6 @@ section#content {
 table tbody tr.odd{
 	background:#e1e1e1 !important;
 }
+td{
+	cursor:pointer;
+}
