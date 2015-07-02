@@ -52,7 +52,30 @@
 							<br />
 						</div>
 					</div>
-					
+					<div class="form-group">
+						<label for="department" class="col-sm-3 control-label">Department</label>
+						<div class="col-sm-9">
+							<sf:select type="text" class="form-control"
+								id="department" placeholder="Select Department" path="department">
+								<sf:option value="0">Select Department</sf:option>
+							</sf:select>
+							<script>
+							$(document).ready(function(){
+								xhr = $.ajax({
+									type : 'GET',
+									url : 'departments',
+									data : '',
+									success : function(data) {
+										for(i=0;i<data.message.length;i++){
+											$('#department').append('<sf:option value="'+data.message[i].idDepartment+'">'+data.message[i].name+'</sf:option>');
+										}
+									}
+								});
+							});
+							</script>
+							<br />
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="image" class="col-sm-3 control-label">Profile image</label>
 						<div class="col-sm-9">
