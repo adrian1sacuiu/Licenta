@@ -1,8 +1,8 @@
 package controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import entities.Department;
 import entities.User;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +24,7 @@ import util.ImageUploadException;
 import static util.OperationsUtils.*;
 
 @PreAuthorize("isAnonymous()")
+@RequestMapping(value = "register")
 @Controller
 public class RegisterController {
 	private static final Logger logger = Logger.getLogger(RegisterController.class);
@@ -36,7 +36,7 @@ public class RegisterController {
 	private DepartmentService departmentService;
 
 	@PreAuthorize("isAnonymous()")
-	@RequestMapping(value = "register", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView createUser() {
 		logger.info("Inside createUser method");
 
@@ -53,13 +53,18 @@ public class RegisterController {
 	}
 
 	@PreAuthorize("isAnonymous()")
-	@RequestMapping(value = "register", method = RequestMethod.POST, produces = "application/json")
-	public ModelAndView registerUser(@ModelAttribute("user") User user, @RequestParam(value = "image", required = false) MultipartFile image) {
+	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	public ModelAndView registerUser(@ModelAttribute("user") User user, HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside registerUser method");
 		ModelAndView modelAndView = new ModelAndView("");
+		Long idDepartment = 0L;
+		Department department = null;
 
 		try {
+			idDepartment = Long.parseLong(request.getParameter("idDepartment"));
 			String username = user.getUsername();
+			department = departmentService.getDepartmentById(idDepartment);
+			user.setDepartment(department);
 
 			if (image != null && !image.isEmpty()) {
 				validateImage(image);
@@ -90,26 +95,4 @@ public class RegisterController {
 		return modelAndView;
 	}
 	
-
-	@RequestMapping(value = "departments", produces = "application/json")
-	@ResponseBody
-	public Map<String, Object> getAllDepartments() {
-		logger.info("Inside getAllDepartments method");
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		List<Department> departments = null;
-
-		try {
-			departments = departmentService.getAllDepartments();
-			resultMap.put("status", "true");
-			resultMap.put("message", departments);
-
-		} catch (Exception e) {
-			logger.error("in getAllDepartments method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
-			e.printStackTrace();
-			resultMap.put("status", "false");
-			resultMap.put("message", "Error getting departments!");
-		}
-
-		return resultMap;
-	}
 }
