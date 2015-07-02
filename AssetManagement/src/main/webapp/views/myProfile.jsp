@@ -89,26 +89,31 @@
 								
 									<label for="inputName1" class="col-sm-4 control-label">Username:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.username}" />" /> <span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change the username</span>
+										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.username}" />" />
+<%-- 										 <span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change the username</span> --%>
 									</div>
 									
 									<label for="inputName1" class="col-sm-4 control-label">Password:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="password" value="" placeholder="Insert password" /><span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your password</span>
+										<input class="form-control" type="password" value="" placeholder="Insert password" />
+<%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your password</span> --%>
 									</div>
 							
 									<hr>
 									<label for="inputName1" class="col-sm-4 control-label">First Name:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.firstName}" />" /><span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your First Name</span>
+										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.firstName}" />" />
+<%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your First Name</span> --%>
 									</div>
 									<label for="inputName1" class="col-sm-4 control-label">Last Name:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.lastName}" />" /><span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your Last Name</span>
+										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.lastName}" />" />
+<%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your Last Name</span> --%>
 									</div>
 									<label for="inputName1" class="col-sm-4 control-label">Email:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.email}" />" /><span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your email</span>
+										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.email}" />" />
+<%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your email</span> --%>
 									</div>
 									<div class="col-sm-12">
 										<button id="update" class="btn btn-primary btn-lg" type="button" style="float: right;margin-top:59px">Update Changes</button>

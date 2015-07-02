@@ -17,8 +17,9 @@
             <security:authorize access="hasRole('ROLE_USER')">
              <li id="my_profile"><a onclick="javascript:getMyProfile();"><h1><span class="glyphicon glyphicon-th-list"></span> My profile</h1></a></li>
            	 <li id="assets"><a onclick="javascript:getAssets('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-th-list"></span> Assets</h1></a></li>
-             <li id="complaints"><a onclick="javascript:getComplaints('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-th"></span> Complaints</h1></a></li>
-             <li id="transactions"><a onclick="javascript:getTransactions();"><h1><span class="glyphicon glyphicon-th-list"></span> Transactions</h1></a></li>
+             <li id="complaints"><a onclick="javascript:getComplaints('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-comment"></span> Complaints</h1></a></li>
+             <li id="requests"><a onclick="javascript:getRequests('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-random"></span>Requests</h1></a></li>
+             <li id="transactions"><a onclick="javascript:getTransactions('<c:url value="${logged_user.username}"/>');"><h1><span class="glyphicon glyphicon-download"></span> Transactions</h1></a></li>
             </security:authorize>
           </ul>
         </div>

@@ -405,14 +405,28 @@ function getComplaintsAdmin(){
 function viewComplaintAdmin(id){
 	xhr = $.ajax({
 		type : 'GET',
-		url : 'viewComplaint/'+id,
+		url : 'adminViewComplaint/'+id,
 		data : '',
 		success : function(data) {
 			console.log(data);
 			$('#content').html('<div id="userRequest">Complaint made by: <b>'+data.user.firstName +' '+ data.user.lastName+'</b></div>');
 			$('#content').append('<div>Complaint for asset: <b>'+data.asset.name+'</b></div>');
+			$('#content').append('<div>Title: <b>'+data.complaint.title+'</b></div>');
+			$('#content').append('<div>Description: <b>'+data.complaint.description+'</b></div>');
 			//$('#content').append('<div>Requested on: <b>'+data.request.date+'</b></div>');
-			$('#content').append('<div><button class="btn-primary btn-sm" onclick="closeComplaint()" style="cursor:pointer">Close Complaint</button><button class="btn-primary btn-sm" onclick="getComplaintsAdmin()" style="cursor:pointer">Go Back</button></div>');
+			$('#content').append('<div>Priority: <b>'+data.complaint.priority+'</b></div>');
+			$('#content').append('<div>Status: <b>'+data.complaint.status+'</b></div>');
+			$('#content').append('<div><button class="btn-primary btn-sm" onclick="closeComplaint('+data.complaint.idComplaint+')" style="cursor:pointer">Close Complaint</button><button class="btn-primary btn-sm" onclick="getComplaintsAdmin()" style="cursor:pointer">Go Back</button></div>');
 		}
 	});
+}
+function closeComplaint(id){
+	xhr = $.ajax({
+		type : 'POST',
+		url : 'closeComplaint/'+id,
+		data : '',
+		success : function(data) {
+			getComplaintsAdmin();
+		}
+	});	
 }
