@@ -53,6 +53,7 @@ $(function(){
 				success : function(data) {
 					///alert(2222222);
 						$info.html(data);
+						
 						$('#login_error').html('Please Authenticate in order to proceed!');
 						$('#login_error').show();
 					}
@@ -253,9 +254,17 @@ $(function() {
 			url : 'register',
 			data : '',
 			success : function(data) {
-				
-					$info.html(data);
-				
+				departments = $.ajax({
+					type : 'GET',
+					url : 'departments',
+					data : '',
+					success : function(data) {
+						for(i=0;i<data.message.length;i++){
+							$('#department').append('<sf:option value="'+data.message[i].idDepartment+'">'+data.message[i].name+'</sf:option>');
+						}
+					}
+				});
+				$info.html(data);
 			}
 		});
 	});

@@ -61,16 +61,7 @@
 							</sf:select>
 							<script>
 							$(document).ready(function(){
-								xhr = $.ajax({
-									type : 'GET',
-									url : 'departments',
-									data : '',
-									success : function(data) {
-										for(i=0;i<data.message.length;i++){
-											$('#department').append('<sf:option value="'+data.message[i].idDepartment+'">'+data.message[i].name+'</sf:option>');
-										}
-									}
-								});
+								
 							});
 							</script>
 							<br />
