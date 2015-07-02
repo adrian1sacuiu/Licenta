@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- START PAGE SOURCE -->
@@ -55,15 +56,14 @@
 					<div class="form-group">
 						<label for="department" class="col-sm-3 control-label">Department</label>
 						<div class="col-sm-9">
-							<sf:select type="text" class="form-control"
+							<select type="text" class="form-control"
 								id="department" placeholder="Select Department" path="department">
-								<sf:option value="0">Select Department</sf:option>
-							</sf:select>
-							<script>
-							$(document).ready(function(){
-								
-							});
-							</script>
+								<option value="0" selected="selected">Select Department</option>
+								<c:forEach items="${departments}" var="department">
+							    	<option value="<c:out value="${department.idDepartment}"/>">${department.name}</option>
+								</c:forEach>
+							</select>
+							
 							<br />
 						</div>
 					</div>
