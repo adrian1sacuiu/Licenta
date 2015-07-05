@@ -4,6 +4,7 @@ import static util.OperationsUtils.saveImage;
 import static util.OperationsUtils.validateImage;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import entities.Department;
 import entities.User;
+import services.DepartmentService;
 import services.UsersService;
 import util.ImageUploadException;
 
@@ -33,14 +37,33 @@ public class MyProfileController {
 	@Autowired
 	private UsersService userService;
 	
+	@Autowired
+	private DepartmentService departmentService;
+	
+	@PreAuthorize("isAuthenticated() and #username == principal.username")
+	@RequestMapping(value = "{username}/createUserObject", method = RequestMethod.GET)
+	public ModelAndView createUserObject() {
+		logger.info("Inside createUserObject method");
+
+		ModelAndView mv = new ModelAndView("views/editProfile.jsp");
+		try{
+			List<Department> departments = departmentService.getAllDepartments();
+			mv.addObject("user", new User());
+			mv.addObject("departments", departments);
+			
+		} catch(Exception e){
+			logger.error("in createUserObject method Exception: " + e.getMessage());
+		}
+		return mv;
+	}
+	
 	@PreAuthorize("isAuthenticated() and #username == principal.username")
 	@RequestMapping(value = "{username}/updateUser", method = RequestMethod.POST)
-	public ModelAndView updateUser(@ModelAttribute("user") User user, HttpSession session, @RequestParam(value = "image", required = false) MultipartFile image) {
+	public ModelAndView updateUser(@PathVariable String username, @ModelAttribute("user") User user, HttpSession session, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside updateUser method");
 		ModelAndView modelAndView = new ModelAndView(new RedirectView(""));
 
 		try {
-			String username = user.getUsername();
 			if (image != null && !image.isEmpty()) {
 				validateImage(image);
 				saveImage(username, image);
