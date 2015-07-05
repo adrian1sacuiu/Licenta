@@ -293,6 +293,62 @@ public class UserController {
 	}
 	
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
+	@RequestMapping(value = "{username}/viewRequestUser/{idRequest}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> viewRequestUser(@PathVariable String username, @PathVariable Long idRequest) {
+		logger.info("Inside viewRequestUser method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Request request = null;
+		Asset asset = null;
+
+		try {
+			request = requestService.getRequestById(idRequest);
+			Long idAsset = request.getAsset().getIdAsset();
+			asset = assetService.getAssetById(idAsset);
+			
+			resultMap.put("status", "true");
+			resultMap.put("request", request);
+			resultMap.put("asset", asset);
+
+		} catch (Exception e) {
+			logger.error("in viewRequestUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting request!");
+		}
+
+		return resultMap;
+	}
+	
+	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
+	@RequestMapping(value = "{username}/viewTransactionUser/{idTransaction}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> viewTransactionUser(@PathVariable String username, @PathVariable Long idTransaction) {
+		logger.info("Inside viewTransactionUser method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Transaction transaction = null;
+		Asset asset = null;
+
+		try {
+			transaction = transactionService.getTransactionById(idTransaction);
+			Long idAsset = transaction.getAsset().getIdAsset();
+			asset = assetService.getAssetById(idAsset);
+			
+			resultMap.put("status", "true");
+			resultMap.put("transaction", transaction);
+			resultMap.put("asset", asset);
+
+		} catch (Exception e) {
+			logger.error("in viewTransactionUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting transaction!");
+		}
+
+		return resultMap;
+	}
+	
+	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
 	@RequestMapping(value = "{username}/userViewComplaint/{idComplaint}", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> userViewComplaint(@PathVariable String username, @PathVariable Long idComplaint) {

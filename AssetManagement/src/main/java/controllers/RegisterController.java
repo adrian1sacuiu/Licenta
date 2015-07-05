@@ -53,7 +53,7 @@ public class RegisterController {
 	}
 
 	@PreAuthorize("isAnonymous()")
-	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute("user") User user, HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside registerUser method");
 		ModelAndView modelAndView = new ModelAndView("");
