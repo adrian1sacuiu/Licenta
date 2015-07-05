@@ -295,7 +295,7 @@ public class UserController {
 	@PreAuthorize("(hasRole('ROLE_USER') and #username == principal.username)")
 	@RequestMapping(value = "{username}/userViewComplaint/{idComplaint}", produces = "application/json")
 	@ResponseBody
-	public Map<String, Object> userViewComplaint(@PathVariable Long idComplaint) {
+	public Map<String, Object> userViewComplaint(@PathVariable String username, @PathVariable Long idComplaint) {
 		logger.info("Inside userViewComplaint method");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Complaint complaint = null;
