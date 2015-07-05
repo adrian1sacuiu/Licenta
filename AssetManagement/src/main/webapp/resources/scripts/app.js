@@ -94,6 +94,28 @@ function getAsset(assetId){
 		}
 	});
 }
+function updateUser(){
+	var username = $('#profile_username').val();
+	var password = $('#profile_password').val();
+	var first_name = $('#profile_fn').val();
+	var last_name = $('#profile_ln').val();
+	var email = $('#profile_email').val();
+	var role = $('#profile_role').val();
+	var image = $('#image').val();
+	
+	if(password == ""){
+		password = "";
+	}
+	xhr = $.ajax({
+		type : 'POST',
+		//url : window.username+'/createComplaint?idAsset='+assetId,
+		url: username+'/updateUser',
+		data : {username:username,password:password,firstName:first_name,lastName:last_name,email:email,role:role,image:image},
+		success : function(data) {
+			location.reload();
+		}
+	});
+}
 function createRequestAsset(){
 	xhr = $.ajax({
 		type : 'POST',
@@ -176,6 +198,7 @@ function createComplaintAsset(assetId){
 			$('.modal-footer').html('<button class="btn btn-default" data-dismiss="modal" onclick="postComplaint('+assetId+');" type="button">Send Complaint</button><button class="btn btn-default" data-dismiss="modal" type="button">Close</button>');
 			
 }
+
 function postComplaint(assetId){
 	var title = $('#title_complaint').val();
 	var description = $('#description_complaint').val();
