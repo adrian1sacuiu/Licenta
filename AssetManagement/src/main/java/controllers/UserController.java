@@ -51,7 +51,7 @@ public class UserController {
 	public Map<String, Object> createRequest(@PathVariable String username, HttpServletRequest request) {
 		logger.info("Inside createRequest method");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		Request newRequest = new Request();
+		Request newRequest = null;
 		Long idAsset = 0L;
 
 		try {
@@ -60,20 +60,25 @@ public class UserController {
 			User user = usersService.getUserByUsername(username);
 			Asset asset = assetService.getAssetById(idAsset);
 
-			newRequest.setUser(user);
-			newRequest.setAsset(asset);
-			newRequest.setDate(new Date(System.currentTimeMillis()));
-			newRequest.setStatus("New");
-
-			boolean result = requestService.addRequest(newRequest);
-			if (result) {
-				resultMap.put("status", "true");
-				resultMap.put("message", "Request created successfully!");
-
-			} else {
-				logger.error("Error creating new request!");
-				resultMap.put("status", "false");
-				resultMap.put("message", "Error creating new request!");
+			newRequest = requestService.getNewRequestByUserAndAsset(user.getIdUser(), idAsset);
+			
+			if(newRequest == null){
+				newRequest = new Request();
+				newRequest.setUser(user);
+				newRequest.setAsset(asset);
+				newRequest.setDate(new Date(System.currentTimeMillis()));
+				newRequest.setStatus("New");
+	
+				boolean result = requestService.addRequest(newRequest);
+				if (result) {
+					resultMap.put("status", "true");
+					resultMap.put("message", "Request created successfully!");
+	
+				} else {
+					logger.error("Error creating new request!");
+					resultMap.put("status", "false");
+					resultMap.put("message", "Error creating new request!");
+				}
 			}
 
 		} catch (Exception e) {
@@ -189,7 +194,7 @@ public class UserController {
 		Long idAsset = 0L;
 
 		try {
-			complaint.setTitle(request.getParameter("idAsset"));
+			complaint.setTitle(request.getParameter("title"));
 			complaint.setDescription(request.getParameter("description"));
 			complaint.setPriority(request.getParameter("priority"));
 			idAsset = Long.parseLong(request.getParameter("idAsset"));

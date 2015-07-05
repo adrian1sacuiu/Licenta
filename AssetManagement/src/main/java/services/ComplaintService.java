@@ -26,6 +26,7 @@ public class ComplaintService {
 		boolean result = false;
 
 		try {
+			complaint.setStatus("New");
 			result = complaintDao.addComplaint(complaint);
 
 		} catch (Exception e) {
