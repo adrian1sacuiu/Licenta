@@ -45,9 +45,12 @@ public class MyProfileController {
 				validateImage(image);
 				saveImage(username, image);
 			}
-
-			userService.updateUser(user);
-			session.setAttribute("logged_user", user);
+			
+			User currentUser = (User)session.getAttribute("logged_user");
+			if(!user.equals(currentUser)){
+				userService.updateUser(user);
+				session.setAttribute("logged_user", user);
+			}
 			
 		} catch (ImageUploadException iue) {
 			logger.error("in updateUser method ImageUploadException: " + iue.getMessage());

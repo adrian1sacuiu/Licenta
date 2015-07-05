@@ -58,18 +58,21 @@ public class UsersService {
 
 		try {
 			String password = user.getPassword();
+			User oldUser = userDao.getUserById(user.getIdUser());
+			String oldPassword = oldUser.getPassword();
 
 			if (password != null) {
-				User oldUser = userDao.getUserById(user.getIdUser());
-				String oldPassword = oldUser.getPassword();
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-				
-				if(oldPassword == null || !oldPassword.equals(password)){
-					String hashedPassword = passwordEncoder.encode(password);
+				String hashedPassword = passwordEncoder.encode(password);
+
+				if (oldPassword == null || !oldPassword.equals(hashedPassword)) {
 					user.setPassword(hashedPassword);
 				}
+
+			} else {
+				user.setPassword(oldPassword);
 			}
-			
+
 			result = userDao.updateUser(user);
 
 		} catch (Exception e) {
