@@ -1,19 +1,22 @@
 package util;
 
 import java.util.Comparator;
+import java.util.Date;
 
 import entities.Transaction;
 
 public class TransactionComparator implements Comparator<Transaction> {
 
 	public int compare(Transaction transaction1, Transaction transaction2) {
-		String startDate1 = transaction1.getStartDate().toString();
-		String startDate2 = transaction2.getStartDate().toString();
-
+		Date startDateDate1 = transaction1.getStartDate();
+		Date startDateDate2 = transaction1.getStartDate();
 		String status1 = transaction1.getStatus();
 		String status2 = transaction2.getStatus();
-
-		if (startDate1 != null && startDate2 != null && status1 != null && status2 != null) {
+		
+		if (startDateDate1 != null && startDateDate2 != null && status1 != null && status2 != null) {		
+		String startDate1 = startDateDate1.toString();
+		String startDate2 = startDateDate2.toString();
+		
 			if (status1.equals(status2)) {
 				return startDate1.compareTo(startDate2);
 
