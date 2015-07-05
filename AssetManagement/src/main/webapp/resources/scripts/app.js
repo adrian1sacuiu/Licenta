@@ -164,6 +164,37 @@ function newRequest(id){
 	});
 }
 function createComplaintAsset(assetId){
+//	xhr = $.ajax({
+//		type : 'POST',
+//		url : window.username+'/createComplaint?idAsset='+assetId,
+//		//url: 'availableAssets',
+//		data : '',
+//		success : function(data) {
+//			var a = "";
+			//$('#content').append('<div id="asset_error"></div><div id="info_asset"></div><div id="form_complaint"><select id="availableAssets"></select> <label>Error Description</label><textarea></textarea></div>');
+			$('.modal-body').html('<div class="form-group" id="edit_user_details" style="display: block;">'+
+					'<form role="form">'+
+					'<div class="form-group">'+
+					'<label class="col-sm-4 control-label" for="inputName1">Complaint Title:</label><div class="col-sm-8"><input class="form-control" placeholder="Title"/></div>'+
+					'<label class="col-sm-4 control-label" for="inputName1">Complaint Description:</label><div class="col-sm-8"><textarea class="form-control" placeholder="Description"></textarea></div>'+
+					'</div></form></div><div class="clear"></div>');
+			$('.modal-footer').html('<button class="btn btn-default" data-dismiss="modal" onclick="postComplaint()" type="button">Send Complaint</button><button class="btn btn-default" data-dismiss="modal" type="button">Close</button>');
+//			if(data.status == "true"){
+//				getAssets(window.username);
+//				$('#info_asset').append(a);
+//				$('#asset_confirm_del').show();
+//				$('#asset_confirm_del').text(data.message);
+//				$('#asset_error').hide();
+//				//setTimeout(function() {$('#myModal').modal('hide');}, 3000);
+//			}else{   
+//				$('#asset_error').append(data.message[0]);
+//				$('#asset_error').show();
+//				//setTimeout(function() {$('#myModal').modal('hide');}, 3000);
+//			}
+//		}
+//	});
+}
+function postComplaint(assetId){
 	xhr = $.ajax({
 		type : 'POST',
 		url : window.username+'/createComplaint?idAsset='+assetId,
@@ -171,18 +202,18 @@ function createComplaintAsset(assetId){
 		data : '',
 		success : function(data) {
 			var a = "";
-			$('#content').html('<div id="asset_error"></div><div id="info_asset"></div><div id="form_complaint"><select id="availableAssets"></select> <label>Error Description</label><textarea></textarea></div>');
+			//$('#content').html('<div id="asset_error"></div><div id="info_asset"></div><div id="form_complaint"><select id="availableAssets"></select> <label>Error Description</label><textarea></textarea></div>');
 			if(data.status == "true"){
 				getAssets(window.username);
 				$('#info_asset').append(a);
 				$('#asset_confirm_del').show();
 				$('#asset_confirm_del').text(data.message);
 				$('#asset_error').hide();
-				setTimeout(function() {$('#myModal').modal('hide');}, 3000);
+				//setTimeout(function() {$('#myModal').modal('hide');}, 3000);
 			}else{   
-				$('#asset_error').append(data.message[0]);
+				$('#asset_error').append(data.message);
 				$('#asset_error').show();
-				setTimeout(function() {$('#myModal').modal('hide');}, 3000);
+				//setTimeout(function() {$('#myModal').modal('hide');}, 3000);
 			}
 		}
 	});

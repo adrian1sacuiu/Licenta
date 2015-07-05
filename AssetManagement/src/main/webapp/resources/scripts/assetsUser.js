@@ -50,7 +50,6 @@ function getAssets(username){
 				$('#complaints').removeClass("active");
 				
 			}else{   
-				$('#asset_error').append(data.message[0]);
 				$('#assets').addClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
