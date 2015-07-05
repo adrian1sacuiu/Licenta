@@ -298,6 +298,39 @@ public class AdminController {
 		return resultMap;
 	}
 	
+	@RequestMapping(value = "viewTransaction/{idTransaction}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> viewTransaction(@PathVariable Long idTransaction) {
+		logger.info("Inside viewTransaction method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Transaction transaction = null;
+		User user = null;
+		Asset asset = null;
+
+		try {
+			transaction = transactionService.getTransactionById(idTransaction);
+			
+			Long idUser = transaction.getUser().getIdUser();
+			Long idAsset = transaction.getAsset().getIdAsset();
+			
+			user = usersService.getUserById(idUser);
+			asset = assetService.getAssetById(idAsset);
+			
+			resultMap.put("status", "true");
+			resultMap.put("transaction", transaction);
+			resultMap.put("user", user);
+			resultMap.put("asset", asset);
+
+		} catch (Exception e) {
+			logger.error("in viewTransaction method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting transaction!");
+		}
+
+		return resultMap;
+	}
+	
 	@RequestMapping(value = "rejectRequest/{idRequest}", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> rejectRequest(@PathVariable Long idRequest) {

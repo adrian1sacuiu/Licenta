@@ -34,7 +34,7 @@ public class MyProfileController {
 	private UsersService userService;
 	
 	@PreAuthorize("isAuthenticated() and #username == principal.username")
-	@RequestMapping(value = "{username}/updateUser", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "{username}/updateUser", method = RequestMethod.POST)
 	public ModelAndView updateUser(@ModelAttribute("user") User user, HttpSession session, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside updateUser method");
 		ModelAndView modelAndView = new ModelAndView(new RedirectView(""));
