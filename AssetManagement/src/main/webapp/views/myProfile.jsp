@@ -68,12 +68,12 @@
 										<span class="form-control"><c:out value="${logged_user.department.name}" /></span>
 									</div>
 	
-							<div class="col-sm-8">
+							<div class="col-sm-12">
 								<button id="edit" class="btn btn-primary btn-lg" type="button" style="float: right;margin-top:59px">Edit Profile</button>
 							</div>
 						</div>
 						<div id="edit_user_details" class="form-group">
-							<form role="form">
+							<form role="form" action="<c:out value="${logged_user.username}" />/updateUser" method="POST" enctype="multipart/form-data">
 								<div class="form-group" style="float:left; width: 150px; margin: 0 auto;">
 									<div class="glyphicon glyphicon-edit edit_image">
 										<input type="file" onchange="javascript:show_upload();readURL($(this))" class="" name="image" id="image" placeholder="Upload profile image" />
@@ -89,34 +89,38 @@
 								
 									<label for="inputName1" class="col-sm-4 control-label">Username:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.username}" />" />
+										<input class="form-control" id="profile_username" type="text" value="<c:out value="${logged_user.username}" />" placeholder="<c:out value="${logged_user.username}" />" />
 <%-- 										 <span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change the username</span> --%>
 									</div>
 									
 									<label for="inputName1" class="col-sm-4 control-label">Password:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="password" value="" placeholder="Insert password" />
+										<input class="form-control" id="profile_password" type="password" value="" placeholder="**********" />
 <%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your password</span> --%>
 									</div>
 							
 									<hr>
 									<label for="inputName1" class="col-sm-4 control-label">First Name:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.firstName}" />" />
+										<input class="form-control" type="text" id="profile_fn" value="<c:out value="${logged_user.firstName}" />" placeholder="<c:out value="${logged_user.firstName}" />" />
 <%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your First Name</span> --%>
 									</div>
 									<label for="inputName1" class="col-sm-4 control-label">Last Name:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.lastName}" />" />
+										<input class="form-control" type="text" id="profile_ln" value="<c:out value="${logged_user.lastName}" />" placeholder="<c:out value="${logged_user.lastName}" />" />
 <%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your Last Name</span> --%>
 									</div>
 									<label for="inputName1" class="col-sm-4 control-label">Email:</label>
 									<div class="col-sm-8">
-										<input class="form-control" type="text" value="" placeholder="<c:out value="${logged_user.email}" />" />
+										<input class="form-control" type="text" value="<c:out value="${logged_user.email}" />" id="profile_email" placeholder="<c:out value="${logged_user.email}" />" />
+<%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your email</span> --%>
+									</div>
+									<div class="col-sm-8">
+										<input class="form-control" type="hidden" value="<c:out value="${logged_user.role}" />" id="profile_role" placeholder="<c:out value="${logged_user.role}" />" />
 <%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your email</span> --%>
 									</div>
 									<div class="col-sm-12">
-										<button id="update" class="btn btn-primary btn-lg" type="button" style="float: right;margin-top:59px">Update Changes</button>
+										<button id="update_user" class="btn btn-primary btn-lg" type="submit" onclick="" style="float: right;margin-top:59px">Update Changes</button>
 									</div>
 							</form>
 						</div>
