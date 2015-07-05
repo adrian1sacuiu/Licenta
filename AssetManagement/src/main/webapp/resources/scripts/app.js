@@ -1,15 +1,22 @@
 $(function(){
 	$(document).on("ready",function(event){
 		//alert(1);
-		
+		var username = $('#profile_username').val();
 		$('#edit_user_details').hide();
 		$('#user_details').show();
 		$('#edit').click(function(){
-			$('#user_details').hide();
-			$('#edit_user_details').show();
+			$.ajax({
+				type : 'GET',
+				url : username+'/createUserObject',
+				data : '',
+				success : function(data) {
+					alert(data);
+					$('#content').html(data);
+				}
+			});
 		});
 		$('#update').click(function(){
-			$('#user_details').show();
+			$('#content').show();
 			$('#edit_user_details').hide();
 		});
 		event.preventDefault;

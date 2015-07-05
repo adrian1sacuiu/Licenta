@@ -42,10 +42,10 @@ public class MyProfileController {
 	
 	@PreAuthorize("isAuthenticated() and #username == principal.username")
 	@RequestMapping(value = "{username}/createUserObject", method = RequestMethod.GET)
-	public ModelAndView createUserObject() {
+	public ModelAndView createUserObject(@PathVariable String username) {
 		logger.info("Inside createUserObject method");
 
-		ModelAndView mv = new ModelAndView("views/editProfile.jsp");
+		ModelAndView mv = new ModelAndView("../views/editProfile.jsp");
 		try{
 			List<Department> departments = departmentService.getAllDepartments();
 			mv.addObject("user", new User());
@@ -61,7 +61,7 @@ public class MyProfileController {
 	@RequestMapping(value = "{username}/updateUser", method = RequestMethod.POST)
 	public ModelAndView updateUser(@PathVariable String username, @ModelAttribute("user") User user, HttpSession session, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside updateUser method");
-		ModelAndView modelAndView = new ModelAndView(new RedirectView(""));
+		ModelAndView modelAndView = new ModelAndView(new RedirectView("../"));
 
 		try {
 			if (image != null && !image.isEmpty()) {
