@@ -475,10 +475,10 @@ public class AdminController {
 		return resultMap;
 	}
 	
-	@RequestMapping(value = "unAssignAsset/{idAsset}", produces = "application/json")
+	@RequestMapping(value = "unassignAsset/{idAsset}", produces = "application/json")
 	@ResponseBody
-	public Map<String, Object> unAssignAsset(@PathVariable Long idAsset) {
-		logger.info("Inside unAssignAsset method");
+	public Map<String, Object> unassignAsset(@PathVariable Long idAsset) {
+		logger.info("Inside unassignAsset method");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Asset asset = null;
 		
@@ -491,7 +491,7 @@ public class AdminController {
 			resultMap.put("message", "Asset unassigned successfully!");
 
 		} catch (Exception e) {
-			logger.error("in unAssignAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			logger.error("in unassignAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error unassigning asset!");
