@@ -80,7 +80,7 @@ public class RegisterController {
 		} catch (ImageUploadException iue) {
 			logger.error("in registerUser method ImageUploadException: " + iue.getMessage());
 			iue.printStackTrace();
-			modelAndView.setViewName("#register");
+			//modelAndView.setViewName("register");
 			modelAndView.addObject("error", iue.getMessage());
 
 		} 
@@ -88,7 +88,7 @@ public class RegisterController {
 		catch (Exception e) {
 			logger.error("in registerUser method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
 			e.printStackTrace();
-			modelAndView.setViewName("#register");
+			//modelAndView.setViewName("register");
 			modelAndView.addObject("error", "Error registering new user!");
 		}
 
