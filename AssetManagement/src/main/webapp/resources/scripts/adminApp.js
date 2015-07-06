@@ -82,7 +82,7 @@ function getAssetsAdmin(){
 				$('#users_data').dataTable( {
 			        "data": a,
 			        "columns": [
-			            { "title": "id",  },        
+			            { "title": "id", "visible": false },        
 			            { "title": "Name" },
 			            { "title": "Type" },
 			            { "title": "Availability" }
@@ -90,10 +90,10 @@ function getAssetsAdmin(){
 			        ],"order": []
 			        //column(0).order(false);
 			    } );
-				$('#users_data thead th').eq(0).hide();
-				$('#users_data tbody tr').each(function(){
-					$("td",this).eq(0).hide();
-				});
+				//$('#users_data thead th').eq(0).hide();
+//				$('#users_data tbody tr').each(function(){
+//					$("td",this).eq(0).hide();
+//				});
 				$('#content').append('<button class="btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="cursor:pointer">Add New Asset</button>');
 				$('.modal-header').html('Add New Asset');
 				$('.modal-body').html('<div id="add_new_asset" class="form-group"><form role="form"><label class="col-sm-4 control-label" for="inputName1">Asset Name:</label><div class="col-sm-8"><input id="assetName" type="text" placeholder="Asset Name" value="" class="form-control"></div><br><br><label class="col-sm-4 control-label" for="inputName1">Asset Type:</label><div class="col-sm-8"><input type="text" id="assetType" placeholder="Asset Type" value="" class="form-control"></div><br><br></form></div>');
@@ -296,7 +296,7 @@ function getTransactionsAdmin(){
 				$('#transactions_data').dataTable( {
 			        "data": a,
 			        "columns": [
-			            { "title": "ID"},        
+			            { "title": "ID","visible": false,},        
 			            { "title": "Start Date" },
 			            { "title": "End Date" },
 			            { "title": "Status" }
