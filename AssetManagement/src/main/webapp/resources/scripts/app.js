@@ -10,7 +10,7 @@ $(function(){
 				url : username+'/createUserObject',
 				data : '',
 				success : function(data) {
-					alert(data);
+					//alert(data);
 					$('#content').html(data);
 				}
 			});
@@ -55,13 +55,13 @@ $(function(){
 		 if(x > -1) {
 			xhr = $.ajax({
 				type : 'GET',
-				url : 'views/register.jsp',
+				url : 'register',
 				data : '',
 				success : function(data) {
 					///alert(2222222);
 						$info.html(data);
 						
-						$('#login_error').html('Please Authenticate in order to proceed!');
+						$('#login_error').html('The user already exists!');
 						$('#login_error').show();
 					}
 	            

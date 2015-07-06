@@ -51,6 +51,25 @@
 										<input class="form-control" type="text" value="<c:out value="${logged_user.email}" />" name="email" id="profile_email" placeholder="<c:out value="${logged_user.email}" />" />
 <%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your email</span> --%>
 									</div>
+									<label for="department" class="col-sm-4 control-label">Department</label>
+									<div class="col-sm-8">
+										
+<!-- 										<div class="col-sm-9"> -->
+											<select class="form-control"
+												id="department" placeholder="Select Department" name="idDepartment">
+												<option value="0" >Select Department</option>
+												<c:forEach items="${departments}" var="department">
+												<c:set var="dept_name" scope="session" value="${department.name}"/>
+												<c:set var="logged_dept_name" scope="session" value="${logged_user.department.name}"/>
+												<c:if test="${dept_name == logged_dept_name}">
+											    	<option value="<c:out value="${department.idDepartment}"/>" selected="selected">${department.name}</option>
+											    </c:if>
+											    <option value="<c:out value="${department.idDepartment}"/>" >${department.name}</option>	
+												</c:forEach>
+											</select>
+										
+<!-- 										</div> -->
+									</div>
 									<div class="col-sm-8">
 										<input class="form-control" type="hidden" value="<c:out value="${logged_user.role}" />" name="role" id="profile_role" placeholder="<c:out value="${logged_user.role}" />" />
 <%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your email</span> --%>
@@ -59,21 +78,7 @@
 										<input class="form-control" type="hidden" value="<c:out value="${logged_user.idUser}" />" id="profile_role" name="idUser" placeholder="<c:out value="${logged_user.role}" />" />
 <%-- 										<span style="font-size:9px;"> @<b><c:out value="${logged_user.username}" /></b> you can change your email</span> --%>
 									</div>
-									<label for="department" class="col-sm-4 control-label">Department</label>
-									<div class="col-sm-8">
-										
-<!-- 										<div class="col-sm-9"> -->
-											<select type="text" class="form-control"
-												id="department" placeholder="Select Department" name="idDepartment">
-												<option value="0" selected="selected">Select Department</option>
-												<c:forEach items="${departments}" var="department">
-											    	<option value="<c:out value="${department.idDepartment}"/>">${department.name}</option>
-												</c:forEach>
-											</select>
-											
-											<br />
-<!-- 										</div> -->
-									</div>
+									
 									<div class="col-sm-12">
 										 &nbsp;&nbsp;&nbsp;<button id="update" class="btn btn-primary btn-lg" type="button" onclick="" style="float: right;margin-top:59px">Go Back</button> <button id="update_user" class="btn btn-primary btn-lg" type="submit" onclick="" style="float: right;margin-top:59px">Update Changes</button> &nbsp;&nbsp;&nbsp;
 									</div>
