@@ -189,7 +189,7 @@ function saveAsset(){
 			url : 'createAsset',
 			data : {name:name,type:type},
 			success : function(data) {
-				alert("Asset saved");
+				//alert("Asset saved");
 				getAssetsAdmin();
 				$('#myModal').modal('hide');
 			}
