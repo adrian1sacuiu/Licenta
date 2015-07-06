@@ -75,15 +75,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Assets Management</a>
+          <a class="navbar-brand" href="">Assets Management</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
           <security:authorize access="isAuthenticated()">	
-            <li><a href="#">Dashboard</a></li>
-            </security:authorize>
-            <li><a href="#">Profile</a></li>
-            <security:authorize access="isAuthenticated()">	
+            <li><a href="">Dashboard</a></li>
+            <li><a href="">Profile</a></li>
             <li><a href="/AssetManagement/j_spring_security_logout">Logout</a></li>
             </security:authorize>
           </ul>
