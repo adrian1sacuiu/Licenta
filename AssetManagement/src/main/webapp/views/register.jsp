@@ -11,7 +11,7 @@
 			<div id="info" class="row col-sm-6 well center">
 				<sf:form class="form-horizontal" role="form" id="register_form" action="register" modelAttribute="user"
 					method="post" enctype="multipart/form-data">
-					
+					<div id="login_error" class="alert alert-danger fade in" style="display:none;"></div>
 					<div class="form-group">
 						<label for="inputName1" class="col-sm-3 control-label">Username <span class="red">*</span></label>
 						<div class="col-sm-9">
