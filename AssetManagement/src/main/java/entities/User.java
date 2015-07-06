@@ -27,7 +27,7 @@ import java.io.Serializable;
 	@NamedQuery(name="getUserByDepartment", query="FROM User u WHERE u.department.idDepartment = :idDepartment")
 })
 @Table(name = "USERS")
-public class User implements Serializable {
+public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Long idUser;
@@ -181,5 +181,5 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [idUser=" + idUser + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", email=" + email + ", role=" + role + "]";
 	}
-
+	
 }

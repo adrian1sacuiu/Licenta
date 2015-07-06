@@ -102,7 +102,7 @@ public class UsersService {
 			result = userDao.deleteUser(user);
 
 			if (result) {
-				File userFolder = new File(Constants.ImagesFolder + user.getUsername());
+				File userFolder = new File(Constants.IMAGES_FOLDER + user.getUsername());
 				boolean deleteSuccess = OperationsUtils.deleteDir(userFolder);
 				if (deleteSuccess) {
 					logger.info("User images folder deleted successfully!");

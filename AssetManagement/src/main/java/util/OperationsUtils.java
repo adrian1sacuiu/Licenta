@@ -23,7 +23,7 @@ public class OperationsUtils {
 		logger.info("Inside saveImage method.");
 		
 		try {
-			File userFolder = new File(Constants.ImagesFolder + username);
+			File userFolder = new File(Constants.IMAGES_FOLDER + username);
 			userFolder.mkdirs();
 			userFolder = new File(userFolder, "/" + username + ".jpg");
 			FileUtils.writeByteArrayToFile(userFolder, image.getBytes());
@@ -34,26 +34,42 @@ public class OperationsUtils {
 		}
 	}
 	
-	public static boolean deleteDir(File dir) {
+	public static boolean deleteDir(String username) throws Exception{
+		logger.info("Inside deleteDirString method.");
+		File userFolder = null;
+		
+		try{
+			userFolder = new File(Constants.IMAGES_FOLDER + username);
+		} catch (Exception e) {
+			logger.error("in deleteDirString method Exception: " + e.getMessage() + ";Cause: " + e.getCause());
+			e.printStackTrace();
+			throw e;
+		} 
+		
+		return deleteDir(userFolder);
+	}
+	
+	public static boolean deleteDir(File userFolder) throws Exception{
 		logger.info("Inside deleteDir method.");
 		boolean result = false;
 		
 	    try {
-			if (dir.exists() && dir.isDirectory()) {
-			    String[] children = dir.list();
+			if (userFolder.exists() && userFolder.isDirectory()) {
+			    String[] children = userFolder.list();
 			    for (int i = 0; i < children.length; i++) {
-			        boolean success = deleteDir(new File(dir, children[i]));
+			        boolean success = deleteDir(new File(userFolder, children[i]));
 			        if (!success) {
 			            return false;
 			        }
 			    }
 			}
 			
-			result = dir.delete();
+			result = userFolder.delete();
 			
 		} catch (Exception e) {
 			logger.error("in deleteDir method Exception: " + e.getMessage() + ";Cause: " + e.getCause());
 			e.printStackTrace();
+			throw e;
 		} 
 	    
 	    return result; 
