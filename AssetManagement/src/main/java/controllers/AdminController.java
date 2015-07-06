@@ -485,6 +485,7 @@ public class AdminController {
 		try {
 			asset = assetService.getAssetById(idAsset);
 			asset.setUser(null);
+			asset.setIsAvailable(true);
 			assetService.updateAsset(asset);
 			
 			resultMap.put("status", "true");
