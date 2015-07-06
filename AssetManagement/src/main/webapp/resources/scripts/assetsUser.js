@@ -188,11 +188,10 @@ function getRequests(username){
 				$('#requests_data tbody tr').each(function(){
 				//	$("td",this).eq(0).hide();
 				});
-//				$('#requests_data tbody').on('click', 'tr', function () {
-//				    var id = $("td",this).eq(0).text();
-//				    //alert(id);
-//				    viewRequestAdmin(id);
-//				} );
+				$('#requests_data tbody').on('click', 'tr', function () {
+				    var id = $("td",this).eq(0).text();
+				    viewRequest(id);
+				} );
 				
 				//$('#asset_info').append('<br><button class="btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="requestAsset()" style="cursor:pointer">Request New Asset</button>');
 				$('#assets').removeClass("active");
@@ -217,7 +216,22 @@ function getRequests(username){
 	
 	
 }
-
+function viewRequest(id){
+	xhr = $.ajax({
+		type : 'GET',
+		url : window.username+'/viewRequestUser/'+id,
+		data : '',
+		success : function(data) {
+			console.log(data);
+			usernames = "'"+window.username+"'";
+			//$('#content').html('<div id="userRequest">Request sent by: <b>'+data.user.firstName +' '+ data.user.lastName+'</b></div>');
+			$('#content').html('<div>Asset requested: <b>'+data.asset.name+'</b></div>');
+			$('#content').append('<div>Requested on: <b>'+data.request.date+'</b></div>');
+			$('#content').append('<div>Status: <b>'+data.request.status+'</b></div>');
+			$('#content').append('<div><button class="btn-primary btn-sm" onclick="getRequests('+usernames+')" style="cursor:pointer">Go Back</button></div>');
+		}
+	});
+}
 function getTransactions(username){
 	window.username = username;
 	xhr = $.ajax({
@@ -272,13 +286,11 @@ function getTransactions(username){
 			            { "title": "Status" }
 			         
 			        ],"order": []
-			        //column(0).order(false);
 			    } );
-				//$('#transactions_data thead th').eq(0).hide();
-				$('#transactions_data tbody tr').each(function(){
-				//	$("td",this).eq(0).hide();
-				});
-				//$('#asset_info').append('<br><button class="btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="requestAsset()" style="cursor:pointer">Request New Asset</button>');
+				$('#transactions_data tbody').on('click', 'tr', function () {
+				    var id = $("td",this).eq(0).text();
+				    viewTransaction(id);
+				} );
 				$('#assets').removeClass("active");
 				$('#edit_user').removeClass("active");
 				$('#my_profile').removeClass("active");
@@ -300,4 +312,23 @@ function getTransactions(username){
 	});
 	
 	
+}
+function viewTransaction(id){
+	xhr = $.ajax({
+		type : 'GET',
+		url : window.username+'/viewTransactionUser/'+id,
+		data : '',
+		success : function(data) {
+			console.log(data);
+			usernames = "'"+window.username+"'";
+			//$('#content').html('<div id="userRequest">Transaction made by: <b>'+data.user.firstName +' '+ data.user.lastName+'</b></div>');
+			$('#content').html('<div>Transaction for asset: <b>'+data.asset.name+'</b></div>');
+			$('#content').append('<div>Start Date: <b>'+dateValue(data.transaction.startDate)+'</b></div>');
+			$('#content').append('<div>End Date: <b>'+dateValue(data.transaction.endDate)+'</b></div>');
+			//$('#content').append('<div>Requested on: <b>'+data.request.date+'</b></div>');
+			//$('#content').append('<div>Priority: <b>'+data.complaint.priority+'</b></div>');
+			$('#content').append('<div>Status: <b>'+data.transaction.status+'</b></div>');
+			$('#content').append('<div><button class="btn-primary btn-sm" onclick="getTransactions('+usernames+')" style="cursor:pointer">Go Back</button></div>');
+		}
+	});
 }
