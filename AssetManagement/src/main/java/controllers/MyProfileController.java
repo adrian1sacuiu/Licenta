@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -65,8 +66,10 @@ public class MyProfileController {
 
 	@PreAuthorize("isAuthenticated() and #username == principal.username")
 	@RequestMapping(value = "{username}/updateUser", method = RequestMethod.POST)
-	public ModelAndView updateUser(@PathVariable String username, @ModelAttribute("user") User user, HttpServletRequest request, @RequestParam(value = "image", required = false) MultipartFile image) {
+	public ModelAndView updateUser(@PathVariable String username, @ModelAttribute("user") User user, HttpServletRequest request,
+					HttpServletResponse response, @RequestParam(value = "image", required = false) MultipartFile image) {
 		logger.info("Inside updateUser method");
+		response.setHeader("Cache-Control", "no-cache");
 		ModelAndView modelAndView = new ModelAndView(new RedirectView("../"));
 		HttpSession session = request.getSession();
 		Department department = null;
@@ -74,11 +77,10 @@ public class MyProfileController {
 		Long idDepartment = 0L;
 		
 		try {
-			final String newUsername = user.getUsername();
-			if (!newUsername.equals(username) && image != null && !image.isEmpty()) {
+			if (image != null && !image.isEmpty()) {
 				validateImage(image);
-				saveImage(user.getUsername(), image);
 				deleteDir(username);
+				saveImage(user.getUsername(), image);
 			}
 
 			idDepartmentString = request.getParameter("idDepartment");

@@ -298,6 +298,35 @@ public class AdminController {
 		return resultMap;
 	}
 	
+	@RequestMapping(value = "viewAsset/{idAsset}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> viewAsset(@PathVariable Long idAsset) {
+		logger.info("Inside viewAsset method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		User user = null;
+		Asset asset = null;
+
+		try {
+			asset = assetService.getAssetById(idAsset);
+
+			user = asset.getUser();
+			resultMap.put("status", "true");
+			resultMap.put("asset", asset);
+			
+			if(user != null){
+				resultMap.put("user", user);
+			}
+
+		} catch (Exception e) {
+			logger.error("in viewAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error getting asset!");
+		}
+
+		return resultMap;
+	}
+	
 	@RequestMapping(value = "viewTransaction/{idTransaction}", produces = "application/json")
 	@ResponseBody
 	public Map<String, Object> viewTransaction(@PathVariable Long idTransaction) {
@@ -417,6 +446,55 @@ public class AdminController {
 			e.printStackTrace();
 			resultMap.put("status", "false");
 			resultMap.put("message", "Error closing complaint!");
+		}
+
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "deleteAsset/{idAsset}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> deleteAsset(@PathVariable Long idAsset) {
+		logger.info("Inside deleteAsset method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Asset asset = null;
+		
+		try {
+			asset = assetService.getAssetById(idAsset);
+			assetService.deleteAsset(asset);
+			
+			resultMap.put("status", "true");
+			resultMap.put("message", "Asset deleted successfully!");
+
+		} catch (Exception e) {
+			logger.error("in deleteAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error deleting asset!");
+		}
+
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "unAssignAsset/{idAsset}", produces = "application/json")
+	@ResponseBody
+	public Map<String, Object> unAssignAsset(@PathVariable Long idAsset) {
+		logger.info("Inside unAssignAsset method");
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Asset asset = null;
+		
+		try {
+			asset = assetService.getAssetById(idAsset);
+			asset.setUser(null);
+			assetService.updateAsset(asset);
+			
+			resultMap.put("status", "true");
+			resultMap.put("message", "Asset unassigned successfully!");
+
+		} catch (Exception e) {
+			logger.error("in unAssignAsset method Exception: " + e.getMessage() + "; Cause: " + e.getCause());
+			e.printStackTrace();
+			resultMap.put("status", "false");
+			resultMap.put("message", "Error unassigning asset!");
 		}
 
 		return resultMap;

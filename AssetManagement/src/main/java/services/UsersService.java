@@ -61,7 +61,7 @@ public class UsersService {
 			User oldUser = userDao.getUserById(user.getIdUser());
 			String oldPassword = oldUser.getPassword();
 
-			if (password != null) {
+			if (password != null && !"".equals(password)) {
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 				String hashedPassword = passwordEncoder.encode(password);
 
